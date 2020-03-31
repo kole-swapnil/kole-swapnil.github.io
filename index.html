@@ -1,19 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-<!-- Required meta tags always come first -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta http-equiv="x-ua-compatible" content="ie=edge">
-
-<!-- Bootstrap CSS -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-<link rel="stylesheet" id="kkk" type="text/css" href="css/navbar.css">
-<title>Noob_Photographer</title> 
+	<meta charset="utf-8">
+	<title>Noob_Photographer</title> 
   <link rel="icon" type="image/gif/png" href="images/thumbnail.png">
-</head>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<link rel="stylesheet" id="kkk" type="text/css" href="css/navbar.css">
+	
+	<script type="text/javascript">
+  
+      
+      var j = 1;
 
+    function hu(){
+    ++j;
+    if(j%2 != 0)
+    {
+      document.getElementById('iconbar').setAttribute('style','height:100px;width:100px;');
+    }
+    else
+    {
+      document.getElementById('iconbar').setAttribute('style','transform:rotate(90deg);height:100px; width:100px;');
+      
+    }
+  }
+  
+ var gret;
+ if (gret == null){
+
+  function fy(){
+  	document.getElementById('welcome').innerHTML = greet;
+   }
+   var k = 0;
+	var speed = 50;
+	var greet = "Hii "+"......Welcome to my Webpage"
+
+function teW() {
+  if (k < greet.length) {
+    document.getElementById("welcome").innerHTML += greet.charAt(k);
+    k++;
+    setTimeout(teW, speed);
+  }
+}
+}
+</script>
+</head>
 <body id="home">
 	<nav class="navbar navbar-expand-lg navbar-light fixed-top">
   
@@ -27,11 +58,11 @@
     height: 100px;
     padding-right: 0px;
     border-right-width: 0px;">
-    <span class="navbar-toggler-icon" id="iconbar" style="height:100px;width:100px;"></span>
+    <span class="navbar-toggler-icon" onclick="hu()" id="iconbar" style="height:100px;width:100px;"></span>
   </button>
 
 
-  <a href="#" class="navbar-brand" id="hu"><img id="yy" src="images/sun.png" style="width: 100px"></a>
+  <a href="#" class="navbar-brand" id="hu"><img id="yy" src="images/sun.png" onclick="hy()" style="width: 100px"></a>
   
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav ml-auto">
@@ -94,10 +125,14 @@
 </div>
   
   <span id="welcome"></span>
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
+<script>
+	  
+	  teW();
+	
+</script>
 </body>
-
 </html>
