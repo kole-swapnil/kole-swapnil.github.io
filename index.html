@@ -5,7 +5,7 @@
 	<title>Noob_Photographer</title> 
   <link rel="icon" type="image/gif/png" href="images/thumbnail.png">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-	<link rel="stylesheet" id="kkk" type="text/css" href="css/navbar.css">
+	<link rel="stylesheet" id="kkk" type="text/css" href="css/style.css">
 	
 	<script type="text/javascript">
   
@@ -24,24 +24,19 @@
     }
   }
   
- var gret;
- if (gret == null){
-
-  function fy(){
-  	document.getElementById('welcome').innerHTML = greet;
-   }
+ 
    var k = 0;
 	var speed = 50;
 	var greet = "Hii "+"......Welcome to my Webpage"
 
-function teW() {
+function teW(){
   if (k < greet.length) {
     document.getElementById("welcome").innerHTML += greet.charAt(k);
     k++;
     setTimeout(teW, speed);
   }
-}
-}
+} 
+
 </script>
 </head>
 <body id="home">
@@ -103,7 +98,7 @@ function teW() {
 
 <div id="carouselExampleFade" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
-    <div class="carousel-item active">
+    <div class="carousel-item active" id="ui">
       <img src="images/x (4).jpeg" class="d-block w-100" alt="...">
     </div>
     <div class="carousel-item">
@@ -130,7 +125,7 @@ function teW() {
 
 <script>
 	  
-	  teW();
+	  $(window).ready(teW);
 	
 </script>
 </body>
