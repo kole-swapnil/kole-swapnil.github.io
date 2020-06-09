@@ -50,27 +50,28 @@ h1{
   text-transform: uppercase;
   z-index: 6; 
   color: #fff;
-}
+  }
+  
   .navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
     color: white;
     text-decoration-color: white;
     text-decoration-line: underline;
     font-size: 30px;
     vertical-align: middle;
-}
+  }
   .navbar-light .navbar-toggler{
   display: inline-block;
   top:20px;
-}
+  }
 
-#navbarSupportedContent.navbar-collapse.collapse.show{
+  #navbarSupportedContent.navbar-collapse.collapse.show{
   
   position: relative;
   display: inline-block;
   width: 200px;
-  
-}
-ul.navbar-nav.ml-auto{
+  }
+
+  ul.navbar-nav.ml-auto{
   background-color: rgba(0,0,0,0.8);
   position: relative;
   height: 90vh;
@@ -80,19 +81,22 @@ ul.navbar-nav.ml-auto{
   justify-content: center;
   margin: 0 60vw 0 0;
 
-}
-.navbar-light .navbar-toggler-icon{
+  }
+
+  .navbar-light .navbar-toggler-icon{
   background-image: url("../images/ic.png");
   background-size: 100px 100px;
-}
+  }
+  
   #navbarSupportedContent.navbar-collapse.collapse.show{
   
   position: relative;
   display: inline-block;
   width: 200px;
   
-}
-ul.navbar-nav.ml-auto li{
+  }
+
+  ul.navbar-nav.ml-auto li{
   display: flex;
   position: relative;
   height: 10vh;
@@ -100,18 +104,18 @@ ul.navbar-nav.ml-auto li{
   justify-content: center;
   align-items: left;
   font-size: 30px;
-}
-.navbar-collapse{
+  }
+ 
+  .navbar-collapse{
   flex-basis: 90vh;
   flex-align:bottom;
-}
+  }
+  
   .navbar-nav.ml-auto{
     background:rgba(0,0,0,1);
     height: 80vh; 
   }
   
-
-
   .navbar-toggler{
     padding: 1px 5px;
     font-size: 18px;
@@ -125,16 +129,16 @@ ul.navbar-nav.ml-auto li{
       color: #fff;
   }
 
-
   .navbar-toggler-icon span{
     display: none;
 
   }
+  
   #yy{
   
   right:20px;
   top: 20px;
-}
+  }
 
 }
 
@@ -158,7 +162,7 @@ ul.navbar-nav.ml-auto li{
   position: relative;
   margin-top: 0;
   max-width: 98%;
-  border-radius: 50px;
+  border-radius: 30px;
   padding: 1%;
   transition-property: max-width,border-radius,padding;
   transition-duration: 1s;
@@ -170,14 +174,14 @@ ul.navbar-nav.ml-auto li{
 .column img:hover{
   border-radius: 20px;
   vertical-align: middle;
-   align-items: center;
+  align-items: center;
   justify-content: center;
   max-width: 100%;
   padding: 0;
   overflow: visible;
   transform: scale(1.5,1.5);
   z-index: 3;
-  border:5px #39ff14 solid;
+  border:5px #fff solid;
   position: relative;
 }
 
