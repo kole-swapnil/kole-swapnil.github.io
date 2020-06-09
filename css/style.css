@@ -27,8 +27,8 @@ body{
 }
 
 .navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
-    color: white;
-    text-decoration-color: white;
+    color: black;
+    text-decoration-color: black;
     text-decoration-line: underline;
     font-size: 20px;
     vertical-align: middle;
