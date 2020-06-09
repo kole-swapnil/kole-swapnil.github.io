@@ -6,27 +6,11 @@
   <link rel="icon" type="image/gif/png" href="images/thumbnail.png">
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link id="kkk" rel="stylesheet"  type="text/css" href="css/slider_dark.css">
+  <link id="kkk" rel="stylesheet"  type="text/css" href="css/slider.css">
 
   
   <script type="text/javascript">
-      var i = 0;
       var j = 1;
-  function hy(){
-    ++i;
-    if(i%2 != 0)
-    {
-      document.getElementById('kkk').setAttribute('href','css/slider.css');
-      document.getElementById('yy').setAttribute('src','images/moon2.png');
-      document.getElementById('hu').style.color = "white";
-    }
-    else
-    {
-      document.getElementById('kkk').setAttribute('href','css/slider_dark.css');
-      document.getElementById('yy').setAttribute('src','images/sun.png');
-      document.getElementById('hu').style.color = "black";
-    }
-}
       function hu(){
     ++j;
     if(j%2 != 0)
@@ -58,7 +42,7 @@
     border-right-width: 0px;">
     <span class="navbar-toggler-icon" onclick="hu()" id="iconbar" style="height:100px;width:100px;"></span>
   </button>
-  <a href="#" class="navbar-brand" id="hu"><img id="yy" src="images/sun.png" onclick="hy()" style="height:100px;width: 100px;"></a>
+<a href="#" class="navbar-brand" id="hu"></a>
 
 <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav ml-auto">
