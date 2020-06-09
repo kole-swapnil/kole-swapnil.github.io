@@ -16,6 +16,10 @@ body{
 	height: 30px;
 	width: 30px;
 }
+.navbar{
+	min-height: 135px;
+}
+
 .navbar-nav .nav-item a{
 	font : bold 20px poppins;
 	text-transform: uppercase;
