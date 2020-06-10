@@ -23,9 +23,12 @@ h1{
 	margin: auto;
 	width: 100%;
 }
-
+.carousel-inner img {
+	margin: auto;
+  }
 .carousel-item {			
 	height: 77vh;
+
 }
 
 .carousel-control-prev,.carousel-control-next{
@@ -94,8 +97,9 @@ h5{
 	opacity: 0.7;
 }
 
-.w-100{
-	height: 100vh;
+.w-10x{
+	height: 100%;
+	width:auto;
 }
 
 @media (max-width: 1000px) 
@@ -118,7 +122,10 @@ h5{
     font-size: 30px;
     vertical-align: middle;
 }
-
+.w-10x{
+	height: auto;
+	width:100%;
+}
 
 .navbar-light .navbar-toggler{
 	display: inline-block;
@@ -209,11 +216,28 @@ ul.navbar-nav.ml-auto li{
 
 	#carouselExampleCaptions{
 		top: 40px;
-		height: 83vh;
+		height: 90vh;
+		width: auto;
+		margin-left: 0;
+		z-index: 8;
 }
 
 	.carousel-item {			
-		height: 81vh;
+		height: 100%;
 		min-width: 300px;
+		align-items: middle;
+		vertical-align: middle;
 	}
+	.w-10x{
+		height: auto;
+		width:100%;
+		vertical-align: middle;
+	}
+	.carousel-inner img {
+		height: 100%;
+		margin: auto 0;
+		vertical-align: middle;
+		
+	}
+
 }
