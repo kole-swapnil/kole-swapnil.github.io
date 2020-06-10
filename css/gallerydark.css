@@ -25,6 +25,7 @@ h1{
   z-index: 6; 
 }
 
+
 .navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
     color: white;
     text-decoration-color: white;
@@ -95,6 +96,7 @@ h1{
   width: 200px;
   
   }
+
 
   ul.navbar-nav.ml-auto li{
   display: flex;
