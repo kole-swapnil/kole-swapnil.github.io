@@ -95,11 +95,16 @@ h5{
 
 @media (max-width: 1000px) 
 {
+	#welcome{
+	font:bold 48px cursive;
+	color:rgba(255,255,255,1);
+	z-index: 3;
+}
 	.navbar-nav .nav-item a{
 	font : bold 26px poppins;
 	text-transform: uppercase;
 	z-index: 6;
-	color: #fff
+	color: #fff;
 }
 .navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
     color: white;
