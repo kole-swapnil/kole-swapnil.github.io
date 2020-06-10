@@ -20,11 +20,14 @@ h1{
   width: 30px;
 }
 .navbar-nav .nav-item a{
+  color: #DCDCDC;
   font : bold 20px poppins;
   text-transform: uppercase;
   z-index: 6; 
 }
-
+a:visited{
+  color: #DCDCDC;
+}
 
 .navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
     color: white;

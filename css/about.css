@@ -13,9 +13,13 @@ body{
 }
 
 .navbar-nav .nav-item a{
+	color: black;
 	font : bold 20px poppins;
 	text-transform: uppercase;
 	z-index: 6;	
+}
+a:visited{
+	color: black;
 }
 
 .navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {

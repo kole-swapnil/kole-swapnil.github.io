@@ -18,20 +18,19 @@ body{
 	width: 30px;
 }
 
-.nav-item dropdown:visited{
-	color: black;
-}
-
 .navbar{
 	min-height: 90px;
 }
 
 .navbar-nav .nav-item a{
+	color: #DCDCDC;
 	font : bold 20px poppins;
 	text-transform: uppercase;
 	z-index: 6;	
 }
-
+a:visited{
+	color: #DCDCDC;
+}
 .bg{
 	background: black;
 	opacity: 0.7;
