@@ -13,14 +13,19 @@ h1{
 }
 
 #carouselExampleCaptions{
-	
+	height: 83vh;
   	border:20px solid black;
   	box-shadow: 10px 10px 10px #333333;
   	background-color: black;
 }
 
 .carousel-inner > .carousal-item > img{
+	margin: auto;
 	width: 100%;
+}
+
+.carousel-item {			
+	height: 77vh;
 }
 
 .carousel-control-prev,.carousel-control-next{
@@ -200,9 +205,15 @@ ul.navbar-nav.ml-auto li{
 
 }
 
-@media screen and  (max-device-width: 320px) {
+@media screen and  (orientation: portrait) {
 
-	body{
-		background: green;
+	#carouselExampleCaptions{
+		top: 40px;
+		height: 83vh;
+}
+
+	.carousel-item {			
+		height: 81vh;
+		min-width: 300px;
 	}
 }
