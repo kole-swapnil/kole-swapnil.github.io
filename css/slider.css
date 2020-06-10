@@ -4,12 +4,14 @@ body{
 	z-index: 7;
 }
 
-h1{
-	font-family: "Times New Roman", Times, serif;
-	font-weight: bold; 
-	text-align: left;
-	margin-left: 200px;
-	margin-top: 30px;
+.navbar-brand{
+  padding: 0 100px;
+  height: 80px;
+  line-height: 80px;
+  font-size: 35px;
+  font-weight: bold;
+  position: relative;
+  font-family: "Times New Roman", Times, serif;
 }
 
 #carouselExampleCaptions{
@@ -77,6 +79,9 @@ a:visited{
 	color: #DCDCDC;
 }
 
+.navbar-default{
+	background:#511b8f; 
+}
 .navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
     color: white;
     text-decoration-color: white;
@@ -94,11 +99,6 @@ a:visited{
 
 .navbar {
   min-height: 90px;
-}
-
-.bg{
-	background: black;
-	opacity: 0.7;
 }
 
 .w-10x{
@@ -119,6 +119,15 @@ a:visited{
 	z-index: 6;
 	color: #fff;
 }
+
+.navbar-brand{
+	padding: 0 600px 0 0 ;
+}
+
+.navbar-default{
+	background: none; 
+}
+
 .navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
     color: white;
     text-decoration-color: white;
@@ -137,17 +146,12 @@ a:visited{
 }
 
 #navbarSupportedContent.navbar-collapse.collapse.show{
-	
 	position: relative;
 	display: inline-block;
 	width: 200px;
-	
 }
 
-.bg{
-	background: none;
-	opacity: 1;
-}
+
 ul.navbar-nav.ml-auto{
 	background-color: rgba(0,0,0,0.8);
 	position: relative;
