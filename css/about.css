@@ -1,18 +1,15 @@
 body{
+	padding: 90px 0 0 0;
 	border : 1vh solid white;
 	z-index: 7;
 	background-color: rgba(255,255,255,0);
 }
 
-.navbar-brand{
-  padding: 0 170px;
-  color: #DCDCDC;
-  height: 80px;
-  line-height: 80px;
-  font-size: 40px;
-  font-weight: bold;
-  position: relative;
-  font-family: "Times New Roman", Times, serif;
+h1{
+	font-family: "Times New Roman", Times, serif;
+	font-size: 40px;
+	font-weight: bold;
+	position: relative;
 }
 #linkedin{
 	height: 30px;
@@ -29,7 +26,10 @@ a:visited{
 }
 
 .navbar-default{
-	background:#511b8f; 
+	background: rgba(102,0,180,1); 
+	font-family: "Open Sans";
+	font-weight: 400;
+	font-size: 12pt;
 }
 .navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
     color: white;
@@ -48,95 +48,93 @@ a:visited{
 }
 
 .navbar {
-  min-height: 90px;
+  min-height: 56px;
 }
 
 
 @media (max-width: 1000px)
 {
 	.navbar-nav .nav-item a{
-	font : bold 26px poppins;
-	text-transform: uppercase;
-	z-index: 6;
-	color: #fff;	
-}
+		font : bold 26px poppins;
+		text-transform: uppercase;
+		z-index: 6;
+		color: #fff;	
+	}
 	
+	.navbar-brand{
+		padding: 0 600px 0 0 ;
+		color: #000;
+	}
 
-.navbar-brand{
-	padding: 0 600px 0 0 ;
-	color: #000;
-}
+	.navbar-default{
+		background: none; 
+	}
 
-.navbar-default{
-	background: none; 
-}
+	.navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
+	    color: white;
+	    text-decoration-color: white;
+	    text-decoration-line: underline;
+	    font-size: 30px;
+	    vertical-align: middle;
+	}
+	.w-10x{
+		height: auto;
+		width:100%;
+	}
 
-.navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
-    color: white;
-    text-decoration-color: white;
-    text-decoration-line: underline;
-    font-size: 30px;
-    vertical-align: middle;
-}
-.w-10x{
-	height: auto;
-	width:100%;
-}
+	.navbar-light .navbar-toggler{
+		display: inline-block;
+		top:20px;
+	}
 
-.navbar-light .navbar-toggler{
-	display: inline-block;
-	top:20px;
-}
-
-#navbarSupportedContent.navbar-collapse.collapse.show{
-	position: relative;
-	display: inline-block;
-	width: 200px;
-}
-
-
-ul.navbar-nav.ml-auto{
-	background-color: rgba(0,0,0,0.8);
-	position: relative;
-	height: 90vh;
-	width: 40vw;
-	top: 4vh;
-	align-self: baseline;
-	justify-content: center;
-	margin: 0 60vw 0 0;
-
-}
-.navbar-light .navbar-toggler-icon{
-	background-image: url("../images/ic.png");
-	background-size: 100px 100px;
-}
 	#navbarSupportedContent.navbar-collapse.collapse.show{
-	
-	position: relative;
-	display: inline-block;
-	width: 200px;
-	
-}
-ul.navbar-nav.ml-auto li{
-	display: flex;
-	position: relative;
-	height: 10vh;
-	list-style-position: inside;
-	justify-content: center;
-	align-items: left;
-	font-size: 30px;
-}
-.navbar-collapse{
-	flex-basis: 90vh;
-	flex-align:bottom;
-}
+		position: relative;
+		display: inline-block;
+		width: 200px;
+	}
+
+
+	ul.navbar-nav.ml-auto{
+		background-color: rgba(0,0,0,0.8);
+		position: relative;
+		height: 90vh;
+		width: 40vw;
+		top: 4vh;
+		align-self: baseline;
+		justify-content: center;
+		margin: 0 60vw 0 0;
+
+	}
+	.navbar-light .navbar-toggler-icon{
+		background-image: url("../images/ic.png");
+		background-size: 100px 100px;
+	}
+		#navbarSupportedContent.navbar-collapse.collapse.show{
+		
+		position: relative;
+		display: inline-block;
+		width: 200px;
+		
+	}
+	ul.navbar-nav.ml-auto li{
+		display: flex;
+		position: relative;
+		height: 10vh;
+		list-style-position: inside;
+		justify-content: center;
+		align-items: left;
+		font-size: 30px;
+	}
+	.navbar-collapse{
+		flex-basis: 90vh;
+		flex-align:bottom;
+	}
+
 	.navbar-nav.ml-auto{
 		background:rgba(0,0,0,1);
 		height: 80vh; 
 	}
-	
-
-
+		
 	.navbar-toggler{
 		padding: 1px 5px;
 		font-size: 18px;
@@ -145,21 +143,19 @@ ul.navbar-nav.ml-auto li{
 		width: 50px;
 		height: 50px; 
 	}
-	
+		
 	.navbar-light .navbar-nav .nav-link {
-    	color: #fff;
+	    color: #fff;
 	}
-
 
 	.navbar-toggler-icon span{
 		display: none;
-
 	}
+
 	#yy{
-	
-	right:20px;
-	top: 20px;
-}
+		right:20px;
+		top: 20px;
+	}
 
 
 }
