@@ -2,6 +2,7 @@ body{
   background: url('../images/bg.jpg');
   background-size: cover;
   z-index: 7;
+  padding: 2px;
 }
 
 h1{
@@ -18,26 +19,33 @@ h1{
   width: 30px;
 }
 .navbar-nav .nav-item a{
-  color: #DCDCDC;
-  font : bold 20px poppins;
+  color: black;
+  font-family: "Open Sans";
+  font-weight: 400;
+  font-size: 12pt;
   text-transform: uppercase;
   z-index: 6; 
 }
 a:visited{
-  color: #DCDCDC;
+  color: black;
 }
 
 .navbar-nav .nav-item a:hover{
   text-decoration: underline;
   color: black; 
 }
+
+.navbar{
+  padding: 0;
+}
+
 .navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
     color: black;
     text-decoration-color: black;
     text-decoration-line: underline;
-    font-size: 20px;
+    font-size: 12pt;
+    font-weight: 700;
     vertical-align: middle;
-    padding-top: 4px;
 }
 .navbar-light .navbar-nav .nav-link {
     color: #000;
@@ -153,30 +161,28 @@ ul.navbar-nav.ml-auto li{
 .row { 
   display: flex;
   flex-wrap: wrap;
-  padding: 0 0;
+  padding: 0 4px;
 }
 
 
 .column {
-  flex: 20%;
-  max-width: 20%;
-  align-items: center;
-  justify-content: center;
-  padding: 0 0;
+  flex: 25%;
+  max-width: 25%;
+  padding: 0 4px;
 }
 
-
 .column img {
+  margin-top: 8px;
+  vertical-align: middle;
+  width: 100%;
   position: relative;
   margin-top: 0;
   max-width: 98%;
-  border-radius: 50px;
+  border-radius: 30px;
   padding: 1%;
   transition-property: max-width,border-radius,padding;
   transition-duration: 1s;
   z-index: 2;
-
-
 }
 
 .column img:hover{
@@ -193,11 +199,9 @@ ul.navbar-nav.ml-auto li{
   position: relative;
 }
 
-
-
-@media (max-width: 400px) {
+@media screen and (max-width: 800px) {
   .column {
-    flex: 100%;
-    max-width: 100%;
+    flex: 50%;
+    max-width: 50%;
   }
 }
