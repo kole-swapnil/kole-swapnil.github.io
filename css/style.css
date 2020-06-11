@@ -34,6 +34,11 @@ a:visited{
 	color: white;
 }
 
+.navbar-nav .nav-item a:hover{
+	text-decoration: underline;
+	color: black;	
+}
+
 .navbar-default{
 	background: rgba(102,0,180,1); 
 	font-family: "Open Sans";

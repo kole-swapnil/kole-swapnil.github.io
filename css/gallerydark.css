@@ -31,6 +31,15 @@ a:visited{
   color: white;
 }
 
+.navbar-nav .nav-item a:hover{
+  text-decoration: underline;
+  color: black; 
+}
+
+.navbar{
+  padding: 0;
+}
+
 .navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
     color: white;
     text-decoration-color: white;

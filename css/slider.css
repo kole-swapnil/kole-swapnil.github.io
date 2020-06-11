@@ -14,6 +14,7 @@ body{
 }
 
 #carouselExampleCaptions{
+	top: 60px;
 	height: 83vh;
   	border:20px solid black;
   	box-shadow: 10px 10px 10px #333333;
@@ -84,6 +85,11 @@ h5{
 }
 a:visited{
 	color: white;
+}
+
+.navbar-nav .nav-item a:hover{
+	text-decoration: underline;
+	color: black;	
 }
 
 .navbar-default{
@@ -239,7 +245,7 @@ ul.navbar-nav.ml-auto li{
 @media screen and  (orientation: portrait) {
 
 	#carouselExampleCaptions{
-		top: 40px;
+		top: 80px;
 		height: 90vh;
 		width: auto;
 		z-index: 8;

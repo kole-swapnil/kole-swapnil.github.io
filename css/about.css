@@ -23,6 +23,11 @@ h1{
 	text-transform: uppercase;
 	z-index: 6;	
 }
+.navbar-nav .nav-item a:hover{
+	text-decoration: underline;
+	color: black;	
+}
+
 a:visited{
 	color: white;
 }
