@@ -273,5 +273,9 @@ ul.navbar-nav.ml-auto li{
 		vertical-align: middle;
 		
 	}
+	footer{
+		margin-bottom: 0;
+		padding-bottom: 0;		
+	}
 
 }
