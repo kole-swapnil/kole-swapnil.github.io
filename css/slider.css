@@ -7,7 +7,7 @@ body{
 
 .navbar-brand{
   padding: 0 170px;
-  color: #DCDCDC;
+  color: white;
   font-size: 30px;
   font-weight: bold;
   position: relative;
@@ -127,8 +127,12 @@ a:visited{
 	padding-right: 0.5rem;
 }
 
-@media (max-width: 1000px) 
+@media (max-width: 1000px)
 {
+	body{
+		background-color: black;
+	}
+	
 	#welcome{
 	font:bold 48px cursive;
 	color:rgba(255,255,255,1);
@@ -143,7 +147,7 @@ a:visited{
 
 .navbar-brand{
 	padding: 0 600px 0 0 ;
-	color: #000;
+	color: #fff;
 }
 
 .navbar-default{
@@ -240,123 +244,14 @@ ul.navbar-nav.ml-auto li{
 	right:20px;
 	top: 20px;
 }
-
 }
-
 
 @media screen and  (orientation: portrait) {
 
-	#welcome{
-	font:bold 48px cursive;
-	color:rgba(255,255,255,1);
-	z-index: 3;
-}
-	.navbar-nav .nav-item a{
-	font : bold 26px poppins;
-	text-transform: uppercase;
-	z-index: 6;
-	color: #fff;
-}
-
-.navbar-brand{
-	padding: 0 600px 0 0 ;
-	color: #000;
-}
-
-.navbar-default{
-	background: none; 
-}
-
-.navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
-    color: white;
-    text-decoration-color: white;
-    text-decoration-line: underline;
-    font-size: 30px;
-    vertical-align: middle;
-}
-.w-10x{
-	width:100%;		
-	height: auto;
-	
-}
-
-.navbar-light .navbar-toggler{
-	display: inline-block;
-	top:20px;
-}
-
-#navbarSupportedContent.navbar-collapse.collapse.show{
-	position: relative;
-	display: inline-block;
-	width: 200px;
-}
-
-
-ul.navbar-nav.ml-auto{
-	background-color: rgba(0,0,0,0.8);
-	position: relative;
-	height: 90vh;
-	width: 40vw;
-	top: 4vh;
-	align-self: baseline;
-	justify-content: center;
-	margin: 0 60vw 0 0;
-
-}
-.navbar-light .navbar-toggler-icon{
-	background-image: url("../images/ic.png");
-	background-size: 100px 100px;
-}
-	#navbarSupportedContent.navbar-collapse.collapse.show{
-	
-	position: relative;
-	display: inline-block;
-	width: 200px;
-	
-}
-ul.navbar-nav.ml-auto li{
-	display: flex;
-	position: relative;
-	height: 10vh;
-	list-style-position: inside;
-	justify-content: center;
-	align-items: left;
-	font-size: 30px;
-}
-.navbar-collapse{
-	flex-basis: 90vh;
-	flex-align:bottom;
-}
-	.navbar-nav.ml-auto{
-		background:rgba(0,0,0,1);
-		height: 80vh; 
+	body{
+		background-color: black;
 	}
 	
-
-
-	.navbar-toggler{
-		padding: 1px 5px;
-		font-size: 18px;
-		line-height: 0.3;
-		background:rgba(0,0,0,0);
-		width: 50px;
-		height: 50px; 
-	}
-	
-	.navbar-light .navbar-nav .nav-link {
-    	color: #fff;
-	}
-
-
-	.navbar-toggler-icon span{
-		display: none;
-
-	}
-	#yy{
-	
-	right:20px;
-	top: 20px;
-}
 	.container{
 		padding: 0 0;
 		margin: 0 0;
@@ -367,15 +262,8 @@ ul.navbar-nav.ml-auto li{
 		width: 100vw;
 		display: flex;
 		align-items: center;
-		background: white;
-		border:20px solid white;
-	  	box-shadow: 10px 10px 10px #fff;
-	  	background-color: white;
-	}
-	#carouselExampleCaptions:hover {
-		background: black;
 		border:20px solid black;
-	  	box-shadow: 10px 10px 10px #333333;
+	  	box-shadow: 10px 10px 10px #000;
 	  	background-color: black;
 	}
 	
