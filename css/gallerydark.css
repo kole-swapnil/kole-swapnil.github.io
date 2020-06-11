@@ -23,8 +23,8 @@ h1{
 .navbar-nav .nav-item a{
   color: white;
   font-family: "Open Sans";
-    font-weight: 400;
-    font-size: 12pt;
+  font-weight: 400;
+  font-size: 12pt;
   text-transform: uppercase;
   z-index: 6; 
 }
@@ -213,9 +213,16 @@ a:visited{
 
 
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1000px) {
   .column {
     flex: 50%;
     max-width: 50%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .column {
+    flex: 100%;
+    max-width: 100%;
   }
 }
