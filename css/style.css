@@ -91,8 +91,9 @@ a:visited{
 }
 
 @media (max-width: 1000px)
-{	#welcome{
-	font:bold 48px cursive;
+{	
+	#welcome{
+	font:bold 48px Comic Sans MS;
 	color:rgba(255,255,255,1);
 	z-index: 3;
 }
