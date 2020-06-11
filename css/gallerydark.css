@@ -20,25 +20,28 @@ h1{
   width: 30px;
 }
 .navbar-nav .nav-item a{
-  color: #DCDCDC;
-  font : bold 20px poppins;
+  color: white;
+  font-family: "Open Sans";
+    font-weight: 400;
+    font-size: 12pt;
   text-transform: uppercase;
   z-index: 6; 
 }
 a:visited{
-  color: #DCDCDC;
+  color: white;
 }
 
 .navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
     color: white;
     text-decoration-color: white;
     text-decoration-line: underline;
-    font-size: 20px;
+    font-size: 12pt;
+	  font-weight: 700;
     vertical-align: middle;
-    padding-top: 4px;
+    
 }
 .navbar-light .navbar-nav .nav-link {
-    color:#DCDCDC;
+    color:white;
 }
 
 .nav-link{
