@@ -10,7 +10,7 @@ body{
 	-webkit-background-size: contain;
 	background-size: contain;
 	overflow: hidden;
-
+ 
 } 
 #img1{
 	content:url("../images/p7.jpg");
