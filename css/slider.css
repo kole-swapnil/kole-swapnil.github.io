@@ -81,7 +81,7 @@ a:visited{
 }
 
 .navbar-default{
-	background:#511b8f; 
+	background: rgba(102,0,180,1); 
 }
 .navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
     color: white;
@@ -106,6 +106,12 @@ a:visited{
 .w-10x{
 	height: 100%;
 	width:auto;
+}
+
+.dropup , .dropright , .dropdown , .dropleft{
+	padding-top: 4px;
+	padding-left: 0.5rem;
+	padding-right: 0.5rem;
 }
 
 @media (max-width: 1000px) 

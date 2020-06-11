@@ -51,6 +51,11 @@ a:visited{
   min-height: 56px;
 }
 
+.dropup , .dropright , .dropdown , .dropleft{
+	padding-top: 4px;
+	padding-left: 0.5rem;
+	padding-right: 0.5rem;
+}
 
 @media (max-width: 1000px)
 {
@@ -157,7 +162,9 @@ a:visited{
 		top: 20px;
 	}
 
-
+.container{
+	max-width: 90vw;
+}
 }
 
 .row-header {
