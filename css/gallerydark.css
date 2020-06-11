@@ -215,8 +215,8 @@ a:visited{
 
 @media screen and (max-width: 1000px) {
   .column {
-    flex: 50%;
-    max-width: 50%;
+    flex: 33.33%;
+    max-width: 33.33%;
   }
 }
 
