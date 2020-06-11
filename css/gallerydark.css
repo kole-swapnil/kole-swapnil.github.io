@@ -17,8 +17,12 @@ h1{
 }
 
 #linkedin{
-  height: 30px;
-  width: 30px;
+	height: 28px;
+	
+}
+#insta{
+	height: 28px;
+	
 }
 .navbar-nav .nav-item a{
   color: white;
@@ -120,7 +124,14 @@ a:visited{
   
   }
 
-
+  #linkedin{
+    height: 40px;
+    width: 40px;
+  }
+  #insta{
+    height: 40px;
+    width: 40px;
+  }
   ul.navbar-nav.ml-auto li{
   display: flex;
   position: relative;
@@ -215,8 +226,8 @@ a:visited{
 
 @media screen and (max-width: 1000px) {
   .column {
-    flex: 50%;
-    max-width: 50%;
+    flex: 33.3%;
+    max-width: 33.3%;
   }
 }
 
