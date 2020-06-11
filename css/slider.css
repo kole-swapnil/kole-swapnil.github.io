@@ -89,7 +89,8 @@ a:visited{
     text-decoration-line: underline;
     font-size: 20px;
     font-weight: bold;
-    vertical-align: middle;
+	vertical-align: middle;
+	padding-top: 4px;
 }
 .navbar-light .navbar-nav .nav-link {
     color: #DCDCDC;

@@ -37,7 +37,8 @@ a:visited{
     text-decoration-line: underline;
     font-size: 20px;
     font-weight: bold;
-    vertical-align: middle;
+	vertical-align: middle;
+	padding-top: 4px; 
 }
 .navbar-light .navbar-nav .nav-link {
     color: #DCDCDC;
@@ -59,6 +60,9 @@ a:visited{
 
 @media (max-width: 1000px)
 {
+	h1{
+		padding:10px;
+	}
 	.navbar-nav .nav-item a{
 		font : bold 26px poppins;
 		text-transform: uppercase;
