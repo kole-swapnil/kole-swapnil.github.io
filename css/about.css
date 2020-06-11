@@ -16,13 +16,13 @@ h1{
 	width: 30px;
 }
 .navbar-nav .nav-item a{
-	color: #DCDCDC;
+	color: white;
 	font : bold 20px poppins;
 	text-transform: uppercase;
 	z-index: 6;	
 }
 a:visited{
-	color: #DCDCDC;
+	color: white;
 }
 
 .navbar-default{
@@ -41,7 +41,7 @@ a:visited{
 	padding-top: 4px; 
 }
 .navbar-light .navbar-nav .nav-link {
-    color: #DCDCDC;
+    color: white;
 }
 
 .nav-link{
