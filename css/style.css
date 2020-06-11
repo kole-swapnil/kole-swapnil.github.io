@@ -77,7 +77,12 @@ a:visited{
 	z-index: 6;
 	color: #fff;	
 }
-	.navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
+	
+.navbar-default{
+	background: none; 
+}
+
+.navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
     color: white;
     text-decoration-color: white;
     text-decoration-line: underline;
@@ -87,11 +92,6 @@ a:visited{
 	.navbar-light .navbar-toggler{
 	display: inline-block;
 	top:20px;
-}
-
-.bg{
-	background: none;
-	opacity: 1;
 }
 
 #navbarSupportedContent.navbar-collapse.collapse.show{
