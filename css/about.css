@@ -18,8 +18,12 @@ li{
 	font-size: 20px ;
 }
 #linkedin{
-	height: 30px;
-	width: 30px;
+	height: 28px;
+	
+}
+#insta{
+	height: 28px;
+	
 }
 .navbar-nav .nav-item a{
 	color: white;
@@ -156,6 +160,14 @@ a:visited{
 		justify-content: center;
 		align-items: left;
 		font-size: 30px;
+	}
+	#linkedin{
+		height: 40px;
+		width: 40px;
+	}
+	#insta{
+		height: 40px;
+		width: 40px;
 	}
 	.navbar-collapse{
 		flex-basis: 90vh;

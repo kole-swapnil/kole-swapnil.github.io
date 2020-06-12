@@ -67,8 +67,12 @@ h5{
 }
 
 #linkedin{
-	height: 30px;
-	width: 30px;
+	height: 28px;
+	
+}
+#insta{
+	height: 28px;
+	
 }
 
 .navbar {
@@ -178,7 +182,14 @@ a:visited{
 	width: 200px;
 }
 
-
+#linkedin{
+	height: 40px;
+	width: 40px;
+}
+#insta{
+	height: 40px;
+	width: 40px;
+}
 ul.navbar-nav.ml-auto{
 	background-color: rgba(0,0,0,0.8);
 	position: relative;
