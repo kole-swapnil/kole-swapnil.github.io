@@ -91,7 +91,7 @@ a:visited{
 		padding:10px;
 	}
 	.navbar-nav .nav-item a{
-		font : bold 26px poppins;
+		font : bold 30px poppins;
 		text-transform: uppercase;
 		z-index: 6;
 		color: #fff;	

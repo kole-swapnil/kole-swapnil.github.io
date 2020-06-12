@@ -84,7 +84,7 @@ a:visited{
 	position: absolute;
 	z-index: 3;
 	left: 5%;
-	top: 15%;
+	top: 15%; 
 }
 
 .dropup , .dropright , .dropdown , .dropleft{

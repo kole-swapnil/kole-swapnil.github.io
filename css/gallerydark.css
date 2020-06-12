@@ -74,7 +74,7 @@ a:visited{
 @media (max-width: 1000px)
 {
   .navbar-nav .nav-item a{
-  font : bold 26px poppins;
+  font : bold 30px poppins;
   text-transform: uppercase;
   z-index: 6; 
   color: #fff;
@@ -226,13 +226,8 @@ a:visited{
 
 @media screen and (max-width: 1000px) {
   .column {
-<<<<<<< HEAD
-    flex: 33.33%;
-    max-width: 33.33%;
-=======
-    flex: 33.3%;
-    max-width: 33.3%;
->>>>>>> 0c636ced97cb917e7aec553d5c20f92656b1bdf5
+    flex: 50%;
+    max-width: 50%;
   }
 }
 

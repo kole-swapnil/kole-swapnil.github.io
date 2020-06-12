@@ -15,8 +15,12 @@ h1{
 }
 
 #linkedin{
-  height: 30px;
-  width: 30px;
+  height: 28px;
+  
+}
+#insta{
+  height: 28px;
+  
 }
 .navbar-nav .nav-item a{
   color: black;
@@ -65,8 +69,18 @@ a:visited{
 
 @media (max-width: 1000px)
 {
+
+   #linkedin{
+    height: 40px;
+    width: 40px;
+  }
+  #insta{
+    height: 40px;
+    width: 40px;
+  }
+  
   .navbar-nav .nav-item a{
-  font : bold 26px poppins;
+  font : bold 30px poppins;
   text-transform: uppercase;
   z-index: 6; 
   color: #fff;
