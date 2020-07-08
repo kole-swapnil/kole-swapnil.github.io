@@ -1,131 +1,384 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>Noob_Photographer</title> 
-  <link rel="icon" type="image/gif/png" href="images/thumbnail.png">
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" id="kkk" type="text/css" href="css/style.css">
-	
-<script type="text/javascript">
-  
-     var j = 1;
-
-    function hu(){ 
-    ++j;
-    if(j%2 != 0)
-    {
-      document.getElementById('iconbar').setAttribute('style','height:130px;width:130px;');
-    }
-    else
-    {
-      document.getElementById('iconbar').setAttribute('style','transform:rotate(90deg);height:130px; width:130px;');
-      
-    }
-  }
-  
- 
-   var k = 0;
-	var speed = 70;
-	var greet = " Hii"+"......Welcome to my Webpage"
-
-function teW(){
-  if (k < greet.length) {
-    document.getElementById("welcome").innerHTML += greet.charAt(k);
-    k++;
-    setTimeout(teW, speed);
-  }
-} 
-
-
-</script>
-</head>
-
-<body id="home">
-   <nav class="navbar navbar-default navbar-expand-lg navbar-light fixed-top">
-  
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="    padding-left: 0px;
-    margin-left: 5‒;
-    margin-left: 5px;
-    margin-top: 10px;
-    border-top-width: 0px;
-    border-left-width: 0px;
-    width: 100px;
-    height: 100px;
-    padding-right: 0px;
-    border-right-width: 0px;">
-    <span class="navbar-toggler-icon" onclick="hu()" id="iconbar" style="height:130px;width:130px;"></span>
-  </button>
-  
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav ml-auto"> 
-      
-      <li id="style" class="nav-item active">
-        <a class="nav-link" href="index.html" style="color: white;"> <span class="fa fa-home fa-md"></span> Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li id="style" class="nav-item">
-        <a class="nav-link" href="gallery.html" style="color: white;"> <span class="fa fa-photo fa-md"></span> Gallery </a>
-      </li>
-      <li id="style" class="nav-item">
-        <a class="nav-link" href="slider.html" style="color: white;"> <span class="fa fa-television fa-md"></span> Slider </a>
-      </li>
-      <li id="style" class="nav-item dropdown">
-        <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
-          <span class="fa fa-address-card fa-md"></span> Contact </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="height:198px">
-          <a class="dropdown-item" href="https://twitter.com/SwapnilKole6" target= "_blank"><img src="images/we.jpg" style="height :30px"><pre style="display: inline"> Twitter</pre></a>
-          <a class="dropdown-item" href="mailto:swapnilkole7500@gmail.com" target= "_blank"><img src="images/gmail1.png"style="height :30px"><pre style="display: inline"> Email</pre></a>
-          <a class="dropdown-item" href="https://github.com/kole-swapnil" target= "_blank"><img src="images/gi.png"style="height :30px"><pre style="display: inline"> Git-Hub</pre></a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="images/resume.pdf" target= "_blank"><img src="images/dox.png" style="height : 30px"><pre style="display: inline"> My Resume</pre></a>
-        </div>
-      </li>
-      <li id="style" class="nav-item">
-        <a class="nav-link" href="aboutus.html" style="color: white;"><span class="fa fa-info fa-md"></span> About </a>
-      </li>
-      <li id="style" class="nav-item">
-        <a class="nav-link" href="https://www.instagram.com/noob_photo_grapher/" target= "_blank"><img id= "insta"src="images/insta2.png"></a>
-      </li>
-      <li id="style" class="nav-item">
-        <a class="nav-link" href="https://www.linkedin.com/in/swapnil-kole-8a386819b/" target="_blank"><img id="linkedin" src="images/link.png"></a>
-      </li>
-    </ul>
+    <title>Swapnil Kole</title>
     
-  </div>
-</nav>
+<!-- JS, Popper.js, and jQuery -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-<div id="carouselExampleFade" class="carousel slide" data-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="" id = "img1" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="" id = "img2" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="" id = "img3" class="d-block w-100" alt="...">
-    </div>
-   </div>
-  <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <link rel="icon" type="image/gif/png" href="images/logox.png">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type = "text/css" href=  "css/style.css">
+    <meta name = "theme-color" content="#000000"/>
+    <meta name = "keywords" content = "Swapnil, Kole, Swapnilkole" />
+    <meta name="author" content="Swapnil Kole">
+</head>
+<body>
+    
+    <div id="particles-js"></div>
+    
+    <header >
+        <ul>
+            <li>
+            <a class = "wow fadeInDown" data-wow-duration=".5s" data-wow-delay=".8s" href="#home">Home</a>
+            <a class = "wow fadeInDown" data-wow-duration=".5s" data-wow-delay="0.9s" href="#about">About</a>
+            <a class = "wow fadeInDown" data-wow-duration=".5s" data-wow-delay="1.0s" href="#service">Services</a>
+            <a class = "wow fadeInDown" data-wow-duration=".5s" data-wow-delay="1.1s" href="#gallery">Projects</a>
+            <a class = "wow fadeInDown" data-wow-duration=".5s" data-wow-delay="1.2s" href="#contact">Contact</a>
+            </li>
+        </ul>
+    </header>
+    <div class="x slides" id="frt">
+    <section id ="home" class=" slide home wow fadeIn" data-wow-duration="2s" data-wow-delay="1.2s">
+        <div class="name">
+            <h1 class=" wow fadeInUp" data-wow-duration="3s" data-wow-delay="1.9s">Swapnil Kole</h1>
+            <h5 class=" wow fadeInDown" data-wow-duration="4s" data-wow-delay="1.4s">Blockchain & Web developer</h5>
+        </div>
+    </section>
+
+    <section id ="about" class="slide about">
+        <div class="section-title" style="padding-top: 40px;">
+            <h2 class=" wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.4s">About</h2>
+        </div>
+        <div class="about-info">
+            <p class=" wow fadeInUp" id="about-first" data-wow-duration="1.3s" data-wow-delay="0.9s">A personality having a balanced mixture of hard-work, skill, and dedication. Someone who can truly unite the team and can work under pressure.</p>
+            <p class=" wow fadeInUp" id="about-second" data-wow-duration="1.3s" data-wow-delay="1s">I was not sure what to do in life. Then it clicked to me that LIFE'S TOO SHORT WHY NOT TRY EVERYTHING. That was basically the first day of the rest of my life. Now be it work or be it enjoyment for me both are balanced. People call me workoholic but the only thing is I use my time efficiently. I do Blockchain and Web development simultaneously and keeping my studies hand-in-hand so basically busy everytime. Will be proud of it someday.</p>
+            <p class=" wow fadeInUp" id="about-third" data-wow-duration="1.3s" data-wow-delay="1.1s">Writing a success story since 2001</p>
+            <div class="btn-group wow fadeInUp" data-wow-duration="1.2s" data-wow-delay="1.8s" role="group">
+                <a href="https://www.linkedin.com/in/swapnil-kole" target= "_blank" class="btn btn-info" id = "call" role = "button"><i class="fa fa-linkedin"></i><span class="invi" style="padding-left: 10px;">     LinkedIn</span></a>
+                <a href="https://www.facebook.com/koleandtech" target= "_blank" class="btn btn-dark" role = "button"><i class="fa fa-facebook"></i><span class="invi" style="padding-left: 10px;">     Facebook</span></a>
+                <a href="https://github.com/kole-swapnil" target= "_blank" class="btn btn-success" id="wapp" role = "button"><i class="fa fa-github"></i><span class="invi" style="padding-left: 10px;">     Github</span></a> 
+                <a href="https://twitter.com/SwapnilKole6" target= "_blank" id= "insta" class="btn btn-danger" role = "button"><i class="fa fa-twitter"></i><span class="invi" style="padding-left: 10px;">     Twitter</span></a>
+          </div>
+            <a href="images/resume.pdf" target="_blank" class="downloadbtn wow fadeInDown" data-wow-duration="1.3s" data-wow-delay="1.2s" >Download Resume</a>
+            <div class="timeline">
+            <div class="colu wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="1.1s">
+                <span>2014-2016</span>
+                <h6>Matriculation with 10 CGPA at Navy Children School, Vizag</h6>
+            </div>
+            <div class="colu wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="1.2s">
+                <span>2016-2018</span>
+                <h6>Higher Secondary with 95% [PCMCs] at Navy Children School,Vizag</h6>
+            </div>
+            <div class="colu wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="1.3s">
+                <span>2018-2022</span>
+                <h6>Bachelor of Technology[Contd.] in Computer Science Engineering with 8.61 CGPA currently at IIIT Bhubaneshwar</h6>
+            </div>
+            <div class="invi colu wow fadeInUp " data-wow-duration="1.3s" data-wow-delay="1.3s">
+                <span>2020</span>
+                <h6>Blockchain Developer intern at Superworld</h6>
+            </div>
+            <div class="invi colu wow fadeInUp " data-wow-duration="1.3s" data-wow-delay="1.3s">
+                <span>2020</span>
+                <h6>PHP Developer intern at Innerworks Pvt Ltd</h6>
+            </div>
+            
+            </div>
+        </div>
+    </section>
+    
+    <section id ="service" class="slide service">
+        <div class="section-title" style="padding-top: 40px;">
+            <h2 class="wow fadeInUp" data-wow-duration="1.s" data-wow-delay="0.4s">Services</h2>
+        </div>
+        <div class="service-info">
+            <div class="colu">
+                <img src = "images/webdev.png" class=" wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="0.9s">
+                <h3 class=" wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="1.1s">Web Developer</h3>
+                <p class=" wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="1.2s">Anything with the Web development starting from React to PHP to MySql making it a full-stack application</p>
+            </div>
+                <div class="colu">
+                    <img src = "images/freelancer.png" class=" wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="0.9s">
+                    <h3 class=" wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="1.1s">Freelancer</h3>
+                    <p class=" wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="1.2s">Ready to take all kinds of Projects and Contracts. Also available for Internships</p>
+                </div>
+                <div class="colu ">
+                    <img src = "images/dev.jpg" class=" wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="0.9s">
+                    <h3 class=" wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="1.1s">Blockchain Developer</h3>
+                    <p class=" wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="1.2s">Dapplication development is my prime work and easily deploy Smart Contracts on Ethereum Blockchain</p>
+                </div>
+                <div class="colu">
+                    <img src = "images/BLOCKCHAIN.png" class=" wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="0.9s">
+                    <h3 class=" wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="1.1s">Blockchain Instructor</h3>
+                    <p class=" wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="1.2s">Teaching Blockchain to about 20000 students on Udemy in collaboration with JP Courses</p>
+                </div>
+                <div class="colu ">
+                    <img src = "images/photographer.png" class=" wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="0.9s">
+                    <h3 class=" wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="1.1s">Photographer</h3>
+                    <p class=" wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="1.2s">A professional hobby and an affection towards photography while capturing every memory in memory.</p>
+                </div>
+                <div class="colu">
+                    <img src = "images/event manager.png" class=" wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="0.9s">
+                    <h3 class=" wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="1.1s">Event Manager</h3>
+                    <p class=" wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="1.2s">Started with a lot of appreciation in the school days now it's more like a passion to me.</p>
+                </div>
+             </div>
+    </section>
+
+    <section id = "gallery" class="slide gallery">
+        <div class="section-title" style="padding-top: 40px;">
+            <h2 class="wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.4s">Projects</h2>
+        </div>
+        <div class="content fourth-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-4 col-sm-6">
+                        <div class="item wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="0.8s">
+                            <div class="thumb">
+                                <a href="https://kole-swapnil.github.io" data-lightbox="image-1"><div class="hover-effect">
+                                    <div class="hover-content">
+                                        <h2>Noob Photographer</h2>
+                                        <p>A photography website to showcase my skills of photography</p>
+                                    </div>
+                                </div></a>
+                                
+                                    <img src="img/first_big_item.jpg">
+                               
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="item wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="0.8s">
+                            <div class="thumb">
+                                <a href="https://github.com/kole-swapnil/Dairy-Management-System-SQL" data-lightbox="image-1"><div class="hover-effect">
+                                    <div class="hover-content">
+                                        <h2>Unimilk</h2>
+                                        <p>Dairy Management System which tracks milk packets by Aadhar Card</p>
+                                    </div>
+                                </div></a>
+                                <div class="image">
+                                    <img src="img/second_big_item.jpg">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="item wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="0.8s">
+                            <div class="thumb">
+                                <a href="https://docs.google.com/presentation/d/1wyz9hlO_DCufkpmvWgOGjLZ33ui7QLx_GwBqrc-GL3Q/edit#slide=id.g1f87997393_0_782" data-lightbox="image-1"><div class="hover-effect">
+                                    <div class="hover-content">
+                                        <h2>Certichain</h2>
+                                        <p>A Certificate tracking and verification dapp created on Blockchain</p>
+                                    </div>
+                                </div></a>
+                                <div class="image">
+                                    <img src="img/third_big_item.jpg">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="item wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="0.9s">
+                            <div class="thumb">
+                                <a href="https://www.researchgate.net/publication/340528602_COVID-19_Database_on_Consortium_Blockchain" data-lightbox="image-1"><div class="hover-effect">
+                                    <div class="hover-content">
+                                        <h2>D-Database</h2>
+                                        <p>Publication on Decentralized database for COVID-19</p>
+                                    </div>
+                                </div></a>
+                                <div class="image">
+                                    <img src="img/fourth_big_item.jpg">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="item wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="0.9s">
+                            <div class="thumb">
+                                <a href="img/fifth_big_item.jpg" data-lightbox="image-1"><div class="hover-effect">
+                                    <div class="hover-content">
+                                        <h2>Conquering Blocks</h2>
+                                        <p>Teaching Blockchain on Udemy</p>
+                                    </div>
+                                </div></a>
+                                <div class="image">
+                                    <img src="img/fifth_big_item.jpg">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="item wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="0.9s">
+                            <div class="thumb">
+                                <a href="https://superworldapp.com/blockchain/ethereum/" data-lightbox="image-1"><div class="hover-effect">
+                                    <div class="hover-content">
+                                        <h2>SUPERWORLD</h2>
+                                        <p>A decentralized estate management system on the blockchain trading AR land as ERC721 Token</p>
+                                    </div>
+                                </div></a>
+                                <div class="image">
+                                    <img src="img/sixth_big_item.jpg">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="item wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="1s">
+                            <div class="thumb">
+                                <a href="https://github.com/kole-swapnil/Blog-the-Blocks" data-lightbox="image-1"><div class="hover-effect">
+                                    <div class="hover-content">
+                                        <h2>Blog The Blocks</h2>
+                                        <p>Writing blogs for people to gain technical knowledge of Blockchain</p>
+                                    </div>
+                                </div></a>
+                                <div class="image">
+                                    <img src="img/seventh_big_item.jpg">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="item wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="1s">
+                            <div class="thumb">
+                                <a href="https://github.com/kole-swapnil/Form" data-lightbox="image-1"><div class="hover-effect">
+                                    <div class="hover-content">
+                                        <h2>Bulma Form</h2>
+                                        <p>A full-stack form application made for hiring interns at INNERWORKS PVT LTD</p>
+                                    </div>
+                                </div></a>
+                                <div class="image">
+                                    <img src="img/eight_big_item.jpg">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6" id="vg">
+                        <div class="item wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="1s">
+                            <div class="thumb">
+                                <a href="img/second_big_item.jpg" data-lightbox="image-1"><div class="hover-effect">
+                                    <div class="hover-content">
+                                        <h2>NCSVMUN</h2>
+                                        <p>Organised Model United Nations at Navy Children School</p>
+                                    </div>
+                                </div></a>
+                                <div class="image">
+                                    <img src="img/second_big_item.jpg">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+           
+    </section>
+    <section id ="contact" class="slide contact">
+        <div class="section-title" style="padding-top: 40px;">
+            <h2 class="wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.4s">Contact</h2>
+        </div>
+        
+            
+        <div class="contact-info">
+            <div id="map" class="colu wow fadeInUp" data-wow-duration="1.2s" data-wow-delay="0.9s" placeholder="Full Name" required="">
+                <!-- How to change your own map point
+                        1. Go to Google Maps
+                        2. Click on your location point
+                        3. Click "Share" and choose "Embed map" tab
+                        4. Copy only URL and paste it within the src="" field below
+                -->
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3215.6748988530226!2d85.74187112409825!3d20.293606348878882!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a1907438b22a2ff%3A0x640ca4bd8a3cef43!2sIIIT%2C%20P-Block!5e0!3m2!1sen!2sin!4v1593927151786!5m2!1sen!2sin" frameborder="0" style="border:0" allowfullscreen></iframe>
+                                    </div>
+                <div class= "colu">
+                <form id="my-form"
+                action="https://formspree.io/xwkrrwdw"
+                method="POST">
+                <input type="text" id = "Name" name = "User" class="textfield wow fadeInUp" data-wow-duration="1.2s" data-wow-delay="0.9s" placeholder="Full Name" required="">
+                <input type="text" id = "Email" name = "Email" class="textfield wow fadeInUp" data-wow-duration="1.2s" data-wow-delay="1.1s" placeholder="Email Address" required="">
+                <input type="text" id = "Service" name = "Service" class="textfield wow fadeInUp" data-wow-duration="1.2s" data-wow-delay="1.2s" placeholder="Service" required="">
+                <textarea id = "Message" name = "Message" class="textfield messagefield wow fadeInUp" data-wow-duration="1.2s" data-wow-delay="1.3s" placeholder="Your Message"></textarea>
+                <input type="submit" id="my-form-button" class ="textfield submitButton wow fadeInUp" data-wow-duration="1.2s" data-wow-delay="1.6s" value="Send Message">
+                <input type="reset" id="my-form-status" class ="textfield submitButton" style = "display:none;" value="Thanks for submitting">
+            </form>
+                
+            
+            <div class="btn-group wow fadeInUp" data-wow-duration="1.2s" data-wow-delay="1.8s" role="group">
+                <a href="tel:+91 8328217163" class="btn btn-info" id = "call" role = "button"><i class="fa fa-phone"></i><span class="invi" style="padding-left: 8px;">    Call </span></a>
+                <a href="mailto:swapnilkole7500@gmail.com" class="btn btn-dark" role = "button"><i class="fa fa-envelope"></i><span class="invi" style="padding-left: 8px;">    Email </span></a>
+                <a href=" https://wa.me/918328217163" class="btn btn-success" id="wapp" role = "button"><i class="fa fa-whatsapp"></i><span class="invi" style="padding-left: 8px;">    Whatsapp </span></a> 
+                <a href="https://www.instagram.com/foody_kole/" target= "_blank" id= "insta" class="btn btn-danger" role = "button"><i class="fa fa-instagram"></i><span class="invi" style="padding-left: 8px;">    Insta </span> </a>
+          </div>
+          </div>
+        </div>
+       
+        
+    </section>
 </div>
-  
-  <span id="welcome"></span>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js" integrity="sha512-Kef5sc7gfTacR7TZKelcrRs15ipf7+t+n7Zh6mKNJbmW+/RRdCW9nwfLn4YX0s2nO6Kv5Y2ChqgIakaC6PW09A==" crossorigin="anonymous"></script>
+    <script src="js/particle-script.js"></script>
+    <script type="text/javascript">
+        new WOW().init();
+        $(window).scroll(() => {
+            var sticky = $("header");
+            if($(window).scrollLeft() >= 0){
+                sticky.addClass("fixed");
+            } 
+            else if($(window).scrollTop() >= 0){
+                sticky.addClass("fixed");
+            }
+            else {
+                sticky.removeClass("fixed");
+            }
+            
+        });
+       
+    </script>
+    <script>
+        window.addEventListener("DOMContentLoaded", function() {
+            //https://formspree.io/forms/xwkrrwdw/integration   form view link
+          // get the form elements defined in your form HTML above
+          
+          var form = document.getElementById("my-form");
+          var button = document.getElementById("my-form-button");
+          var status = document.getElementById("my-form-status");
+      
+          // Success and Error functions for after the form is submitted
+          
+          function success() {
+            form.reset();
+            button.style = "display: none ";
+            status.style = "display: inline-block ";
+          }
+      
+          function error() {
+            status.innerHTML = "Oops! There was a problem.";
+          }
+      
+          // handle the form submission event
+      
+          form.addEventListener("submit", function(ev) {
+            ev.preventDefault();
+            var data = new FormData(form);
+            ajax(form.method, form.action, data, success, error);
+          });
+        });
+        
+        // helper function for sending an AJAX request
+      
+        function ajax(method, url, data, success, error) {
+          var xhr = new XMLHttpRequest();
+          xhr.open(method, url);
+          xhr.setRequestHeader("Accept", "application/json");
+          xhr.onreadystatechange = function() {
+            if (xhr.readyState !== XMLHttpRequest.DONE) return;
+            if (xhr.status === 200) {
+              success(xhr.response, xhr.responseType);
+            } else {
+              error(xhr.status, xhr.response, xhr.responseType);
+            }
+          };
+          xhr.send(data);
+        }
+      </script>
 
-<script>
-	  
-	  $('#img1').ready(teW);
-	
-</script>
 </body>
+
 </html>
+
