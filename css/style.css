@@ -437,9 +437,7 @@ iframe{
     border-color: #ff6e40;
 }
 @media screen and  (orientation: portrait){
-	:root{
-		--app-height: 100%;
-	}
+	
 	html,body {
 		height: 100%;
 		line-height: 1;
