@@ -1,3 +1,4 @@
-##Trials and Github Practice
+## Portfolio Website
 
->Just for a rough idea of my portfolio website
+>A website atleast for my satisfaction :xD
+
