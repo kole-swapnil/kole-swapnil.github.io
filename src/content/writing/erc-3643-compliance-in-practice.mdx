@@ -1,0 +1,266 @@
+---
+title: ERC-3643 compliance in practice
+slug: erc-3643-compliance-in-practice
+date: 2026-07-28
+excerpt: Permissioned tokens push eligibility checks into the transfer path itself. Here is what that actually looks like in Solidity, and the three places teams get it wrong.
+tags:
+  - Solidity
+  - ERC-3643
+  - Compliance
+placeholder: true
+# TODO(content): sample post — delete once real articles exist — see CONTENT-NEEDED.md
+---
+
+Most token standards answer one question: who owns what. ERC-3643 — the T-REX
+standard — answers a second one that regulated assets cannot avoid: *is this
+particular person allowed to hold this particular token right now?*
+
+That sounds like a policy problem. In practice it is an architecture problem,
+because the answer has to be available inside `transfer`, on-chain, before the
+balance moves. You cannot check eligibility in your API and then call the
+contract, because nothing stops someone calling the contract directly.
+
+## The shape of the standard
+
+A T-REX deployment is four contracts that most people initially assume should
+be one:
+
+- **The token** — ERC-20 on the surface, with every transfer routed through a
+  compliance check first.
+- **The identity registry** — maps a wallet address to an on-chain identity and
+  the claims attached to it.
+- **The claim topics registry** — states which claims this token requires. KYC,
+  accreditation, jurisdiction.
+- **The compliance contract** — holds the transfer rules that are not about the
+  identity of the holder: supply caps, holder limits, lockups.
+
+The split is not ceremony. The identity registry is shared across every token
+an issuer runs, the compliance rules differ per token, and the claim
+requirements change when a regulator changes its mind. Fusing them means
+redeploying the token to change a rule.
+
+## The transfer path
+
+Here is the part that matters. Every transfer is gated:
+
+```solidity
+function transfer(address to, uint256 amount)
+    public
+    override
+    returns (bool)
+{
+    require(!frozen[msg.sender] && !frozen[to], "wallet frozen");
+    require(
+        amount <= balanceOf(msg.sender) - frozenTokens[msg.sender],
+        "insufficient unfrozen balance"
+    );
+
+    // Both parties must be verified against the identity registry.
+    require(identityRegistry.isVerified(to), "recipient not verified");
+
+    // And the transfer itself must satisfy the compliance rules.
+    require(compliance.canTransfer(msg.sender, to, amount), "compliance failure");
+
+    _transfer(msg.sender, to, amount);
+    compliance.transferred(msg.sender, to, amount);
+
+    return true;
+}
+```
+
+Two calls, two different questions. `isVerified` asks whether the recipient is
+allowed to hold the token at all. `canTransfer` asks whether *this* movement is
+permitted — which depends on state the token does not own, like how many
+holders already exist in the recipient's country.
+
+The `compliance.transferred` call afterwards is easy to miss and important:
+compliance modules are stateful, and if you never tell them a transfer
+succeeded, their counters drift out of sync with reality.
+
+## Verification is a claim lookup, not a boolean
+
+`isVerified` is where the interesting work happens. It walks the claim topics
+the token requires and checks that each one has a valid signature from a
+trusted issuer:
+
+```solidity
+function isVerified(address userAddress) public view returns (bool) {
+    if (address(identities[userAddress]) == address(0)) {
+        return false;
+    }
+
+    uint256[] memory requiredTopics = topicsRegistry.getClaimTopics();
+
+    for (uint256 i = 0; i < requiredTopics.length; i++) {
+        bytes32[] memory claimIds =
+            identities[userAddress].getClaimIdsByTopic(requiredTopics[i]);
+
+        if (claimIds.length == 0) {
+            return false;
+        }
+
+        bool topicSatisfied = false;
+
+        for (uint256 j = 0; j < claimIds.length; j++) {
+            (, , address issuer, bytes memory sig, bytes memory data, ) =
+                identities[userAddress].getClaim(claimIds[j]);
+
+            if (
+                issuersRegistry.isTrustedIssuer(issuer) &&
+                issuersRegistry.hasClaimTopic(issuer, requiredTopics[i]) &&
+                IClaimIssuer(issuer).isClaimValid(
+                    identities[userAddress],
+                    requiredTopics[i],
+                    sig,
+                    data
+                )
+            ) {
+                topicSatisfied = true;
+                break;
+            }
+        }
+
+        if (!topicSatisfied) {
+            return false;
+        }
+    }
+
+    return true;
+}
+```
+
+Read the loop bounds again. This is a nested loop over two arrays whose lengths
+are set by other contracts, running inside a `transfer`. That is the first
+place teams get hurt.
+
+## Three things that go wrong
+
+### 1. The gas cost is not a constant
+
+Every additional required claim topic adds an outer iteration, and every claim
+a user holds for that topic adds an inner one. A holder with a long claim
+history costs more to transfer to than a fresh one, and the difference is not
+small.
+
+The failure mode is not "transfers are expensive". It is that a transfer which
+succeeded in testing reverts in production for one specific user, because that
+user happens to have accumulated six claims and the caller set a gas limit
+based on a two-claim test account.
+
+Cap the topics you require, and prune stale claims.
+
+### 2. Compliance state and token state can diverge
+
+Compliance modules count things — holders per country, tokens per investor,
+days since a lockup started. Those counters live in the compliance contract,
+not the token. Any code path that moves a balance without calling
+`compliance.transferred` will silently corrupt them.
+
+The usual culprits are `mint`, `burn`, and forced transfers used for recovery.
+Recovery in particular is easy to get wrong: when you move a holder's balance
+to a new wallet after they lose their keys, the holder count should not
+increment. It is one holder with a new address, not a new one.
+
+```solidity
+function recoveryAddress(
+    address lostWallet,
+    address newWallet,
+    address investorOnchainID
+) external onlyAgent returns (bool) {
+    require(balanceOf(lostWallet) != 0, "no tokens to recover");
+
+    IIdentity onchainID = IIdentity(investorOnchainID);
+    bytes32 key = keccak256(abi.encode(newWallet));
+
+    require(onchainID.keyHasPurpose(key, 1), "new wallet not in identity");
+
+    // Register first, so the recipient is verified before any movement.
+    identityRegistry.registerIdentity(
+        newWallet,
+        onchainID,
+        identityRegistry.investorCountry(lostWallet)
+    );
+
+    forcedTransfer(lostWallet, newWallet, balanceOf(lostWallet));
+
+    // Frozen tokens and freeze status travel with the holder, not the wallet.
+    if (frozenTokens[lostWallet] > 0) {
+        freezePartialTokens(newWallet, frozenTokens[lostWallet]);
+    }
+    if (frozen[lostWallet]) {
+        setAddressFrozen(newWallet, true);
+    }
+
+    identityRegistry.deleteIdentity(lostWallet);
+    return true;
+}
+```
+
+Note the order. Register the new wallet before transferring, or the transfer
+fails its own verification check. Carry the freeze state across, or recovery
+becomes a way to launder a frozen balance into a clean wallet.
+
+### 3. "Trusted issuer" is a live trust assumption
+
+`isTrustedIssuer` is a mutable registry controlled by the issuer. Whoever holds
+that key can add a claim issuer, and a claim issuer can attest that anyone is
+eligible for anything.
+
+This is usually the largest real risk in a T-REX deployment, and it is entirely
+off-chain: who holds the agent keys, what approval is needed to add an issuer,
+and whether removal is possible without a redeploy. An audit that reviews the
+Solidity and not the key management has looked at the smaller half of the
+problem.
+
+## What to test
+
+Unit tests on the happy path prove almost nothing here. The tests worth writing
+are the ones that assert on failure:
+
+```typescript
+it('rejects a transfer to an unverified recipient', async () => {
+  await expect(
+    token.connect(alice).transfer(strangerAddress, 100n),
+  ).to.be.revertedWith('recipient not verified')
+})
+
+it('keeps the holder count stable through a recovery', async () => {
+  const before = await compliance.holderCount()
+
+  await token.connect(agent).recoveryAddress(
+    aliceOldWallet,
+    aliceNewWallet,
+    aliceIdentity,
+  )
+
+  expect(await compliance.holderCount()).to.equal(before)
+})
+
+it('carries a partial freeze across a recovery', async () => {
+  await token.connect(agent).freezePartialTokens(aliceOldWallet, 40n)
+
+  await token.connect(agent).recoveryAddress(
+    aliceOldWallet,
+    aliceNewWallet,
+    aliceIdentity,
+  )
+
+  expect(await token.getFrozenTokens(aliceNewWallet)).to.equal(40n)
+})
+```
+
+The second and third are the ones that catch real bugs. They are also the ones
+most test suites do not have, because they require setting up a recovery
+scenario, and recovery is the path everyone assumes will be rare.
+
+It is rare. It is also the path where the money moves without a user's
+signature, which is exactly why it deserves the most tests.
+
+## The part that is not Solidity
+
+Deploying T-REX means running an identity infrastructure: a KYC provider whose
+attestations you sign into claims, a key management process for the agent
+roles, and an operational answer to "an investor's status changed, now what".
+
+The contracts are the smallest part of it. They are just the part that cannot
+be fixed after the fact.

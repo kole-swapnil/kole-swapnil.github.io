@@ -1,0 +1,187 @@
+---
+title: What a land registry taught me about state
+slug: what-a-land-registry-taught-me-about-state
+date: 2026-06-14
+excerpt: A blockchain does not make a record true. It makes it hard to change quietly. Those are different guarantees, and confusing them is how registry projects fail.
+tags:
+  - Architecture
+  - Blockchain
+  - Systems
+placeholder: true
+# TODO(content): sample post — delete once real articles exist — see CONTENT-NEEDED.md
+---
+
+The pitch for putting land records on a blockchain is easy to make and mostly
+wrong. It goes: land disputes happen because records get altered, blockchains
+cannot be altered, therefore blockchain fixes land disputes.
+
+Every step of that is true except the conclusion. Working on a registry for a
+state government taught me why, and the lesson turned out to be about state
+management generally rather than about land.
+
+## Two guarantees that look like one
+
+An immutable ledger gives you exactly one thing: once a fact is written, you
+can prove it has not changed, and you can prove when it was written.
+
+It gives you nothing at all about whether the fact was true when it was
+written.
+
+<figure>
+  <svg viewBox="0 0 720 200" role="img" aria-label="The world produces a claim, a clerk records it on-chain, and the ledger's guarantee covers only the segment after recording." style={{ width: '100%', height: 'auto' }}>
+    <rect x="0" y="0" width="720" height="200" fill="#F5F4F0" />
+
+    <rect x="12" y="52" width="150" height="64" rx="8" fill="#FFFFFF" stroke="#DFDED8" />
+    <text x="87" y="80" textAnchor="middle" fontFamily="Instrument Sans, sans-serif" fontSize="14" fontWeight="600" fill="#131316">The world</text>
+    <text x="87" y="99" textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontSize="11" fill="#78776F">who owns it</text>
+
+    <rect x="222" y="52" width="150" height="64" rx="8" fill="#FFFFFF" stroke="#DFDED8" />
+    <text x="297" y="80" textAnchor="middle" fontFamily="Instrument Sans, sans-serif" fontSize="14" fontWeight="600" fill="#131316">The clerk</text>
+    <text x="297" y="99" textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontSize="11" fill="#78776F">enters a claim</text>
+
+    <rect x="432" y="52" width="150" height="64" rx="8" fill="#131316" />
+    <text x="507" y="80" textAnchor="middle" fontFamily="Instrument Sans, sans-serif" fontSize="14" fontWeight="600" fill="#F2F1ED">The ledger</text>
+    <text x="507" y="99" textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontSize="11" fill="#A3A2A0">records it</text>
+
+    <path d="M162 84 H214" stroke="#DFDED8" strokeWidth="1.5" />
+    <path d="M206 79 l8 5 -8 5" fill="#DFDED8" />
+    <path d="M372 84 H424" stroke="#DFDED8" strokeWidth="1.5" />
+    <path d="M416 79 l8 5 -8 5" fill="#DFDED8" />
+
+    <path d="M432 148 H700" stroke="#FFC94A" strokeWidth="2" />
+    <text x="566" y="172" textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontSize="11" fill="#5E5E58">guaranteed from here onward</text>
+
+    <path d="M12 148 H420" stroke="#DFDED8" strokeWidth="2" strokeDasharray="4 4" />
+    <text x="216" y="172" textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontSize="11" fill="#78776F">not guaranteed at all</text>
+  </svg>
+  <figcaption>
+    The chain's guarantee starts at the moment of recording. Everything to the
+    left of that line is a human process, and that is where registry disputes
+    actually originate.
+  </figcaption>
+</figure>
+
+This is the oracle problem, and it is not solved by a better consensus
+algorithm. If the clerk enters the wrong owner, you now have a permanent,
+tamper-evident, cryptographically signed record of the wrong owner. The system
+worked perfectly and produced a worse outcome than a paper ledger, because a
+paper ledger can be corrected with a pen and an explanation.
+
+## So why build it at all
+
+Because "hard to change quietly" turns out to be worth a great deal on its own.
+
+The disputes that a registry system can actually address are not the ones where
+the original entry was wrong. They are the ones where the record was correct
+and then changed — a transfer recorded twice, a parcel that appears in two
+chains of title, an alteration nobody can date.
+
+Those are detection problems. And detection is precisely what an append-only
+log with a verifiable history gives you. Not prevention — detection.
+
+Once you accept that framing, the design changes. You stop trying to make the
+system the source of truth and start trying to make it the *audit* of truth:
+
+- Records are never edited. A correction is a new entry that supersedes an old
+  one, and both remain readable.
+- Every entry carries who submitted it and under what authority.
+- The chain of title for a parcel is reconstructed by replaying entries, not
+  by reading a current-state row.
+
+## Which is just event sourcing
+
+At which point an experienced backend engineer will point out that this is
+event sourcing, and they are right. Append-only log, derived read models,
+corrections as compensating events. None of it requires a blockchain.
+
+That is a fair challenge and worth answering honestly, because it decides
+whether the chain earns its place.
+
+<figure>
+  <svg viewBox="0 0 720 240" role="img" aria-label="An append-only event log feeding a derived read model, with an on-chain anchor hash proving the log was not rewritten." style={{ width: '100%', height: 'auto' }}>
+    <rect x="0" y="0" width="720" height="240" fill="#F5F4F0" />
+
+    <text x="12" y="28" fontFamily="JetBrains Mono, monospace" fontSize="11" fill="#78776F">EVENTS (append only)</text>
+
+    <rect x="12" y="42" width="120" height="52" rx="6" fill="#FFFFFF" stroke="#DFDED8" />
+    <text x="72" y="66" textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontSize="11" fill="#131316">Registered</text>
+    <text x="72" y="82" textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontSize="10" fill="#78776F">2019-04-02</text>
+
+    <rect x="152" y="42" width="120" height="52" rx="6" fill="#FFFFFF" stroke="#DFDED8" />
+    <text x="212" y="66" textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontSize="11" fill="#131316">Transferred</text>
+    <text x="212" y="82" textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontSize="10" fill="#78776F">2021-11-30</text>
+
+    <rect x="292" y="42" width="120" height="52" rx="6" fill="#FFFFFF" stroke="#DFDED8" />
+    <text x="352" y="66" textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontSize="11" fill="#131316">Corrected</text>
+    <text x="352" y="82" textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontSize="10" fill="#78776F">2022-01-14</text>
+
+    <rect x="432" y="42" width="120" height="52" rx="6" fill="#FFFFFF" stroke="#DFDED8" />
+    <text x="492" y="66" textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontSize="11" fill="#131316">Transferred</text>
+    <text x="492" y="82" textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontSize="10" fill="#78776F">2024-08-09</text>
+
+    <path d="M132 68 H150" stroke="#DFDED8" strokeWidth="1.5" />
+    <path d="M272 68 H290" stroke="#DFDED8" strokeWidth="1.5" />
+    <path d="M412 68 H430" stroke="#DFDED8" strokeWidth="1.5" />
+
+    <path d="M282 110 V150" stroke="#DFDED8" strokeWidth="1.5" strokeDasharray="4 4" />
+    <path d="M277 142 l5 8 5 -8" fill="#DFDED8" />
+
+    <rect x="152" y="152" width="260" height="56" rx="8" fill="#FFFFFF" stroke="#DFDED8" />
+    <text x="282" y="176" textAnchor="middle" fontFamily="Instrument Sans, sans-serif" fontSize="14" fontWeight="600" fill="#131316">Current owner (derived)</text>
+    <text x="282" y="195" textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontSize="10" fill="#78776F">rebuildable, never authoritative</text>
+
+    <rect x="452" y="152" width="256" height="56" rx="8" fill="#131316" />
+    <text x="580" y="176" textAnchor="middle" fontFamily="Instrument Sans, sans-serif" fontSize="14" fontWeight="600" fill="#F2F1ED">Anchor hash on chain</text>
+    <text x="580" y="195" textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontSize="10" fill="#A3A2A0">proves the log was not rewritten</text>
+
+    <path d="M552 68 C 640 68, 640 120, 580 148" stroke="#FFC94A" strokeWidth="1.5" fill="none" />
+    <path d="M584 140 l-5 9 10 1" fill="#FFC94A" />
+  </svg>
+  <figcaption>
+    The read model is disposable — delete it and rebuild it from the log. The
+    on-chain anchor exists to prove the log itself was not quietly rewritten.
+  </figcaption>
+</figure>
+
+The honest answer is that a database gives you the append-only log, and a
+blockchain gives you one additional property: *the operator of the database
+cannot rewrite history without it being obvious to someone who does not trust
+them.*
+
+For most systems that property is worth nothing, because you already trust the
+operator — it is your own company, and the auditors have access. For a public
+registry, where the party running the database is also a party to the disputes
+it adjudicates, that property is the entire point.
+
+That is the test I now apply. Not "would immutability be nice", but: **is there
+a party who needs to verify this history without trusting whoever stores it?**
+If no, use Postgres. It is faster, cheaper, and you can fix things.
+
+## What actually shipped
+
+The system that went in looks unremarkable on a diagram. A React application
+officials use to register, search and verify parcels. An API and database
+holding the working state, because officials need sub-second search across
+millions of records and no chain does that. Solidity contracts holding record
+state and enforcing the rules a transfer must satisfy.
+
+Most of the engineering was not the contracts. It was reconciliation: the
+registry had decades of existing records in inconsistent formats, and any
+system that cannot answer questions about those records is a system nobody in
+the department can use.
+
+That is the part nobody puts in the pitch deck, and it is where the project
+either works or does not.
+
+## The generalisation
+
+The thing I took from it applies well outside land records.
+
+When you are deciding where a piece of state lives, the useful question is not
+how important the data is. It is **who needs to be able to disagree with you
+about it later**. Data nobody will contest can live wherever it is cheapest.
+Data that will be contested needs a history, and the history needs to be
+verifiable by the party doing the contesting.
+
+Everything else — the chain, the database, the file — is an implementation
+detail of that one requirement.

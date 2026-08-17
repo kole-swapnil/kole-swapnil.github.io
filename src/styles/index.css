@@ -1,0 +1,367 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------------------------------------------------------------------------
+   Fonts — self-hosted variable woff2. Both files are the latin subset;
+   instrument-sans-latin-ext covers the extended latin range for names and
+   currency symbols. No network request to Google at runtime.
+--------------------------------------------------------------------------- */
+
+@font-face {
+  font-family: 'Instrument Sans';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('/fonts/instrument-sans-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191,
+    U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Instrument Sans';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('/fonts/instrument-sans-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+    U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+    U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url('/fonts/jetbrains-mono-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191,
+    U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@layer base {
+  :root {
+    /* Height of the sticky nav. Used by scroll-margin so anchor links do not
+       land underneath the bar, and by the hero's top padding. Changing this
+       one value keeps both in step. */
+    --nav-h: 3.5rem;
+  }
+
+  @media (min-width: 768px) {
+    :root {
+      --nav-h: 4rem;
+    }
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    @apply bg-surface font-sans text-base text-slate antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Every anchor target clears the sticky nav. Applied on the element rather
+     than via a wrapper so it survives layout changes in the sections. */
+  [id] {
+    scroll-margin-top: calc(var(--nav-h) + 1.25rem);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-sans font-semibold text-ink;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* One focus treatment for the whole site. Visible on both the dark band and
+     the light body — the offset colour is inherited from the surface. */
+  :focus-visible {
+    outline: 2px solid theme('colors.amber.DEFAULT');
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* Remove the focus ring for mouse users only; :focus-visible above still
+     fires for keyboard navigation. */
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  ::selection {
+    background: theme('colors.amber.DEFAULT');
+    color: theme('colors.amber.ink');
+  }
+}
+
+@layer components {
+  /* --- Layout ----------------------------------------------------------- */
+
+  .shell {
+    @apply mx-auto w-full max-w-shell px-5 sm:px-8 lg:px-12;
+  }
+
+  /* --- Buttons ---------------------------------------------------------- */
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-btn
+      px-4 py-2.5 font-sans text-sm font-medium
+      transition-[background-color,color,border-color,transform] duration-200 ease-ease;
+  }
+
+  /* Primary action on the light body: ink fill, bone text.
+     Deliberately NOT amber — amber on white fails contrast and an accent that
+     appears everywhere stops meaning anything. */
+  .btn-primary {
+    @apply btn bg-ink text-bone hover:bg-[#25252b] active:translate-y-px;
+  }
+
+  .btn-secondary {
+    @apply btn border-hairline border-rule bg-card text-ink
+      hover:border-ink/25 hover:bg-white active:translate-y-px;
+  }
+
+  /* On the dark band the polarity inverts. */
+  .btn-on-dark-primary {
+    @apply btn bg-bone text-ink hover:bg-white active:translate-y-px;
+  }
+
+  .btn-on-dark-secondary {
+    @apply btn border-hairline border-dark-rule-strong bg-transparent text-bone
+      hover:border-dark-muted hover:bg-white/[0.06] active:translate-y-px;
+  }
+
+  /* --- Type helpers ----------------------------------------------------- */
+
+  /* Mono uppercase eyebrow above section headings. */
+  .eyebrow {
+    @apply font-mono text-label font-medium uppercase tracking-[0.09em] text-meta;
+  }
+
+  .eyebrow-on-dark {
+    @apply font-mono text-label font-medium uppercase tracking-[0.09em] text-dark-muted;
+  }
+
+  /* --- Surfaces --------------------------------------------------------- */
+
+  .card {
+    @apply rounded-card border-hairline border-rule bg-card;
+  }
+
+  /* --- Long-form article typography ------------------------------------- */
+
+  /*
+   * The reading column. This is where people spend actual minutes, so it gets
+   * a larger body size than the rest of the site (17px vs 15px), a looser
+   * line-height, and a measure capped near 68 characters.
+   *
+   * Vertical rhythm is built on one rule: space belongs ABOVE a heading, not
+   * below it, so a heading stays visually bound to the text it introduces.
+   * The `:first-child` resets stop that margin creating a gap at the top of
+   * the article.
+   */
+  .prose {
+    @apply text-[1.0625rem] leading-[1.72] text-slate;
+  }
+
+  .prose > * + * {
+    @apply mt-6;
+  }
+
+  .prose > :first-child {
+    @apply mt-0;
+  }
+
+  .prose h2 {
+    @apply mt-14 text-2xl text-ink sm:text-3xl;
+  }
+
+  .prose h3 {
+    @apply mt-11 text-xl text-ink;
+  }
+
+  .prose h4 {
+    @apply mt-9 text-md font-semibold text-ink;
+  }
+
+  /* The paragraph immediately after a heading sits closer to it. */
+  .prose h2 + *,
+  .prose h3 + *,
+  .prose h4 + * {
+    @apply mt-4;
+  }
+
+  .prose a {
+    @apply text-ink underline decoration-rule underline-offset-[3px] transition-colors;
+  }
+
+  .prose a:hover {
+    @apply decoration-ink;
+  }
+
+  /* Heading anchors are wrapped links; they should not look like body links. */
+  .prose .heading-anchor {
+    @apply text-inherit no-underline;
+  }
+
+  .prose .heading-anchor:hover {
+    @apply underline decoration-rule underline-offset-[6px];
+  }
+
+  .prose strong {
+    @apply font-semibold text-ink;
+  }
+
+  .prose ul,
+  .prose ol {
+    @apply space-y-2.5 pl-5;
+  }
+
+  .prose ul {
+    @apply list-disc marker:text-rule;
+  }
+
+  .prose ol {
+    @apply list-decimal marker:font-mono marker:text-sm marker:text-meta;
+  }
+
+  .prose li > ul,
+  .prose li > ol {
+    @apply mt-2.5;
+  }
+
+  .prose blockquote {
+    @apply border-l-2 border-amber pl-5 text-ink;
+  }
+
+  .prose blockquote p {
+    @apply mt-0;
+  }
+
+  .prose hr {
+    @apply my-12 border-0 border-t-hairline border-rule;
+  }
+
+  /* Inline code. Distinct from a code block without shouting. */
+  .prose :not(pre) > code {
+    @apply rounded-[3px] border-hairline border-rule bg-card px-1.5 py-0.5 font-mono text-[0.86em] text-ink;
+  }
+
+  .prose figure {
+    @apply my-8;
+  }
+
+  .prose figcaption {
+    @apply mt-3 font-mono text-xs text-meta;
+  }
+
+  .prose img,
+  .prose svg {
+    @apply max-w-full;
+  }
+
+  .prose table {
+    @apply w-full border-collapse text-base;
+  }
+
+  .prose th {
+    @apply border-b-hairline border-rule pb-2 pr-4 text-left font-sans text-sm font-semibold text-ink;
+  }
+
+  .prose td {
+    @apply border-b-hairline border-rule py-2.5 pr-4 align-top;
+  }
+
+  /*
+   * Code blocks run wider than the reading measure. Long lines of Solidity do
+   * not fit in 68 characters, and wrapping them destroys the indentation that
+   * carries the structure — so the block breaks out of the column and scrolls
+   * horizontally inside itself. The page body never scrolls sideways.
+   */
+  .prose .code-figure {
+    @apply -mx-5 my-8 sm:mx-0 lg:-mx-10;
+  }
+
+  .prose pre {
+    @apply overflow-x-auto px-5 py-4 font-mono text-[0.8125rem] leading-[1.65] sm:px-6;
+    /* Shiki emits an inline background colour; this overrides it so code
+       blocks share the site's ink rather than the theme's near-black. */
+    background-color: theme('colors.ink') !important;
+  }
+
+  .prose pre code {
+    @apply grid;
+    /* `grid` on <code> makes each shiki line a row, which is what allows line
+       highlighting and correct wrapping behaviour inside the scroll area. */
+  }
+
+  /* --- Motion ----------------------------------------------------------- */
+
+  /*
+   * Scroll reveal, arranged so content is NEVER hidden waiting on JavaScript.
+   *
+   * `.reveal` on its own is fully visible. The hidden state only applies once
+   * useReveal has set `data-reveal-armed` on the container, which it does in a
+   * layout effect — after hydration, before paint. So the prerendered HTML
+   * renders immediately whether the bundle is slow, blocked or broken, and the
+   * animation is a progressive enhancement rather than a precondition.
+   *
+   * The order matters: arming happens in the same frame as observing, so there
+   * is no flash of visible-then-hidden.
+   */
+  .reveal {
+    transition:
+      opacity 0.6s cubic-bezier(0.22, 0.61, 0.36, 1),
+      transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  [data-reveal-armed='true'] .reveal:not([data-revealed='true']) {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+@layer utilities {
+  .hairline-t {
+    @apply border-t-hairline border-rule;
+  }
+
+  .hairline-b {
+    @apply border-b-hairline border-rule;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Reduced motion. Everything decorative stops; nothing becomes unreadable.
+--------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  [data-reveal-armed='true'] .reveal:not([data-revealed='true']) {
+    opacity: 1;
+    transform: none;
+  }
+}

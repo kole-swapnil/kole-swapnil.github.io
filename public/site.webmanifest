@@ -1,0 +1,19 @@
+{
+  "name": "Swapnil Kole — Senior Software Engineer",
+  "short_name": "Swapnil Kole",
+  "icons": [
+    {
+      "src": "/favicon-32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#131316",
+  "background_color": "#F5F4F0",
+  "display": "browser"
+}
