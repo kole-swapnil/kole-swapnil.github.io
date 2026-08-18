@@ -133,8 +133,8 @@ export const projects: Project[] = [
     summary:
       'A phygital NFT platform where investors buy asset-backed tokens with a card, not a wallet.',
     description:
-      'A platform for purchasing NFTs backed by real physical assets. The entire backend runs on AWS serverless, defined as code with AWS CDK and Terraform so every environment is reproducible and nothing lives only in a console. The token layer is T-REX (ERC-3643), which enforces investor eligibility and transfer restrictions on-chain rather than in application code, shipped with deployment scripts and an automated test suite. I integrated the React front end with those backend services and designed the end-to-end system flows.',
-    stack: ['React', 'AWS CDK', 'AWS Serverless', 'Terraform', 'Solidity', 'ERC-3643'],
+      'A platform for purchasing NFTs backed by real physical assets. The entire backend runs on AWS serverless, provisioned as code with Terraform so every environment is reproducible and nothing lives only in a console. The token layer is T-REX (ERC-3643), which enforces investor eligibility and transfer restrictions on-chain rather than in application code, shipped with deployment scripts and an automated test suite. I connected the React front end over GraphQL and designed the end-to-end system flows.',
+    stack: ['React', 'GraphQL', 'AWS Serverless', 'Terraform', 'Solidity', 'ERC-3643'],
     // TODO(content): real screenshot at 16:10 — see CONTENT-NEEDED.md
     image: '/images/projects/domx.jpg',
     imageAlt:

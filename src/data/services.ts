@@ -25,9 +25,9 @@ export interface Service {
 export const services: Service[] = [
   {
     id: 'speaking',
-    title: 'Speaking & teaching',
+    title: 'Speaking & mentoring',
     description:
-      'Talks and hands-on Solidity and blockchain workshops for engineering teams and universities. Curriculum design, and one-to-one mentoring for engineers moving into Web3.',
+      'Conference talks, guest lectures, and one-to-one mentoring for engineers moving into Web3. Multi-day workshops have their own section above.',
     // TODO(content): optional link to a talks page or deck — see CONTENT-NEEDED.md
   },
   {

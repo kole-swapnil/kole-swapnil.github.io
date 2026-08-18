@@ -6,10 +6,28 @@
  * impossible to accidentally publish a fixed price by typing one into a
  * free-text field.
  *
- * !!! EVERY PRICE AND DURATION BELOW IS A PLACEHOLDER. !!!
- * They are the figures from the original brief and have not been set.
- * See CONTENT-NEEDED.md — these block launch.
+ * PRICING IS CURRENTLY HIDDEN — see `showPricing` below. The figures are kept
+ * in the data rather than deleted so it is one line to turn them back on.
+ *
+ * The DURATIONS are still assumed and now matter more than they did: with the
+ * prices hidden, the timeline is the only concrete number differentiating the
+ * three cards. See the TODO(content) markers and CONTENT-NEEDED.md.
  */
+
+/**
+ * Whether to display the price figures.
+ *
+ * Set to false: the cards show the timeline as their headline figure and
+ * "Pricing on enquiry" beneath it. Set it to true and the prices below render
+ * exactly as before — nothing else needs changing.
+ *
+ * Hiding prices is a real trade. The section is a self-qualification tool, and
+ * a visitor who cannot see a number cannot place themselves in a tier without
+ * emailing first, which is the friction the page was built to remove. It also
+ * turns the "from" floors into a conversation rather than a filter. Kept as a
+ * switch so the decision stays cheap to reverse.
+ */
+export const showPricing = false
 
 export interface Package {
   /** Stable id. Used in the anchor, the React key and the mailto subject. */
@@ -38,8 +56,6 @@ export interface Package {
    * duration is a price with no shape. Short string, ~14 chars.
    */
   duration: string
-  /** 2–3 sentences on what the engagement actually is. */
-  description: string
   /**
    * What lands at the end. 4–6 items, each ~55 chars max.
    * Written as deliverables ("A ranked findings document"), not activities.
@@ -64,14 +80,11 @@ export const packages: Package[] = [
     id: 'technical-audit',
     name: 'Technical audit',
     tagline: 'A codebase, cloud setup or contract suite reviewed line by line.',
-    // TODO(content): set the real price — see CONTENT-NEEDED.md
-    priceFrom: 1500,
+    priceFrom: 1000,
     priceUnit: 'project',
     priceNote: 'Fixed scope, fixed fee',
     // TODO(content): confirm the duration — see CONTENT-NEEDED.md
     duration: '1 week',
-    description:
-      'I read the whole thing — application code, infrastructure, or smart contracts — and write up what I find, ranked by how much it is likely to cost you. You get the document and a call to walk through it, and you keep both whether or not we work together again.',
     deliverables: [
       'Findings document, ranked by severity',
       'Fixes described concretely, not "consider refactoring"',
@@ -85,14 +98,11 @@ export const packages: Package[] = [
     id: 'product-build',
     name: 'Product build',
     tagline: 'A working platform, front to back, deployed and handed over.',
-    // TODO(content): set the real price — see CONTENT-NEEDED.md
-    priceFrom: 12000,
+    priceFrom: 4000,
     priceUnit: 'project',
     priceNote: 'Scoped in detail before we start',
     // TODO(content): confirm the duration — see CONTENT-NEEDED.md
     duration: '6–10 weeks',
-    description:
-      'End to end: a React front end, a Node or serverless API, and the infrastructure it runs on written as code so it can be rebuilt from scratch. Smart contracts and a payment or wallet on-ramp when the product needs them — not as the default assumption.',
     deliverables: [
       'React front end, responsive and accessible',
       'Node or AWS serverless API',
@@ -109,13 +119,10 @@ export const packages: Package[] = [
     id: 'lead-engineer',
     name: 'Lead engineer, part time',
     tagline: 'Senior engineering judgment on your team, without the headcount.',
-    // TODO(content): set the real price — see CONTENT-NEEDED.md
-    priceFrom: 4000,
+    priceFrom: 2000,
     priceUnit: 'month',
     priceNote: '2-week minimum, cancel anytime',
     duration: 'Ongoing',
-    description:
-      'I sit with your team on a regular cadence: architecture decisions, code review, and unblocking whatever is stuck. Includes workshops and one-to-one mentoring where the gap is knowledge rather than hours.',
     deliverables: [
       'Architecture and design review',
       'Regular code review on your repos',
@@ -131,8 +138,9 @@ export const packages: Package[] = [
  * The quiet line under the cards. Every price is a floor; this states it once
  * in plain language rather than repeating a disclaimer on each card.
  */
-export const pricingNote =
-  'Every figure is a starting point. Final scope and price are agreed on a call before any work begins.'
+export const pricingNote = showPricing
+  ? 'Every figure is a starting point. Final scope and price are agreed on a call before any work begins.'
+  : 'Every project is quoted individually. Tell me what you need and you will have a figure within a day.'
 
 /**
  * The fourth option: work that does not fit a tier.

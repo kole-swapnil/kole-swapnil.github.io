@@ -60,7 +60,7 @@ export function Hero() {
 
         {/* --- Right column: photograph, then who it was done for ---------- */}
         <div className="flex animate-rise flex-col gap-8 [animation-delay:120ms]">
-          <div className="relative w-full max-w-[15rem] sm:max-w-[17rem]">
+          <div className="relative w-full max-w-[11.5rem] sm:max-w-[13rem]">
             <img
               src={profile.headshot}
               alt={profile.headshotAlt}
@@ -82,14 +82,16 @@ export function Hero() {
 
           {/* Trust strip — typographic wordmarks, no logo images. Stacked
               rather than inline: the column is narrow, and a vertical list
-              reads as a record instead of a cramped row. */}
-          <div className="max-w-[17rem]">
+              reads as a record instead of a cramped row. It runs the full
+              width of the column rather than matching the photo, so six names
+              each sit on one line. */}
+          <div>
             <p className="eyebrow-on-dark">Worked with</p>
             <ul className="mt-3 flex flex-col">
               {profile.trustedBy.map((client) => (
                 <li
                   key={client}
-                  className="border-t-hairline border-dark-rule py-2.5 font-sans text-md font-medium tracking-[-0.01em] text-bone/85 first:border-t-0 first:pt-0"
+                  className="border-t-hairline border-dark-rule py-2 font-sans text-md font-medium tracking-[-0.01em] text-bone/85 first:border-t-0 first:pt-0"
                 >
                   {client}
                 </li>

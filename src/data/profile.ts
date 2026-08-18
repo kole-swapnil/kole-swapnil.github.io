@@ -60,6 +60,12 @@ export interface Profile {
   email: string
   /** Display format with country code; also used for the tel: link. */
   phone: string
+  /**
+   * WhatsApp number in international format, digits only — no +, no spaces.
+   * e.g. "918328217163". Leave undefined and it is derived from `phone`,
+   * which is correct unless you use a different number for WhatsApp.
+   */
+  whatsapp?: string
   /** Path under public/. 4:5 portrait. */
   headshot: string
   /** Alt text for the headshot. Describe the person, not the file. */
@@ -73,7 +79,11 @@ export interface Profile {
   /**
    * The hero trust strip. Plain typographic wordmarks — no logo images, which
    * avoids both a rights problem and a row of badly-cropped PNGs.
-   * 3–4 entries; more than that and none of them register.
+   *
+   * Strongest name first. Six is the practical ceiling — past that the list
+   * stops reading as selective. The share card and the "Recent clients" line
+   * beside the packages both take only the first three, so keep the openers
+   * the ones you most want a stranger to see.
    */
   trustedBy: string[]
 }
@@ -86,7 +96,7 @@ export const profile: Profile = {
   headlineTail:
     'Web platforms, cloud infrastructure, AI features, and the blockchain layer when the project calls for one.',
   supportingLine:
-    'Five years building with React, Node, AWS, Terraform and Solidity — for a state government department, a US asset manager, and startups in Singapore and California.',
+    'Six years building with React, Node, AWS, Terraform and Solidity — for a state government department, a US asset manager, and startups in Singapore and California.',
 
   location: 'Hyderabad, India',
   timezoneNote:
@@ -94,6 +104,7 @@ export const profile: Profile = {
 
   email: 'swapnilkole7500@gmail.com',
   phone: '+91 8328217163',
+  whatsapp: '918328217163',
 
   // TODO(content): real headshot — 1200×1500, 4:5 portrait — see CONTENT-NEEDED.md
   headshot: '/images/swapnil.jpg',
@@ -115,5 +126,12 @@ export const profile: Profile = {
     { label: 'Instagram', href: 'https://www.instagram.com/car_thruster/', isMe: true },
   ],
 
-  trustedBy: ['Govt. of Odisha', 'Bridgetower Capital', 'SuperWorld'],
+  trustedBy: [
+    'Govt. of Odisha',
+    'Bridgetower Capital',
+    'SuperWorld',
+    'GetFi',
+    'BlockX',
+    'Wirmon',
+  ],
 }

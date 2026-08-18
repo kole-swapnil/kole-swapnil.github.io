@@ -46,7 +46,7 @@ export const skillGroups: SkillGroup[] = [
   {
     id: 'backend',
     name: 'Backend',
-    items: ['Node.js', 'Express.js', 'PHP', 'REST APIs', 'Axios'],
+    items: ['Node.js', 'Express.js', 'PHP', 'REST APIs', 'GraphQL', 'Axios'],
   },
   {
     id: 'ai',
@@ -61,12 +61,12 @@ export const skillGroups: SkillGroup[] = [
   {
     id: 'cloud',
     name: 'Cloud',
-    items: ['AWS (CDK)', 'Microsoft Azure', 'Google Cloud Platform'],
+    items: ['AWS', 'Microsoft Azure', 'Google Cloud Platform'],
   },
   {
     id: 'devops',
     name: 'DevOps & IaC',
-    items: ['Terraform', 'AWS CDK', 'Infrastructure as Code', 'CI/CD'],
+    items: ['Terraform', 'AWS Serverless', 'AWS CDK', 'Infrastructure as Code', 'CI/CD'],
   },
   {
     id: 'databases',

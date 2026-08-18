@@ -1,4 +1,10 @@
-import { packages, pricingNote, customEngagement, type Package } from '@/data/packages'
+import {
+  packages,
+  pricingNote,
+  customEngagement,
+  showPricing,
+  type Package,
+} from '@/data/packages'
 import { testimonials } from '@/data/testimonials'
 import { profile } from '@/data/profile'
 import { formatPrice, packageMailto, customMailto } from '@/lib/mailto'
@@ -86,28 +92,45 @@ function PackageCard({ pkg, onSelect }: { pkg: Package; onSelect: (id: string) =
         <p className="mt-2 text-base text-slate">{pkg.tagline}</p>
       </header>
 
-      {/* Price. `from` is rendered by the component, never stored in the data,
-          so a fixed total cannot reach the page by accident. */}
-      <div className="mt-6 flex items-end justify-between gap-4">
-        <div>
-          <span className="block font-mono text-label uppercase tracking-[0.09em] text-meta">
-            from
-          </span>
-          <span className="mt-1 flex items-baseline gap-1">
-            <span className="font-sans text-3xl font-semibold tracking-[-0.03em] text-ink">
-              {formatPrice(pkg.priceFrom)}
+      {/* The card's headline figure.
+          With pricing shown it is the price floor, with the duration beside it.
+          With pricing hidden the timeline takes that slot — the section still
+          needs one concrete, comparable number per card, and speed is the one
+          that remains. The eyebrow / figure / note rhythm is identical either
+          way, so the cards do not reflow when the switch is flipped. */}
+      {showPricing ? (
+        <>
+          <div className="mt-6 flex items-end justify-between gap-4">
+            <div>
+              <span className="block font-mono text-label uppercase tracking-[0.09em] text-meta">
+                from
+              </span>
+              <span className="mt-1 flex items-baseline gap-1">
+                <span className="font-sans text-3xl font-semibold tracking-[-0.03em] text-ink">
+                  {formatPrice(pkg.priceFrom)}
+                </span>
+                {pkg.priceUnit === 'month' && (
+                  <span className="font-mono text-sm text-meta">/month</span>
+                )}
+              </span>
+            </div>
+            <span className="rounded-pill border-hairline border-rule px-2.5 py-1 font-mono text-xs text-slate">
+              {pkg.duration}
             </span>
-            {pkg.priceUnit === 'month' && (
-              <span className="font-mono text-sm text-meta">/month</span>
-            )}
+          </div>
+          {pkg.priceNote && <p className="mt-2 font-mono text-xs text-meta">{pkg.priceNote}</p>}
+        </>
+      ) : (
+        <div className="mt-6">
+          <span className="block font-mono text-label uppercase tracking-[0.09em] text-meta">
+            timeline
           </span>
+          <span className="mt-1 block font-sans text-3xl font-semibold tracking-[-0.03em] text-ink">
+            {pkg.duration}
+          </span>
+          <p className="mt-2 font-mono text-xs text-meta">Pricing on enquiry</p>
         </div>
-        <span className="rounded-pill border-hairline border-rule px-2.5 py-1 font-mono text-xs text-slate">
-          {pkg.duration}
-        </span>
-      </div>
-
-      {pkg.priceNote && <p className="mt-2 font-mono text-xs text-meta">{pkg.priceNote}</p>}
+      )}
 
       {/* The chooser line. High on the card on purpose — this is the sentence
           a visitor matches themselves against. */}
@@ -115,8 +138,6 @@ function PackageCard({ pkg, onSelect }: { pkg: Package; onSelect: (id: string) =
         <p className="eyebrow">Best for</p>
         <p className="mt-1.5 text-base text-ink">{pkg.bestFor}</p>
       </div>
-
-      <p className="mt-5 text-base text-slate">{pkg.description}</p>
 
       <div className="mt-6 border-t-hairline border-rule pt-5">
         <p className="eyebrow">What you get</p>
@@ -163,8 +184,10 @@ function AdjacentProof() {
       <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between sm:gap-10">
         <div>
           <p className="eyebrow">Recent clients</p>
+          {/* First three only. This sits beside a testimonial in a narrow
+              column, and the full list wraps to three lines there. */}
           <p className="mt-2.5 font-sans text-lg font-medium tracking-[-0.015em] text-ink">
-            {profile.trustedBy.join(' · ')}
+            {profile.trustedBy.slice(0, 3).join(' · ')}
           </p>
         </div>
 

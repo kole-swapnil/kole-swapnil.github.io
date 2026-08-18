@@ -41,7 +41,7 @@ export interface Metric {
 export const metrics: Metric[] = [
   {
     id: 'years',
-    value: '5+',
+    value: '6+',
     label: 'years shipping production software',
   },
   {
@@ -59,10 +59,10 @@ export const metrics: Metric[] = [
     sourceLabel: 'See the SuperWorld project',
   },
   {
-    id: 'papers',
-    value: '2',
-    label: 'peer-reviewed papers on blockchain systems',
-    sourceHref: '#credentials',
-    sourceLabel: 'See publications',
+    id: 'workshops',
+    value: '8',
+    label: 'workshops run across different colleges',
+    sourceHref: '#workshops',
+    sourceLabel: 'See the workshops',
   },
 ]

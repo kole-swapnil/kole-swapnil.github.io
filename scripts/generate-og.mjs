@@ -122,7 +122,8 @@ function siteCard() {
           color: palette.muted,
         },
       },
-      profile.trustedBy.join('  ·  '),
+      // First three only — the card is 1200px wide and the full list overflows.
+      profile.trustedBy.slice(0, 3).join('  ·  '),
     ),
   )
 }

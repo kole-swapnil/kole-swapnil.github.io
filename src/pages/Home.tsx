@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Seo } from '@/components/Seo'
 import { Hero } from '@/sections/Hero'
 import { Packages } from '@/sections/Packages'
+import { Workshops } from '@/sections/Workshops'
 import { AlsoAvailable } from '@/sections/AlsoAvailable'
 import { Work } from '@/sections/Work'
 import { Experience } from '@/sections/Experience'
@@ -42,6 +43,7 @@ export function Home() {
 
       <Hero />
       <Packages onSelect={handleSelectPackage} />
+      <Workshops />
       <AlsoAvailable />
       <Work />
       <Experience />

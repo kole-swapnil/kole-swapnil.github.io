@@ -1,9 +1,14 @@
 import { profile } from '@/data/profile'
 import { packages } from '@/data/packages'
-import { generalMailto, packageMailto } from '@/lib/mailto'
+import {
+  generalMailto,
+  generalWhatsapp,
+  packageMailto,
+  packageWhatsapp,
+} from '@/lib/mailto'
 import { useReveal } from '@/hooks/useReveal'
 import { CopyButton } from '@/components/CopyButton'
-import { ArrowRight, ArrowUpRight, Download } from '@/components/Icons'
+import { ArrowRight, ArrowUpRight, Download, WhatsApp } from '@/components/Icons'
 
 /**
  * Contact.
@@ -30,9 +35,31 @@ export function Contact({ selectedPackageId }: { selectedPackageId: string | nul
             Tell me what you are building
           </h2>
           <p className="mt-4 max-w-[34rem] text-lg text-slate">
-            Email is the fastest route. Include what you are building and the timeline you are
-            working to, and you will have a reply {profile.availability.responseTime}.
+            Either button opens with a short template already in it — fill in the blanks and
+            send. You will have a reply {profile.availability.responseTime}.
           </p>
+        </div>
+
+        {/* The two ways to start a conversation, given equal weight and placed
+            before the reference details. Email suits a desktop visitor writing
+            a considered brief; WhatsApp suits the larger share arriving from a
+            LinkedIn link on a phone, where a mailto: often opens nothing at
+            all. Both carry a prefilled template. */}
+        <div className="reveal mt-8 flex flex-col gap-3 sm:flex-row">
+          <a href={generalMailto()} className="btn-primary group px-6 py-3.5 sm:px-7">
+            Email me
+            <ArrowRight className="transition-transform duration-200 group-hover:translate-x-0.5" />
+          </a>
+          <a
+            href={generalWhatsapp()}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-secondary group px-6 py-3.5 sm:px-7"
+          >
+            <WhatsApp className="text-[#25D366]" />
+            WhatsApp
+            <ArrowUpRight className="text-meta transition-colors group-hover:text-ink" />
+          </a>
         </div>
 
         {/* Reflects the package chosen above. */}
@@ -44,10 +71,21 @@ export function Contact({ selectedPackageId }: { selectedPackageId: string | nul
                 {selected.name}
               </p>
             </div>
-            <a href={packageMailto(selected)} className="btn-primary group shrink-0 px-5 py-3">
-              Open the email again
-              <ArrowRight className="transition-transform duration-200 group-hover:translate-x-0.5" />
-            </a>
+            <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
+              <a href={packageMailto(selected)} className="btn-primary group px-5 py-3">
+                Email about this
+                <ArrowRight className="transition-transform duration-200 group-hover:translate-x-0.5" />
+              </a>
+              <a
+                href={packageWhatsapp(selected)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-secondary px-5 py-3"
+              >
+                <WhatsApp className="text-[#25D366]" />
+                WhatsApp
+              </a>
+            </div>
           </div>
         )}
 
@@ -77,6 +115,15 @@ export function Contact({ selectedPackageId }: { selectedPackageId: string | nul
                   {profile.phone}
                 </a>
                 <CopyButton value={profile.phone} label="Copy phone number" />
+                <a
+                  href={generalWhatsapp()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-secondary gap-1.5 px-3 py-2 font-mono text-xs"
+                >
+                  <WhatsApp className="text-[#25D366]" />
+                  WhatsApp
+                </a>
               </dd>
             </div>
 

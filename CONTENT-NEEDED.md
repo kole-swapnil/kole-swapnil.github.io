@@ -11,7 +11,7 @@ The living checklist of everything the site still needs from Swapnil.
 Every placeholder in the source is marked with `// TODO(content): ... — see CONTENT-NEEDED.md`.
 Run `grep -rn "TODO(content)" src public` for the complete live list.
 
-Last verified against the codebase: **2026-08-18** — `grep -rn "TODO(content)" src public` returns 20 markers, every one of them accounted for in Part 2 below.
+Last verified against the codebase: **2026-08-18** — `grep -rn "TODO(content)" src public` returns 18 markers, every one of them accounted for in Part 2 below.
 
 ---
 
@@ -19,10 +19,10 @@ Last verified against the codebase: **2026-08-18** — `grep -rn "TODO(content)"
 
 ### Blocking launch
 
-- [ ] **The three package prices and durations**
-  - **Destination:** `src/data/packages.ts` — fields `priceFrom`, `priceUnit`, `priceNote`, `duration`
-  - **Format:** `priceFrom` is a plain integer in USD, no symbol, no commas (e.g. `1500`). `priceUnit` is `'project'` or `'month'`. `duration` is a short human string, max ~14 chars ("1 week", "6–10 weeks", "2-week minimum"). The UI renders the "from" prefix and the `$` itself, so never type them into the data.
-  - **Currently:** placeholder figures from the brief ($1,500 / $12,000 / $4,000) are live and rendering. These are invented and must not go public.
+- [ ] **Confirm the three package durations**
+  - **Destination:** `src/data/packages.ts` — the `duration` field on each package
+  - **Format:** short human string, max ~14 chars ("1 week", "6–10 weeks", "Ongoing").
+  - **Currently:** prices are set in the data but **hidden** (`showPricing = false` in `packages.ts`). The durations are still the figures from the original brief and have **not** been confirmed — and they now carry the whole card, because with the price hidden the timeline is the only comparable number a visitor gets. "6–10 weeks" on the middle card is the one to check.
   - **Priority:** Blocking launch
 
 - [ ] **Professional headshot**
@@ -43,6 +43,12 @@ Last verified against the codebase: **2026-08-18** — `grep -rn "TODO(content)"
   - **Destination:** `src/data/process.ts` — the four `duration` fields and `processNote`
   - **Format:** `duration` is a short string, ~12 chars ("30 minutes", "2–3 days", "Weekly"). `processNote` is the reassurance line under the steps.
   - **Currently:** the four stages are written from how a sensible engagement runs, not from anything you told me. The durations are assumed. More importantly, `processNote` currently promises **"You can stop after the scope document and keep it. It is yours either way."** — that is a commercial commitment I invented. If you do not work that way, change it before anyone reads it.
+  - **Priority:** Blocking launch
+
+- [ ] **Correct the resume PDF itself**
+  - **Destination:** `public/Swapnil_Kole_Resume.pdf`
+  - **What is wrong:** the PDF states **5+ years**, **May 2022** for the SuperWorld role, and **AWS CDK** with no GraphQL for the Bridgetower role. You confirmed the correct values are 6+ years, May 2020, and AWS Serverless with GraphQL. The site now shows the correct values; the PDF does not.
+  - **Why it matters:** this is the document a recruiter opens after reading the page, so the two disagreeing is worse than either being wrong alone.
   - **Priority:** Blocking launch
 
 - [ ] **Production domain**
@@ -110,20 +116,18 @@ Everything invented that is in the code **right now**. Find them all with `grep 
 
 | # | Placeholder | File | Notes |
 |---|---|---|---|
-| 1 | Package price `1500` + duration "1 week" | `src/data/packages.ts` | **Invented.** Blocks launch. |
-| 2 | Package price `12000` + duration "6–10 weeks" | `src/data/packages.ts` | **Invented.** Blocks launch. |
-| 3 | Package price `4000`/month | `src/data/packages.ts` | **Invented.** Blocks launch. |
-| 4 | Hero metric figures | `src/data/metrics.ts` | **Not invented** — all four are CV-supported. Conservative stand-ins for stronger numbers. |
-| 5 | Headshot | `public/images/swapnil.jpg` | Generated neutral placeholder, 1200×1500, exact final dimensions. |
-| 6 | Square headshot | `public/images/swapnil-square.jpg` | Generated placeholder, 800×800. Used by JSON-LD `Person`. |
-| 7 | Two testimonials | `src/data/testimonials.ts` | `placeholder: true`; renders a visible "Placeholder" badge. |
-| 8 | Three project screenshots | `public/images/projects/*.jpg` | Generated placeholders at final 16:10. `distributed-doctor` and `process-lineage` intentionally have **no** image and use the typographic fallback. |
-| 9 | Availability month "September 2026" | `src/data/profile.ts` | Assumed, not confirmed. |
-| 10 | Publication URLs absent | `src/data/publications.ts` | `url: undefined` — renders unlinked rather than guessing a link. |
-| 11 | Production domain | `src/config/site.ts` | Defaulted to the existing GitHub Pages URL. |
-| 12 | Four process stage durations | `src/data/process.ts` | Assumed, not confirmed. |
-| 13 | `processNote` scope-document terms | `src/data/process.ts` | **An invented commercial promise.** Confirm or rewrite. |
-| 14 | Custom engagement copy | `src/data/packages.ts` | Describes how bespoke work gets scoped. No invented figures, but confirm it matches reality. |
+| 1 | Package durations | `src/data/packages.ts` | Assumed, not confirmed. Now the headline figure on each card, since prices are hidden. |
+| 2 | Hero metric figures | `src/data/metrics.ts` | **Not invented** — all four are CV-supported. Conservative stand-ins for stronger numbers. |
+| 3 | Headshot | `public/images/swapnil.jpg` | Generated neutral placeholder, 1200×1500, exact final dimensions. |
+| 4 | Square headshot | `public/images/swapnil-square.jpg` | Generated placeholder, 800×800. Used by JSON-LD `Person`. |
+| 5 | Two testimonials | `src/data/testimonials.ts` | `placeholder: true`; renders a visible "Placeholder" badge. |
+| 6 | Three project screenshots | `public/images/projects/*.jpg` | Generated placeholders at final 16:10. `distributed-doctor` and `process-lineage` intentionally have **no** image and use the typographic fallback. |
+| 7 | Availability month "September 2026" | `src/data/profile.ts` | Assumed, not confirmed. |
+| 8 | Publication URLs absent | `src/data/publications.ts` | `url: undefined` — renders unlinked rather than guessing a link. |
+| 9 | Production domain | `src/config/site.ts` | Defaulted to the existing GitHub Pages URL. |
+| 10 | Four process stage durations | `src/data/process.ts` | Assumed, not confirmed. |
+| 11 | `processNote` scope-document terms | `src/data/process.ts` | **An invented commercial promise.** Confirm or rewrite. |
+| 12 | Custom engagement copy | `src/data/packages.ts` | Describes how bespoke work gets scoped. No invented figures, but confirm it matches reality. |
 
 Generated placeholder imagery is produced by `node scripts/generate-placeholders.mjs`
 and is committed. Overwrite the files in place — no code change is needed, and
@@ -144,8 +148,15 @@ nothing reflows, because every placeholder is at the real asset's dimensions.
 
 ## Removed by decision
 
+- **2026-08-18** — **All prices removed from display.** `showPricing = false` in `src/data/packages.ts` governs both the packages and the workshops, so the page cannot show a price in one section and hide it in another. The figures are still in the data — flipping the flag to `true` restores them exactly. Cards now lead with the timeline and read "Pricing on enquiry".
+  - ⚠️ **Prices are still public on blockenzyme.com/tech-workshops** (₹19,999 / ₹29,999 / ₹59,999), which the Workshops section links to. Update that page too, or the removal is only half done.
+  - The `Budget range:` field was kept in the enquiry templates. With nothing published, it is the only thing qualifying an enquiry before it reaches the inbox.
+- **2026-08-18** — Package card `description` paragraphs removed; the cards now run name → tagline → timeline → best for → deliverables. Recoverable from git at `b659d7e:src/data/packages.ts`.
+
 - **2026-08-18** — The Writing section, `/writing` routes, both placeholder articles, the MDX + shiki pipeline and the RSS feed were removed at Swapnil's request. Eleven devDependencies went with them and the JS bundle dropped from 60k to 48k gzipped. If you ever want to publish again this is a rebuild, not a toggle.
-- **2026-08-18** — **Real resume delivered** (`Swapnil_Freelance.pdf`) and installed at `public/Swapnil_Kole_Resume.pdf`, replacing the generated placeholder. Served under the `Swapnil_Kole_Resume.pdf` filename so the download is named sensibly for a recruiter. Site content reconciled against it: years corrected 6+ → 5+, SuperWorld dates corrected to May 2022 – Sep 2025, Bridgetower stack corrected to AWS CDK with GraphQL dropped, freelance history added, five projects added, skills updated, `AI & integrations` group added.
+- **2026-08-18** — **Package prices set**: Technical audit $1,000, Product build $4,000, Lead engineer $2,000/month. Applied in page order. The invented figures from the brief ($1,500 / $12,000 / $4,000) are gone — no fabricated pricing remains on the site.
+- **2026-08-18** — **Real resume delivered** (`Swapnil_Freelance.pdf`) and installed at `public/Swapnil_Kole_Resume.pdf`, replacing the generated placeholder. Served under the `Swapnil_Kole_Resume.pdf` filename so the download is named sensibly for a recruiter. Freelance history added, four projects added, skills updated, `AI & integrations` group added.
+- **2026-08-18** — Note: the PDF reads 5+ years, May 2022 for SuperWorld, and AWS CDK without GraphQL. Swapnil confirmed the correct values are **6+ years, May 2020, and AWS Serverless with GraphQL** — the site uses those. **The PDF itself still needs correcting**, since it is the document that gets handed over.
 - **2026-08-18** — The hero availability badge ("Available from September 2026 · Replies within 24 hours") was removed. The `availability` object stays in `profile.ts` because the contact section and its response-time line still read from it.
 
 ---
