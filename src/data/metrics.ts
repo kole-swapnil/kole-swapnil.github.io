@@ -41,13 +41,13 @@ export interface Metric {
 export const metrics: Metric[] = [
   {
     id: 'years',
-    value: '6+',
+    value: '5+',
     label: 'years shipping production software',
   },
   {
     id: 'clients',
-    value: '3',
-    label: 'government and enterprise clients delivered for',
+    value: '6',
+    label: 'clients delivered for, from startups to a state government',
     sourceHref: '#work',
     sourceLabel: 'See the projects',
   },

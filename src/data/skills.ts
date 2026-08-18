@@ -26,7 +26,7 @@ export const skillGroups: SkillGroup[] = [
   {
     id: 'languages',
     name: 'Languages',
-    items: ['JavaScript (ES6)', 'TypeScript', 'Python', 'Go', 'C++', 'C', 'SQL', 'Solidity'],
+    items: ['JavaScript (ES6)', 'TypeScript', 'Solidity', 'Python', 'PHP', 'Go', 'C++', 'C', 'SQL'],
   },
   {
     id: 'frontend',
@@ -46,22 +46,32 @@ export const skillGroups: SkillGroup[] = [
   {
     id: 'backend',
     name: 'Backend',
-    items: ['Node.js', 'Express.js', 'REST APIs', 'GraphQL', 'Axios'],
+    items: ['Node.js', 'Express.js', 'PHP', 'REST APIs', 'Axios'],
+  },
+  {
+    id: 'ai',
+    name: 'AI & integrations',
+    items: [
+      'AI/LLM integration',
+      'Recommendation systems',
+      'Amazon API',
+      'Telegram Mini Apps',
+    ],
   },
   {
     id: 'cloud',
     name: 'Cloud',
-    items: ['AWS', 'Microsoft Azure', 'Google Cloud Platform'],
+    items: ['AWS (CDK)', 'Microsoft Azure', 'Google Cloud Platform'],
   },
   {
     id: 'devops',
     name: 'DevOps & IaC',
-    items: ['Terraform', 'Infrastructure as Code', 'CI/CD', 'AWS Serverless'],
+    items: ['Terraform', 'AWS CDK', 'Infrastructure as Code', 'CI/CD'],
   },
   {
     id: 'databases',
     name: 'Databases',
-    items: ['MongoDB', 'SQL'],
+    items: ['MongoDB', 'MySQL', 'SQL'],
   },
   {
     id: 'blockchain',
@@ -74,6 +84,7 @@ export const skillGroups: SkillGroup[] = [
       'IPFS',
       'Hyperledger',
       'T-REX (ERC-3643)',
+      'Staking contracts',
       'Polygon',
       'Smart contract auditing',
       'dApp development',
@@ -82,7 +93,7 @@ export const skillGroups: SkillGroup[] = [
   {
     id: 'practices',
     name: 'Practices',
-    items: ['GitHub', 'Code review', 'System design', 'ML/AI', 'Agile'],
+    items: ['GitHub', 'Code review', 'System design', 'Agile'],
   },
   {
     id: 'agentic',

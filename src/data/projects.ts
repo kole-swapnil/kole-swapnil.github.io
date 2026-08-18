@@ -81,17 +81,31 @@ export const projects: Project[] = [
     slug: 'land-record-management',
     title: 'Decentralized Land Record Management',
     client: 'Govt. of Odisha',
-    clientDetail: 'Department of Science and Technology, Government of Odisha',
+    clientDetail:
+      'Department of Science and Technology, Government of Odisha — delivered as Technical Blockchain Assistant at IIIT Bhubaneswar',
     summary:
       'A land ownership registry for a state government, where every transfer is traceable end to end.',
     description:
-      'Land ownership in India is recorded across registries that rarely agree with each other, and reconciling them is manual, slow and disputable. This system writes ownership and transfer records to an immutable ledger and verifies them against the state’s existing registry data, so the chain of title for a parcel can be traced rather than reconstructed. I built the web application officials use to register, search and verify parcels, the API and data layer behind it, and the Solidity contracts that hold record state and enforce the rules a transfer has to satisfy before it is accepted.',
-    stack: ['React', 'Node.js', 'MongoDB', 'Solidity', 'Smart Contracts'],
+      'Land ownership in India is recorded across registries that rarely agree with each other, and reconciling them is manual, slow and disputable. This system records ownership and transfer on an immutable ledger so the chain of title for a parcel can be traced rather than reconstructed. Delivered as a complete decentralized application: the interface officials use to register, search and verify parcels, the core algorithms the system runs on, and the Solidity contracts holding record state and enforcing the rules a transfer must satisfy — written, tested and deployed. The work was published as a peer-reviewed conference paper.',
+    stack: ['React', 'Solidity', 'Smart Contracts', 'Blockchain', 'dApp'],
     // TODO(content): real screenshot at 16:10 — see CONTENT-NEEDED.md
     image: '/images/projects/land-record-management.jpg',
     imageAlt:
       'The land record registry interface showing a parcel search and its verified ownership history',
     outcomes: ['Built for a state government', 'Auditable chain of title'],
+  },
+  {
+    slug: 'getfi',
+    title: 'GetFi',
+    client: 'GetFi',
+    clientDetail: 'GetFi — freelance engagement, under NDA',
+    period: '2025',
+    summary:
+      'A Telegram mini-app store with gamified rewards and a conversational AI product recommender.',
+    description:
+      'A commerce product that lives entirely inside Telegram: users earn gamified rewards, browse and buy without leaving the chat. The part that made it work is an AI recommendation engine built as a “ChatGPT for shopping” — a conversational front end that reads intent from ordinary questions and surfaces matching products in real time against the Amazon catalogue API. I built the whole thing end to end: the mini-app front end, the backend services behind it, and the recommendation system itself.',
+    stack: ['Telegram Mini App', 'AI / LLM', 'Amazon API', 'Node.js', 'Full-stack'],
+    outcomes: ['Conversational product discovery', 'Delivered solo, end to end'],
   },
   {
     slug: 'superworld-map',
@@ -119,13 +133,47 @@ export const projects: Project[] = [
     summary:
       'A phygital NFT platform where investors buy asset-backed tokens with a card, not a wallet.',
     description:
-      'A platform for purchasing NFTs backed by real physical assets. The entire backend runs on AWS serverless — API Gateway, Lambda and DynamoDB — provisioned as code with Terraform so every environment is reproducible and nothing lives only in a console. The token layer is T-REX (ERC-3643), which enforces investor eligibility and transfer restrictions on-chain rather than in application code, shipped with deployment scripts and an automated test suite. I connected the React front end over GraphQL and designed the end-to-end system flows.',
-    stack: ['React', 'GraphQL', 'AWS Serverless', 'Terraform', 'Solidity', 'ERC-3643'],
+      'A platform for purchasing NFTs backed by real physical assets. The entire backend runs on AWS serverless, defined as code with AWS CDK and Terraform so every environment is reproducible and nothing lives only in a console. The token layer is T-REX (ERC-3643), which enforces investor eligibility and transfer restrictions on-chain rather than in application code, shipped with deployment scripts and an automated test suite. I integrated the React front end with those backend services and designed the end-to-end system flows.',
+    stack: ['React', 'AWS CDK', 'AWS Serverless', 'Terraform', 'Solidity', 'ERC-3643'],
     // TODO(content): real screenshot at 16:10 — see CONTENT-NEEDED.md
     image: '/images/projects/domx.jpg',
     imageAlt:
       'The DOMX purchase flow showing an asset-backed NFT listing and its compliance details',
     outcomes: ['Compliance enforced on-chain', 'Fully reproducible infrastructure'],
+  },
+  {
+    slug: 'blockx-staking',
+    title: 'BlockX Staking App',
+    client: 'BlockX',
+    clientDetail: 'BlockX, Singapore — freelance engagement, under NDA',
+    period: '2024–2025',
+    summary:
+      'A staking dApp on the BlockX chain, with custom contracts and a React front end.',
+    description:
+      'Staking infrastructure for the BlockX chain. I designed and wrote the staking contracts — deposit, lock, reward accrual and withdrawal — then tested and deployed them on-chain. On top of that sits a React application that reads live position state and lets holders stake and unstake without touching a block explorer.',
+    stack: ['React', 'Solidity', 'Smart Contracts', 'BlockX Chain'],
+  },
+  {
+    slug: 'superworld-nft-salon',
+    title: 'SuperWorld NFT Salon',
+    client: 'SuperWorld',
+    period: '2022–2025',
+    summary:
+      'A crypto and NFT marketplace where creators and collectors list, buy and sell work.',
+    description:
+      'The marketplace side of SuperWorld, separate from the land map: creators mint and list work, collectors browse and buy. Built on the same MERN foundation, with Web3.js binding the listing and settlement flows to the marketplace contracts.',
+    stack: ['React', 'Node.js', 'MongoDB', 'Web3.js', 'Solidity'],
+  },
+  {
+    slug: 'certichain',
+    title: 'Certichain',
+    client: 'Independent',
+    period: '2022',
+    summary:
+      'Certificate verification that makes a forged document detectable rather than plausible.',
+    description:
+      'An anti-forgery system for certificates. The document itself is stored on IPFS and its hash is anchored on-chain, so anyone holding a certificate can verify it against the issuer\'s record instead of trusting the paper. Built as a decentralized database with the verification contracts and an issuer-facing front end.',
+    stack: ['React', 'Solidity', 'IPFS', 'Blockchain'],
   },
   {
     slug: 'distributed-doctor',

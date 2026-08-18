@@ -84,9 +84,9 @@ export const profile: Profile = {
 
   headline: 'I build and ship production software for founders and engineering teams.',
   headlineTail:
-    'Web platforms, cloud infrastructure, and the blockchain layer when the project calls for one.',
+    'Web platforms, cloud infrastructure, AI features, and the blockchain layer when the project calls for one.',
   supportingLine:
-    'Six years building with React, Node, AWS, Terraform and Solidity — for a state government department, a US asset manager, and a virtual real estate marketplace.',
+    'Five years building with React, Node, AWS, Terraform and Solidity — for a state government department, a US asset manager, and startups in Singapore and California.',
 
   location: 'Hyderabad, India',
   timezoneNote:
@@ -99,7 +99,6 @@ export const profile: Profile = {
   headshot: '/images/swapnil.jpg',
   headshotAlt: 'Swapnil Kole, senior software engineer, photographed against a dark background',
 
-  // TODO(content): current resume PDF — see CONTENT-NEEDED.md
   resumePath: '/Swapnil_Kole_Resume.pdf',
   resumeFileName: 'Swapnil_Kole_Resume.pdf',
 

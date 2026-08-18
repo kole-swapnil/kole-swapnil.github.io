@@ -11,7 +11,7 @@ The living checklist of everything the site still needs from Swapnil.
 Every placeholder in the source is marked with `// TODO(content): ... — see CONTENT-NEEDED.md`.
 Run `grep -rn "TODO(content)" src public` for the complete live list.
 
-Last verified against the codebase: **2026-08-18** — `grep -rn "TODO(content)" src public` returns 21 markers, every one of them accounted for in Part 2 below.
+Last verified against the codebase: **2026-08-18** — `grep -rn "TODO(content)" src public` returns 20 markers, every one of them accounted for in Part 2 below.
 
 ---
 
@@ -45,12 +45,6 @@ Last verified against the codebase: **2026-08-18** — `grep -rn "TODO(content)"
   - **Currently:** the four stages are written from how a sensible engagement runs, not from anything you told me. The durations are assumed. More importantly, `processNote` currently promises **"You can stop after the scope document and keep it. It is yours either way."** — that is a commercial commitment I invented. If you do not work that way, change it before anyone reads it.
   - **Priority:** Blocking launch
 
-- [ ] **Current resume PDF**
-  - **Destination:** `public/Swapnil_Kole_Resume.pdf`
-  - **Format:** PDF, under 2 MB, filename exactly as above (it is linked from the nav, hero and contact section). Should reflect the Vistateq Virtuosity role.
-  - **Currently:** a placeholder PDF is in place so the download link is not broken. The 2022 resume from the old site was deliberately not carried over — it predates both current roles.
-  - **Priority:** Blocking launch
-
 - [ ] **Production domain**
   - **Destination:** `src/config/site.ts` — the `siteUrl` constant, one line
   - **Format:** full origin, no trailing slash, e.g. `https://swapnilkole.com`. This one constant drives canonical URLs, `sitemap.xml`, `rss.xml`, `robots.txt` and every Open Graph tag, so it must be set before the first real deploy or link previews will point at the wrong host.
@@ -66,10 +60,10 @@ Last verified against the codebase: **2026-08-18** — `grep -rn "TODO(content)"
 ### Improves launch
 
 - [ ] **Project screenshots**
-  - **Destination:** `public/images/projects/<slug>.jpg` — slugs: `land-record-management`, `superworld-map`, `domx`, `distributed-doctor`, `process-lineage`
+  - **Destination:** `public/images/projects/<slug>.jpg` — slugs: `land-record-management`, `getfi`, `superworld-map`, `domx`, `blockx-staking`, `superworld-nft-salon`, `certichain`, `distributed-doctor`, `process-lineage`
   - **Format:** **16:10 landscape**, 1600×1000 recommended, JPG or WebP, under 500 KB each. Real UI, not a mockup in a laptop frame. Crop to the interesting part of the screen rather than shrinking a whole 1440px browser window.
   - **Optional gallery:** additional shots go in the `gallery` array on each project, same aspect ratio.
-  - **Currently:** placeholders at the final aspect ratio are live for all five, so nothing reflows when real files land. Projects with no `image` set degrade to a typographic treatment by design — that path is built and tested, so it is fine to ship the two older projects without shots.
+  - **Currently:** placeholders at the final aspect ratio are live for three of the nine. The other six render a deliberate typographic panel — the title set oversized, low-contrast and cropped — which is a designed state, not a gap. GetFi and BlockX are under NDA, so check what you are allowed to show before sending anything for those two.
   - **Priority:** Improves launch
 
 - [ ] **Real testimonials**
@@ -122,15 +116,14 @@ Everything invented that is in the code **right now**. Find them all with `grep 
 | 4 | Hero metric figures | `src/data/metrics.ts` | **Not invented** — all four are CV-supported. Conservative stand-ins for stronger numbers. |
 | 5 | Headshot | `public/images/swapnil.jpg` | Generated neutral placeholder, 1200×1500, exact final dimensions. |
 | 6 | Square headshot | `public/images/swapnil-square.jpg` | Generated placeholder, 800×800. Used by JSON-LD `Person`. |
-| 7 | Resume PDF | `public/Swapnil_Kole_Resume.pdf` | Generated one-page placeholder so the download link resolves rather than 404s. |
-| 8 | Two testimonials | `src/data/testimonials.ts` | `placeholder: true`; renders a visible "Placeholder" badge. |
-| 9 | Three project screenshots | `public/images/projects/*.jpg` | Generated placeholders at final 16:10. `distributed-doctor` and `process-lineage` intentionally have **no** image and use the typographic fallback. |
-| 10 | Availability month "September 2026" | `src/data/profile.ts` | Assumed, not confirmed. |
-| 11 | Publication URLs absent | `src/data/publications.ts` | `url: undefined` — renders unlinked rather than guessing a link. |
-| 12 | Production domain | `src/config/site.ts` | Defaulted to the existing GitHub Pages URL. |
-| 13 | Four process stage durations | `src/data/process.ts` | Assumed, not confirmed. |
-| 14 | `processNote` scope-document terms | `src/data/process.ts` | **An invented commercial promise.** Confirm or rewrite. |
-| 15 | Custom engagement copy | `src/data/packages.ts` | Describes how bespoke work gets scoped. No invented figures, but confirm it matches reality. |
+| 7 | Two testimonials | `src/data/testimonials.ts` | `placeholder: true`; renders a visible "Placeholder" badge. |
+| 8 | Three project screenshots | `public/images/projects/*.jpg` | Generated placeholders at final 16:10. `distributed-doctor` and `process-lineage` intentionally have **no** image and use the typographic fallback. |
+| 9 | Availability month "September 2026" | `src/data/profile.ts` | Assumed, not confirmed. |
+| 10 | Publication URLs absent | `src/data/publications.ts` | `url: undefined` — renders unlinked rather than guessing a link. |
+| 11 | Production domain | `src/config/site.ts` | Defaulted to the existing GitHub Pages URL. |
+| 12 | Four process stage durations | `src/data/process.ts` | Assumed, not confirmed. |
+| 13 | `processNote` scope-document terms | `src/data/process.ts` | **An invented commercial promise.** Confirm or rewrite. |
+| 14 | Custom engagement copy | `src/data/packages.ts` | Describes how bespoke work gets scoped. No invented figures, but confirm it matches reality. |
 
 Generated placeholder imagery is produced by `node scripts/generate-placeholders.mjs`
 and is committed. Overwrite the files in place — no code change is needed, and
@@ -152,6 +145,7 @@ nothing reflows, because every placeholder is at the real asset's dimensions.
 ## Removed by decision
 
 - **2026-08-18** — The Writing section, `/writing` routes, both placeholder articles, the MDX + shiki pipeline and the RSS feed were removed at Swapnil's request. Eleven devDependencies went with them and the JS bundle dropped from 60k to 48k gzipped. If you ever want to publish again this is a rebuild, not a toggle.
+- **2026-08-18** — **Real resume delivered** (`Swapnil_Freelance.pdf`) and installed at `public/Swapnil_Kole_Resume.pdf`, replacing the generated placeholder. Served under the `Swapnil_Kole_Resume.pdf` filename so the download is named sensibly for a recruiter. Site content reconciled against it: years corrected 6+ → 5+, SuperWorld dates corrected to May 2022 – Sep 2025, Bridgetower stack corrected to AWS CDK with GraphQL dropped, freelance history added, five projects added, skills updated, `AI & integrations` group added.
 - **2026-08-18** — The hero availability badge ("Available from September 2026 · Replies within 24 hours") was removed. The `availability` object stays in `profile.ts` because the contact section and its response-time line still read from it.
 
 ---

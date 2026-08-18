@@ -158,18 +158,28 @@ function ProjectVisual({ project, wide }: { project: Project; wide: boolean }) {
     )
   }
 
+  /*
+   * No screenshot: a decorative typographic panel rather than an information
+   * one. Everything factual — client, title, summary, stack — is already in
+   * the card body directly below, so repeating any of it here just prints the
+   * same words twice. The title is set oversized, very low contrast and
+   * cropped by the panel edges, which reads as a considered treatment instead
+   * of a placeholder box. Hidden from assistive tech for the same reason.
+   */
   return (
     <div
       className={[
-        'flex aspect-[16/10] flex-col justify-between border-b-hairline border-rule bg-surface p-6 sm:p-7',
+        'relative flex aspect-[16/10] items-center justify-center overflow-hidden',
+        'border-b-hairline border-rule bg-surface',
         wide ? 'lg:aspect-auto lg:h-full lg:border-b-0 lg:border-r-hairline' : '',
       ].join(' ')}
     >
-      <p className="eyebrow">{project.client}</p>
-      <p className="max-w-[18rem] font-sans text-2xl font-semibold tracking-[-0.025em] text-ink/85">
+      <span
+        aria-hidden="true"
+        className="select-none whitespace-nowrap font-sans text-[4.5rem] font-semibold leading-none tracking-[-0.05em] text-ink/[0.07] sm:text-[5.5rem]"
+      >
         {project.title}
-      </p>
-      <p className="font-mono text-xs text-meta">{project.stack.slice(0, 3).join(' · ')}</p>
+      </span>
     </div>
   )
 }

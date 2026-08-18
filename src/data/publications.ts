@@ -69,4 +69,9 @@ export const credentials: Credential[] = [
     title: 'Placement Coordinator',
     organisation: 'IIIT Bhubaneswar',
   },
+  {
+    id: 'pr-head',
+    title: 'PR Head, Advaita (college fest)',
+    organisation: 'IIIT Bhubaneswar',
+  },
 ]
