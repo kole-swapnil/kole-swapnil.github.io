@@ -38,21 +38,21 @@ npm run preview  # serve the built output locally
 
 `npm run build` runs four steps in order:
 
-1. `node scripts/generate-og.mjs` — regenerates every share card and the
-   favicon set, so a new post always gets a preview image.
+1. `node scripts/generate-og.mjs` — regenerates the share card and the favicon
+   set from `profile.ts`, so the card can never drift from the headline.
 2. `tsc -b` — typecheck. The build fails on any TypeScript error.
 3. `vite-react-ssg build` — bundles, then prerenders every route to its own
    HTML file with its title, meta description and Open Graph tags baked in.
-4. `node scripts/postbuild.mjs` — writes `sitemap.xml`, `rss.xml`,
-   `robots.txt`, `humans.txt` and `404.html`, then **verifies** that every
-   route emitted real HTML containing those tags. If a tag is missing the build
-   fails rather than shipping a page with a broken link preview.
+4. `node scripts/postbuild.mjs` — writes `sitemap.xml`, `robots.txt`,
+   `humans.txt` and `404.html`, then **verifies** that every route emitted real
+   HTML containing those tags. If a tag is missing the build fails rather than
+   shipping a page with a broken link preview.
 
 Other scripts:
 
 | Command | What it does |
 |---|---|
-| `npm run og` | Regenerate share cards and favicons only |
+| `npm run og` | Regenerate the share card and favicons only |
 | `npm run typecheck` | Typecheck without building |
 | `node scripts/generate-placeholders.mjs` | Regenerate the placeholder images (only needed if an aspect ratio changes) |
 
@@ -76,8 +76,8 @@ limit the design assumes.
 | `src/data/publications.ts` | Papers, education, positions held |
 | `src/data/testimonials.ts` | Testimonials (delete every entry to hide the section) |
 | `src/data/metrics.ts` | The proof numbers in the hero |
+| `src/data/process.ts` | The four "How I work" stages and the note under them |
 | `src/config/site.ts` | Production domain, site title, default description |
-| `src/content/writing/*.mdx` | Articles |
 
 Design tokens — colours, type scale, spacing, radii — live in
 `tailwind.config.js`. Components use token names (`bg-ink`, `text-slate`,
@@ -135,45 +135,6 @@ A metric must read as evidence attached to a specific claim. `"1.2M"` with
 `"happy clients"` does not. Add `sourceHref` to link the figure to the project
 it comes from.
 
-### Add an article
-
-Create `src/content/writing/<descriptive-slug>.mdx`:
-
-```mdx
----
-title: How something actually works
-slug: how-something-actually-works
-date: 2026-09-01
-excerpt: One or two sentences, ~160 characters. Becomes the meta description and the text on the share card.
-tags:
-  - Solidity
-  - Architecture
----
-
-Your prose here.
-```
-
-That is all. The post appears in the home page index, the `/writing` index, the
-sitemap, the RSS feed, and gets its own prerendered page and share card.
-
-- **Do not write `readingTime`** — it is computed at build time (prose at 200
-  words/minute, code at 20 lines/minute, so a code-heavy post is not
-  under-counted).
-- `draft: true` keeps a post out of the production build but visible in `npm run dev`.
-- `coverImage` overrides the generated share card. 1200×630.
-- Slugs must be human-readable: `/writing/erc-3643-compliance-in-practice`,
-  never `/writing/post-1`.
-
-Code blocks are highlighted at build time by **shiki** — nothing ships to the
-browser. Solidity, TypeScript, TSX, JavaScript, bash, JSON, YAML, Terraform
-(`hcl`), GraphQL, SQL and diff are all loaded; the list is in `vite.config.ts`.
-Each block gets a language label and a copy button automatically.
-
-Writing JSX inside MDX — an inline SVG diagram, for instance — works, but
-**keep any text child on one line**. MDX parses multi-line children as markdown
-and turns them into elements, which renders as `[object Object]` inside tags
-like `<title>`. Use `aria-label` on the `<svg>` instead.
-
 ### Swap the resume PDF
 
 Replace `public/Swapnil_Kole_Resume.pdf`, keeping the filename. It is linked
@@ -198,8 +159,8 @@ One line in `src/config/site.ts`:
 export const siteUrl = 'https://swapnilkole.com'   // no trailing slash
 ```
 
-That single constant drives canonical URLs, `sitemap.xml`, `rss.xml`,
-`robots.txt` and every Open Graph tag. **Set it before the first real deploy**
+That single constant drives canonical URLs, `sitemap.xml`, `robots.txt` and
+every Open Graph tag. **Set it before the first real deploy**
 or every link preview will point at the wrong host.
 
 ### Change availability
@@ -212,9 +173,8 @@ muted, un-pulsing dot for `'unavailable'`.
 
 ## Deploying
 
-The build output is entirely static. Every route — the home page, `/writing`,
-and each article — is a real HTML file, so there is no client-side routing
-fallback to configure for known URLs.
+The build output is entirely static. Every route is a real HTML file, so there
+is no client-side routing fallback to configure for known URLs.
 
 ### Vercel
 
@@ -267,13 +227,13 @@ by copying `index.html` to `404.html`, so any deep link boots the app and the
 router sorts it out client-side — at the cost of every unknown URL returning
 HTTP 404 with a page that looks fine.
 
-**This site does not need that trick for its real routes**, because they are
-all prerendered to actual files. `404.html` here is a genuine "page not found"
-page, which is the correct behaviour: a mistyped URL should be a 404, and a
-real article should be a 200 with its own `<title>` and Open Graph tags. That
-is the whole reason for prerendering rather than shipping a client-rendered SPA.
+**This site does not need that trick**, because every real route is prerendered
+to an actual file. `404.html` here is a genuine "page not found" page, which is
+the correct behaviour: a mistyped URL should be a 404, and a real page should be
+a 200 with its own `<title>` and Open Graph tags. That is the whole reason for
+prerendering rather than shipping a client-rendered SPA.
 
-The one consequence: **a new article is only reachable after a rebuild.** There
+The one consequence: **a new route is only reachable after a rebuild.** There
 is no runtime router to catch a path the build did not emit.
 
 #### Custom domain
@@ -293,13 +253,6 @@ means the tags end up in the served markup rather than being injected on
 hydration. `scripts/postbuild.mjs` asserts this on every build — "the tags are
 in a React component" and "the tags are in the HTML" are different claims and
 only the second one matters to a crawler or a link unfurler.
-
-**Post metadata.** `scripts/vite-plugin-writing-index.mjs` reads frontmatter at
-build time and exposes it as the virtual module `virtual:writing-index`. The
-compiled MDX bodies are globbed separately in `src/lib/posts.ts`. Keeping them
-apart means the writing index does not ship the article bodies just to display
-a list of titles. The same reader (`scripts/lib/posts.mjs`) feeds the sitemap
-and RSS generator, so the site and the feed cannot disagree.
 
 **Build scripts read the TypeScript data files directly.** `scripts/lib/load-ts.mjs`
 uses esbuild (already inside Vite) to bundle and import `profile.ts` and
@@ -353,20 +306,18 @@ cost you more conversions than the analytics are worth.
 
 ```
 src/
-  components/     Nav, Footer, Layout, Seo, CodeBlock, icons
+  components/     Nav, Footer, Layout, Seo, CopyButton, icons
   sections/       One file per home page section
-  pages/          Home, WritingIndex, Article, NotFound
+  pages/          Home, NotFound
   data/           All content — typed, commented, hand-edited
-  content/writing/  Articles as .mdx
   config/site.ts  Production domain and site metadata
   hooks/          useReveal, useActiveSection
-  lib/            Post loading, mailto composition
-  styles/index.css  Fonts, base styles, article typography
+  lib/            mailto composition
+  styles/index.css  Fonts, base styles, components, motion
 scripts/
-  generate-og.mjs           Share cards + favicons
+  generate-og.mjs           Share card + favicons
   generate-placeholders.mjs Placeholder imagery
-  postbuild.mjs             sitemap, rss, robots, 404, verification
+  postbuild.mjs             sitemap, robots, 404, verification
   lib/                      Shared build helpers
-  vite-plugin-writing-index.mjs
 public/           Static assets served as-is
 ```

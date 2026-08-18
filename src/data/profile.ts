@@ -113,6 +113,7 @@ export const profile: Profile = {
   social: [
     { label: 'LinkedIn', href: 'https://linkedin.com/in/swapnil-kole', isMe: true },
     { label: 'GitHub', href: 'https://github.com/kole-swapnil', isMe: true },
+    { label: 'Instagram', href: 'https://www.instagram.com/car_thruster/', isMe: true },
   ],
 
   trustedBy: ['Govt. of Odisha', 'Bridgetower Capital', 'SuperWorld'],

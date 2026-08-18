@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import { profile } from '@/data/profile'
 import { ArrowUpRight } from './Icons'
 
@@ -38,25 +37,9 @@ export function Footer() {
                 </a>
               </li>
             ))}
-            <li>
-              <Link
-                to="/writing"
-                className="font-sans text-sm text-slate transition-colors hover:text-ink"
-              >
-                Writing
-              </Link>
-            </li>
-            <li>
-              <a
-                href="/rss.xml"
-                className="font-sans text-sm text-slate transition-colors hover:text-ink"
-              >
-                RSS
-              </a>
-            </li>
           </ul>
           <p className="font-mono text-xs text-meta sm:text-right">
-            © {year} {profile.name}. Built with React, Vite and Tailwind.
+            © {year} {profile.name}
           </p>
         </nav>
       </div>

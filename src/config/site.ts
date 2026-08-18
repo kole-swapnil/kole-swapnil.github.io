@@ -31,4 +31,4 @@ export function absoluteUrl(path = '/'): string {
 }
 
 /** Every prerendered static route, used by the sitemap generator. */
-export const staticRoutes = ['/', '/writing'] as const
+export const staticRoutes = ['/'] as const

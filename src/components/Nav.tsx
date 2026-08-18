@@ -6,12 +6,11 @@ import { SectionLink } from './SectionLink'
 import { Download } from './Icons'
 
 /** The sections the nav tracks, in page order. */
-const SECTIONS = ['packages', 'work', 'writing', 'contact'] as const
+const SECTIONS = ['packages', 'work', 'contact'] as const
 
 const LABELS: Record<(typeof SECTIONS)[number], string> = {
   packages: 'Packages',
   work: 'Work',
-  writing: 'Writing',
   contact: 'Contact',
 }
 

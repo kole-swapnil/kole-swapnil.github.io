@@ -19,7 +19,7 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
 
-    "types": ["vite/client", "mdx"],
+    "types": ["vite/client"],
 
     "baseUrl": ".",
     "paths": {

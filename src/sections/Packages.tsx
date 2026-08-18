@@ -1,4 +1,4 @@
-import { packages, pricingNote, escapeHatch, type Package } from '@/data/packages'
+import { packages, pricingNote, customEngagement, type Package } from '@/data/packages'
 import { testimonials } from '@/data/testimonials'
 import { profile } from '@/data/profile'
 import { formatPrice, packageMailto, customMailto } from '@/lib/mailto'
@@ -43,18 +43,10 @@ export function Packages({ onSelect }: { onSelect: (id: string) => void }) {
         {/* The quiet line: every price is a floor. */}
         <p className="reveal mt-6 text-center font-mono text-xs text-meta">{pricingNote}</p>
 
-        {/* Escape hatch — deliberately understated so it does not undercut the
-            cards above, but present so nobody who does not fit bounces. */}
-        <p className="reveal mt-10 border-t-hairline border-rule pt-8 text-center text-base text-meta">
-          {escapeHatch.text}{' '}
-          <a
-            href={customMailto()}
-            className="text-ink underline decoration-rule underline-offset-4 transition-colors hover:decoration-ink"
-          >
-            {escapeHatch.linkLabel}
-          </a>
-          .
-        </p>
+        {/* The fourth option. Full-width and on the plain surface rather than a
+            white card, so it reads as a real choice without pulling the eye
+            away from the three priced tiers during the first scan. */}
+        <CustomOption />
 
         {/* Social proof adjacent to the decision, not parked in its own zone
             further down the page. */}
@@ -189,6 +181,41 @@ function AdjacentProof() {
             </figcaption>
           </figure>
         )}
+      </div>
+    </div>
+  )
+}
+
+/* -------------------------------------------------------------------------- */
+
+function CustomOption() {
+  return (
+    <div className="reveal mt-10 rounded-card border-hairline border-rule p-6 sm:p-8">
+      <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between lg:gap-16">
+        <div className="lg:max-w-[46rem]">
+          <p className="eyebrow">{customEngagement.name}</p>
+          <h3 className="mt-2.5 max-w-[34rem] text-xl text-ink">{customEngagement.tagline}</h3>
+          <p className="mt-3 max-w-[36rem] text-base text-slate">{customEngagement.description}</p>
+
+          <ul className="mt-5 grid gap-x-8 gap-y-2 sm:grid-cols-2">
+            {customEngagement.examples.map((example) => (
+              <li key={example} className="flex gap-2.5 text-sm text-slate">
+                <span aria-hidden="true" className="mt-[0.7em] h-px w-2.5 shrink-0 bg-rule" />
+                <span>{example}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="shrink-0 lg:text-right">
+          <p className="font-mono text-label uppercase tracking-[0.09em] text-meta">
+            {customEngagement.priceLabel}
+          </p>
+          <a href={customMailto()} className="btn-secondary group mt-3 w-full py-3 lg:w-auto lg:px-5">
+            {customEngagement.ctaLabel}
+            <ArrowRight className="transition-transform duration-200 group-hover:translate-x-0.5" />
+          </a>
+        </div>
       </div>
     </div>
   )

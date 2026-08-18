@@ -134,9 +134,52 @@ export const packages: Package[] = [
 export const pricingNote =
   'Every figure is a starting point. Final scope and price are agreed on a call before any work begins.'
 
-/** The escape hatch under the cards, for anyone the three packages do not fit. */
-export const escapeHatch = {
-  /** ~70 chars. Kept deliberately quiet so it does not undercut the cards. */
-  text: 'None of these quite fit?',
-  linkLabel: 'Describe what you need',
+/**
+ * The fourth option: work that does not fit a tier.
+ *
+ * Deliberately NOT a fourth card in the grid. Three tiers with prices are a
+ * chooser — a visitor can compare them in fifteen seconds and place
+ * themselves. Adding a fourth column that says "anything you like, priced
+ * later" collapses that: it removes the need to choose, so most people take
+ * it, and the self-qualification the whole page is built on stops happening.
+ *
+ * So it sits full-width beneath the three, on the plain surface rather than a
+ * white card, so it reads as a genuine option without competing with the tiers
+ * for the first glance.
+ */
+export interface CustomEngagement {
+  /** Package name. 1–2 words. */
+  name: string
+  /** One line on what makes it different from the three tiers. ~90 chars. */
+  tagline: string
+  /**
+   * What stands in for a price. Free text, because there is no floor to quote
+   * here — that is the whole point of this option. ~28 chars.
+   */
+  priceLabel: string
+  /** 2–3 sentences. Say how the scope and price get set, not what they are. */
+  description: string
+  /**
+   * Concrete shapes this covers, so "custom" is not an empty word.
+   * 3–4 items, ~48 chars each.
+   */
+  examples: string[]
+  /** Button text. 2–4 words. */
+  ctaLabel: string
+}
+
+// TODO(content): confirm this describes how you actually scope bespoke work — see CONTENT-NEEDED.md
+export const customEngagement: CustomEngagement = {
+  name: 'Custom',
+  tagline: 'Scope, timeline and price built around your project rather than a tier.',
+  priceLabel: 'Priced per project',
+  description:
+    'Plenty of good work does not fit a package. If yours is one of those, tell me what you are trying to do and what constraints you are under, and we shape the engagement — and the price — around it on a call.',
+  examples: [
+    'A build that runs in phases over several months',
+    'An audit followed by the fixes it turns up',
+    'A fixed piece of work inside a larger programme',
+    'Something none of the three above describes',
+  ],
+  ctaLabel: 'Describe your project',
 }

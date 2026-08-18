@@ -1,26 +1,8 @@
 import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import mdx from '@mdx-js/rollup'
-import remarkFrontmatter from 'remark-frontmatter'
-import remarkMdxFrontmatter from 'remark-mdx-frontmatter'
-import remarkGfm from 'remark-gfm'
-import rehypeSlug from 'rehype-slug'
-import rehypeAutolinkHeadings from 'rehype-autolink-headings'
-import rehypeShiki from '@shikijs/rehype'
-import type { ShikiTransformer } from 'shiki'
 // Pulls in the module augmentation that adds `ssgOptions` to Vite's UserConfig.
 import type {} from 'vite-react-ssg'
-// @ts-expect-error — plain .mjs plugin, no type declarations by design
-import { writingIndexPlugin } from './scripts/vite-plugin-writing-index.mjs'
-
-/** Stamps the source language onto the <pre> so CodeBlock can label it. */
-const languageAttribute: ShikiTransformer = {
-  name: 'language-attribute',
-  pre(node) {
-    node.properties['data-language'] = this.options.lang
-  },
-}
 
 /**
  * `base` differs per host:
@@ -41,60 +23,7 @@ export default defineConfig({
     },
   },
 
-  plugins: [
-    writingIndexPlugin(),
-    // MDX must run before the React plugin so the output JSX gets transformed.
-    {
-      enforce: 'pre',
-      ...mdx({
-        providerImportSource: '@mdx-js/react',
-        remarkPlugins: [
-          remarkFrontmatter,
-          // Exposes YAML frontmatter as a named `frontmatter` export.
-          [remarkMdxFrontmatter, { name: 'frontmatter' }],
-          remarkGfm,
-        ],
-        rehypePlugins: [
-          rehypeSlug,
-          [
-            rehypeAutolinkHeadings,
-            {
-              behavior: 'wrap',
-              properties: { className: 'heading-anchor' },
-            },
-          ],
-          [
-            rehypeShiki,
-            {
-              theme: 'github-dark-default',
-              // Solidity is not in every default language set — it is listed
-              // explicitly here and asserted by scripts/check-langs.mjs.
-              langs: [
-                'solidity',
-                'typescript',
-                'tsx',
-                'javascript',
-                'jsx',
-                'json',
-                'bash',
-                'yaml',
-                'toml',
-                'hcl',
-                'graphql',
-                'sql',
-                'diff',
-                'html',
-                'css',
-                'markdown',
-              ],
-              transformers: [languageAttribute],
-            },
-          ],
-        ],
-      }),
-    },
-    react(),
-  ],
+  plugins: [react()],
 
   build: {
     target: 'es2020',

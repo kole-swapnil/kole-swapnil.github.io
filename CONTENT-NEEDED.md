@@ -11,7 +11,7 @@ The living checklist of everything the site still needs from Swapnil.
 Every placeholder in the source is marked with `// TODO(content): ... — see CONTENT-NEEDED.md`.
 Run `grep -rn "TODO(content)" src public` for the complete live list.
 
-Last verified against the codebase: **2026-08-17** — `grep -rn "TODO(content)" src public` returns 21 markers, every one of them accounted for in Part 2 below.
+Last verified against the codebase: **2026-08-18** — `grep -rn "TODO(content)" src public` returns 21 markers, every one of them accounted for in Part 2 below.
 
 ---
 
@@ -38,6 +38,12 @@ Last verified against the codebase: **2026-08-17** — `grep -rn "TODO(content)"
   - **Wanted:** land records secured, SuperWorld users or transaction volume, workshop attendees taught. These are the ones that do real work.
   - **Currently:** **nothing here is invented.** The four live figures (6+ years, 3 government/enterprise clients, 5 engineers led, 2 papers) are all directly supported by your CV, so the site is safe to show today. They are deliberately conservative — the numbers above are stronger and should replace them.
   - **Priority:** Blocking launch *(not because anything is fake, but because these figures undersell the work)*
+
+- [ ] **Confirm the "How I work" stages and terms**
+  - **Destination:** `src/data/process.ts` — the four `duration` fields and `processNote`
+  - **Format:** `duration` is a short string, ~12 chars ("30 minutes", "2–3 days", "Weekly"). `processNote` is the reassurance line under the steps.
+  - **Currently:** the four stages are written from how a sensible engagement runs, not from anything you told me. The durations are assumed. More importantly, `processNote` currently promises **"You can stop after the scope document and keep it. It is yours either way."** — that is a commercial commitment I invented. If you do not work that way, change it before anyone reads it.
+  - **Priority:** Blocking launch
 
 - [ ] **Current resume PDF**
   - **Destination:** `public/Swapnil_Kole_Resume.pdf`
@@ -76,13 +82,6 @@ Last verified against the codebase: **2026-08-17** — `grep -rn "TODO(content)"
   - **Destination:** `src/data/projects.ts` — the `description` field
   - **Format:** 2–4 sentences per project. Make the platform engineering visible, not just the chain: the React app, the API, the AWS serverless backend, the Terraform, the payment integration. Also welcome: `metrics` (short outcome strings, ≤ 40 chars each) and any `links` you can make public.
   - **Currently:** descriptions written from the brief. They are accurate to what you supplied but thin on specifics only you know.
-  - **Priority:** Improves launch
-
-- [ ] **Real articles**
-  - **Destination:** `src/content/writing/<descriptive-slug>.mdx`
-  - **Format:** frontmatter needs `title`, `slug`, `date` (`YYYY-MM-DD`), `excerpt` (1–2 sentences, ~160 chars — it becomes the meta description and the OG card text), `tags` (array). Optional: `coverImage` (1200×630), `draft: true` to keep it out of the build. **Do not write `readingTime`** — it is computed at build time.
-  - Slugs must be human-readable: `/writing/erc-3643-compliance-in-practice`, never `/writing/post-1`.
-  - **Currently:** two complete placeholder posts are live, both flagged `placeholder: true` in frontmatter and visibly badged in the UI. Delete them once you have real posts. **If no posts exist, the home page Writing section hides itself.**
   - **Priority:** Improves launch
 
 - [ ] **Availability status**
@@ -125,11 +124,13 @@ Everything invented that is in the code **right now**. Find them all with `grep 
 | 6 | Square headshot | `public/images/swapnil-square.jpg` | Generated placeholder, 800×800. Used by JSON-LD `Person`. |
 | 7 | Resume PDF | `public/Swapnil_Kole_Resume.pdf` | Generated one-page placeholder so the download link resolves rather than 404s. |
 | 8 | Two testimonials | `src/data/testimonials.ts` | `placeholder: true`; renders a visible "Placeholder" badge. |
-| 9 | Two articles | `src/content/writing/*.mdx` | `placeholder: true`; badged on the card and at the top of the article. |
-| 10 | Three project screenshots | `public/images/projects/*.jpg` | Generated placeholders at final 16:10. `distributed-doctor` and `process-lineage` intentionally have **no** image and use the typographic fallback. |
-| 11 | Availability month "September 2026" | `src/data/profile.ts` | Assumed, not confirmed. |
-| 12 | Publication URLs absent | `src/data/publications.ts` | `url: undefined` — renders unlinked rather than guessing a link. |
-| 13 | Production domain | `src/config/site.ts` | Defaulted to the existing GitHub Pages URL. |
+| 9 | Three project screenshots | `public/images/projects/*.jpg` | Generated placeholders at final 16:10. `distributed-doctor` and `process-lineage` intentionally have **no** image and use the typographic fallback. |
+| 10 | Availability month "September 2026" | `src/data/profile.ts` | Assumed, not confirmed. |
+| 11 | Publication URLs absent | `src/data/publications.ts` | `url: undefined` — renders unlinked rather than guessing a link. |
+| 12 | Production domain | `src/config/site.ts` | Defaulted to the existing GitHub Pages URL. |
+| 13 | Four process stage durations | `src/data/process.ts` | Assumed, not confirmed. |
+| 14 | `processNote` scope-document terms | `src/data/process.ts` | **An invented commercial promise.** Confirm or rewrite. |
+| 15 | Custom engagement copy | `src/data/packages.ts` | Describes how bespoke work gets scoped. No invented figures, but confirm it matches reality. |
 
 Generated placeholder imagery is produced by `node scripts/generate-placeholders.mjs`
 and is committed. Overwrite the files in place — no code change is needed, and
@@ -142,9 +143,16 @@ nothing reflows, because every placeholder is at the real asset's dimensions.
 ## Part 3 — Delivered
 
 - **2026-08-17** — Legacy 2022 static site (`index.html`, `css/`, `js/`, `img/`, `images/`) removed and replaced with the React/Vite build. A full copy of the old site was archived before deletion. The old `images/resume.pdf` and `images/q.jpeg` were deliberately **not** carried forward — both are from 2022 and predate the current roles.
-- **2026-08-17** — Open Graph share card designed and generated at `public/og-image.png` (1200×630), built from the site's own palette and typefaces. Per-article cards generate automatically at `public/og/writing/<slug>.png` on every build, so a new post can never ship without a preview image.
+- **2026-08-17** — Open Graph share card designed and generated at `public/og-image.png` (1200×630), built from the site's own palette and typefaces.
 - **2026-08-17** — Favicon set generated: `favicon.svg`, `favicon-32.png`, `apple-touch-icon.png`, `site.webmanifest`.
 - **2026-08-17** — Self-hosted Instrument Sans and JetBrains Mono (`public/fonts/`). No runtime request to Google Fonts.
+
+---
+
+## Removed by decision
+
+- **2026-08-18** — The Writing section, `/writing` routes, both placeholder articles, the MDX + shiki pipeline and the RSS feed were removed at Swapnil's request. Eleven devDependencies went with them and the JS bundle dropped from 60k to 48k gzipped. If you ever want to publish again this is a rebuild, not a toggle.
+- **2026-08-18** — The hero availability badge ("Available from September 2026 · Replies within 24 hours") was removed. The `availability` object stays in `profile.ts` because the contact section and its response-time line still read from it.
 
 ---
 

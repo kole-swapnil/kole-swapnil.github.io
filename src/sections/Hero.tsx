@@ -11,40 +11,38 @@ import { ArrowRight, ArrowUpRight, Download } from '@/components/Icons'
  * the package selector directly underneath. Do not repeat this treatment
  * further down the page.
  *
+ * Column split: the left carries the claim and the actions, the right carries
+ * the photograph and the proof of who it was done for. The trust strip lives
+ * on the right rather than under the CTAs so the two columns balance now that
+ * the headshot is smaller — otherwise the right column bottoms out well above
+ * the left and the band looks lopsided.
+ *
  * Entrance motion is one orchestrated sequence: each block animates in on a
  * fixed delay rather than each element having its own effect. Disabled wholly
  * under prefers-reduced-motion by the global stylesheet.
  */
 export function Hero() {
-  const { availability } = profile
-
   return (
     <section id="hero" className="relative isolate bg-ink">
-      <div className="shell grid gap-12 pb-16 pt-[calc(var(--nav-h)+3rem)] sm:pb-20 sm:pt-[calc(var(--nav-h)+4.5rem)] lg:grid-cols-[1.1fr_minmax(0,0.9fr)] lg:items-center lg:gap-16 lg:pb-24">
-        {/* --- Left column ------------------------------------------------ */}
-        <div className="max-w-[38rem]">
-          <AvailabilityBadge
-            status={availability.status}
-            availableFrom={availability.availableFrom}
-            responseTime={availability.responseTime}
-          />
-
+      <div className="shell grid gap-12 pb-16 pt-[calc(var(--nav-h)+3.5rem)] sm:pb-20 sm:pt-[calc(var(--nav-h)+5rem)] lg:grid-cols-[minmax(0,1.35fr)_minmax(0,0.65fr)] lg:items-center lg:gap-16 lg:pb-24">
+        {/* --- Left column: the claim and the actions --------------------- */}
+        <div>
           {/* Three descending steps: the claim, the range, then the evidence.
               Keeping the range out of the <h1> stops the accessible name of
               the page from running to forty words. */}
-          <h1 className="mt-7 animate-rise text-display font-semibold text-bone [animation-delay:80ms]">
+          <h1 className="max-w-[40rem] animate-rise text-display font-semibold text-bone">
             {profile.headline}
           </h1>
 
-          <p className="mt-5 max-w-[32rem] animate-rise text-display-sub text-bone/80 [animation-delay:140ms]">
+          <p className="mt-5 max-w-[32rem] animate-rise text-display-sub text-bone/80 [animation-delay:80ms]">
             {profile.headlineTail}
           </p>
 
-          <p className="mt-5 max-w-[33rem] animate-rise text-base text-dark-muted [animation-delay:200ms]">
+          <p className="mt-5 max-w-[33rem] animate-rise text-base text-dark-muted [animation-delay:140ms]">
             {profile.supportingLine}
           </p>
 
-          <div className="mt-9 flex animate-rise flex-col gap-3 sm:flex-row sm:items-center [animation-delay:220ms]">
+          <div className="mt-9 flex animate-rise flex-col gap-3 sm:flex-row sm:items-center [animation-delay:200ms]">
             <SectionLink id="packages" className="btn-on-dark-primary group px-5 py-3">
               See packages and pricing
               <ArrowRight className="transition-transform duration-200 group-hover:translate-x-0.5" />
@@ -58,34 +56,11 @@ export function Hero() {
               Download resume
             </a>
           </div>
-
-          {/* Trust strip — typographic wordmarks, no logo images. */}
-          <div className="mt-11 animate-rise [animation-delay:280ms]">
-            <p className="eyebrow-on-dark">Worked with</p>
-            <ul className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
-              {profile.trustedBy.map((client, index) => (
-                <li key={client} className="flex items-center gap-4">
-                  {/* Hidden below `sm`: the strip wraps on narrow screens and a
-                      divider left stranded at the start of a line reads as a
-                      rendering fault. Above `sm` it fits on one line. */}
-                  {index > 0 && (
-                    <span
-                      aria-hidden="true"
-                      className="hidden h-3.5 w-px bg-dark-rule-strong sm:block"
-                    />
-                  )}
-                  <span className="font-sans text-md font-medium tracking-[-0.01em] text-bone/85">
-                    {client}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
         </div>
 
-        {/* --- Right column: headshot ------------------------------------- */}
-        <div className="animate-rise [animation-delay:140ms]">
-          <div className="relative mx-auto w-full max-w-[22rem] lg:max-w-none">
+        {/* --- Right column: photograph, then who it was done for ---------- */}
+        <div className="flex animate-rise flex-col gap-8 [animation-delay:120ms]">
+          <div className="relative w-full max-w-[15rem] sm:max-w-[17rem]">
             <img
               src={profile.headshot}
               alt={profile.headshotAlt}
@@ -104,6 +79,23 @@ export function Hero() {
               className="pointer-events-none absolute inset-0 rounded-card bg-gradient-to-t from-ink/45 via-transparent to-transparent"
             />
           </div>
+
+          {/* Trust strip — typographic wordmarks, no logo images. Stacked
+              rather than inline: the column is narrow, and a vertical list
+              reads as a record instead of a cramped row. */}
+          <div className="max-w-[17rem]">
+            <p className="eyebrow-on-dark">Worked with</p>
+            <ul className="mt-3 flex flex-col">
+              {profile.trustedBy.map((client) => (
+                <li
+                  key={client}
+                  className="border-t-hairline border-dark-rule py-2.5 font-sans text-md font-medium tracking-[-0.01em] text-bone/85 first:border-t-0 first:pt-0"
+                >
+                  {client}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
 
@@ -111,59 +103,17 @@ export function Hero() {
       <div className="border-t-hairline border-dark-rule">
         <ul className="shell grid grid-cols-2 gap-x-6 gap-y-8 py-10 md:grid-cols-4 md:gap-x-8">
           {metrics.map((metric, index) => (
-            <li key={metric.id} className="animate-rise" style={{ animationDelay: `${340 + index * 60}ms` }}>
+            <li
+              key={metric.id}
+              className="animate-rise"
+              style={{ animationDelay: `${280 + index * 60}ms` }}
+            >
               <MetricTile metric={metric} />
             </li>
           ))}
         </ul>
       </div>
     </section>
-  )
-}
-
-/* -------------------------------------------------------------------------- */
-
-function AvailabilityBadge({
-  status,
-  availableFrom,
-  responseTime,
-}: {
-  status: 'available' | 'limited' | 'unavailable'
-  availableFrom: string | null
-  responseTime: string
-}) {
-  const isOpen = status !== 'unavailable'
-
-  const statusText =
-    status === 'available'
-      ? availableFrom
-        ? `Available from ${availableFrom}`
-        : 'Available now'
-      : status === 'limited'
-        ? availableFrom
-          ? `Limited availability from ${availableFrom}`
-          : 'Limited availability'
-        : 'Not taking new work'
-
-  return (
-    <div className="animate-rise inline-flex flex-wrap items-center gap-x-3 gap-y-1.5 rounded-pill border-hairline border-dark-rule-strong px-3.5 py-2">
-      <span className="flex items-center gap-2">
-        <span className="relative flex h-2 w-2" aria-hidden="true">
-          {isOpen && (
-            <span className="absolute inline-flex h-full w-full animate-pulse rounded-pill bg-amber" />
-          )}
-          <span
-            className={[
-              'relative inline-flex h-2 w-2 rounded-pill',
-              isOpen ? 'bg-amber' : 'bg-dark-muted',
-            ].join(' ')}
-          />
-        </span>
-        <span className="font-mono text-xs font-medium text-bone">{statusText}</span>
-      </span>
-      <span aria-hidden="true" className="h-3 w-px bg-dark-rule-strong" />
-      <span className="font-mono text-xs text-dark-muted">Replies {responseTime}</span>
-    </div>
   )
 }
 

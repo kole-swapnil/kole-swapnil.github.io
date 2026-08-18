@@ -7,7 +7,7 @@ import { Work } from '@/sections/Work'
 import { Experience } from '@/sections/Experience'
 import { Skills } from '@/sections/Skills'
 import { Credentials } from '@/sections/Credentials'
-import { WritingPreview } from '@/sections/WritingPreview'
+import { Process } from '@/sections/Process'
 import { Testimonials } from '@/sections/Testimonials'
 import { Contact } from '@/sections/Contact'
 import { profile } from '@/data/profile'
@@ -47,7 +47,7 @@ export function Home() {
       <Experience />
       <Skills />
       <Credentials />
-      <WritingPreview />
+      <Process />
       <Testimonials />
       <Contact selectedPackageId={selectedPackageId} />
     </>

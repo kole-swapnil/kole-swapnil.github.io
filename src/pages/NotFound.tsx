@@ -11,12 +11,9 @@ export function NotFound() {
         <p className="mt-4 max-w-prose text-lg text-slate">
           The link may be out of date, or the page may have moved.
         </p>
-        <div className="mt-8 flex flex-wrap gap-3">
+        <div className="mt-8">
           <Link to="/" className="btn-primary px-5 py-3">
             Back to the home page
-          </Link>
-          <Link to="/writing" className="btn-secondary px-5 py-3">
-            Read the writing
           </Link>
         </div>
       </section>
