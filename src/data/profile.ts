@@ -81,9 +81,8 @@ export interface Profile {
    * avoids both a rights problem and a row of badly-cropped PNGs.
    *
    * Strongest name first. Six is the practical ceiling — past that the list
-   * stops reading as selective. The share card and the "Recent clients" line
-   * beside the packages both take only the first three, so keep the openers
-   * the ones you most want a stranger to see.
+   * stops reading as selective. The share card takes only the first three, so
+   * keep the openers the ones you most want a stranger to see.
    */
   trustedBy: string[]
 }
@@ -106,9 +105,8 @@ export const profile: Profile = {
   phone: '+91 8328217163',
   whatsapp: '918328217163',
 
-  // TODO(content): real headshot — 1200×1500, 4:5 portrait — see CONTENT-NEEDED.md
   headshot: '/images/swapnil.jpg',
-  headshotAlt: 'Swapnil Kole, senior software engineer, photographed against a dark background',
+  headshotAlt: 'Swapnil Kole, smiling, photographed outdoors in front of trees',
 
   resumePath: '/Swapnil_Kole_Resume.pdf',
   resumeFileName: 'Swapnil_Kole_Resume.pdf',

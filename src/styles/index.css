@@ -58,6 +58,30 @@
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
+
+    /*
+     * One section, one screen. `proximity` rather than `mandatory`: it settles
+     * onto a screen when a scroll ends near one, but never hijacks a scroll in
+     * progress and never traps a section that is taller than the window —
+     * which is exactly what happens on a short laptop, or when a visitor bumps
+     * their text size up.
+     */
+    scroll-snap-type: y proximity;
+  }
+
+  /*
+   * Height of the footer, which shares the last screen with the contact
+   * section. Hard-coded because CSS cannot measure it: if the footer gains or
+   * loses a line, update this or the last screen stops landing exactly.
+   */
+  :root {
+    --footer-h: 16.5rem;
+  }
+
+  @media (min-width: 640px) {
+    :root {
+      --footer-h: 11.25rem;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -114,6 +138,123 @@
 
   .shell {
     @apply mx-auto w-full max-w-shell px-5 sm:px-8 lg:px-12;
+  }
+
+  /*
+   * A screen — one section, one viewport.
+   *
+   * `min-h` rather than `h`: when the content genuinely needs more room than
+   * the window has (a short laptop, a phone, larger text) the section grows
+   * instead of clipping, and because the box grows there is never any
+   * centred-overflow to scroll back up into.
+   *
+   * `scroll-margin-top: 0` overrides the global anchor offset. Every screen
+   * already reserves the nav height in its own padding, so an in-page link
+   * should land the section flush with the top of the window, not 5rem down.
+   */
+  .screen {
+    @apply flex min-h-svh flex-col;
+    scroll-snap-align: start;
+    scroll-margin-top: 0;
+  }
+
+  /*
+   * The light-body variant: content centred in whatever height is left over,
+   * with the fixed nav's height reserved at the top. Padding is viewport-
+   * relative so a short window loses breathing room before it loses content.
+   */
+  .screen-body {
+    @apply justify-center border-t-hairline border-rule bg-surface;
+    padding-top: calc(var(--nav-h) + clamp(1rem, 2.5vh, 2rem));
+    padding-bottom: clamp(1.5rem, 3vh, 2.5rem);
+  }
+
+  /*
+   * Short screens — a 13" laptop is around 760px of viewport.
+   *
+   * The densest screens need about 850px at the full type scale. Rather than
+   * let them spill past the fold, the scale steps down here: the section
+   * headings drop one step, the standfirst drops to body size, and the space
+   * around both tightens. Nothing is hidden and the body copy inside cards is
+   * untouched — what gives is the air, and then the headings, in that order.
+   */
+  /*
+    * Phones. The standfirst drops to body size and the screen keeps only as
+    * much air as it needs to clear the nav — on a 390px-wide screen every
+    * block below the fold costs a swipe, so the padding is the first thing to
+    * give, before any type size.
+    */
+  @media (max-width: 640px) {
+    .screen-body {
+      padding-top: calc(var(--nav-h) + 0.875rem);
+      padding-bottom: 0.875rem;
+    }
+
+    .screen-body header > p:last-child {
+      font-size: theme('fontSize.base[0]');
+      line-height: 1.55;
+    }
+  }
+
+  @media (max-height: 830px) {
+    .screen-body {
+      padding-top: calc(var(--nav-h) + 0.75rem);
+      padding-bottom: 0.75rem;
+    }
+
+    .screen-body :is(h2):not(.text-xl):not(.text-2xl) {
+      font-size: theme('fontSize.3xl[0]');
+      line-height: 1.16;
+      letter-spacing: -0.024em;
+    }
+
+    .screen-body header > p:last-child,
+    .screen-body .reveal > header + p {
+      font-size: theme('fontSize.base[0]');
+      line-height: 1.55;
+    }
+  }
+
+  /* The last screen shares the window with the footer. */
+  .screen-last {
+    min-height: calc(100svh - var(--footer-h));
+  }
+
+  /*
+   * The mobile half of <Rail>. See src/components/Rail.tsx for why.
+   *
+   * The negative margin plus matching padding lets the rail bleed to both
+   * edges of the phone while its first card still lines up with the shell —
+   * without it, a card scrolled to the end stops short of the screen edge and
+   * the rail reads as a cropped grid rather than something swipeable.
+   *
+   * 86% is the card width: wide enough to be the subject of the screen, narrow
+   * enough that the next card peeks. A rail with no peek does not get swiped.
+   */
+  .rail {
+    @apply -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-1 sm:-mx-8 sm:px-8;
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+  }
+
+  .rail::-webkit-scrollbar {
+    display: none;
+  }
+
+  .rail > * {
+    @apply w-[86%] shrink-0 snap-center;
+  }
+
+  /* From `lg` the caller's own grid takes over and the rail stops existing. */
+  @media (min-width: 1024px) {
+    .rail {
+      @apply mx-0 grid gap-6 overflow-visible px-0 pb-0;
+    }
+
+    .rail > * {
+      width: auto;
+      flex-shrink: 1;
+    }
   }
 
   /* --- Buttons ---------------------------------------------------------- */

@@ -69,12 +69,4 @@ export const courses: Course[] = [
     url: 'https://www.udemy.com/course/jp-courses-blockchain-made-easy/',
     free: true,
   },
-  {
-    id: 'web-dev-pathway',
-    title: 'Web Development Pathway',
-    duration: '35 mins',
-    lectures: 5,
-    level: 'Beginner',
-    url: 'https://www.udemy.com/course/web-development-pathway/',
-  },
 ]

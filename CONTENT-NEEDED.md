@@ -25,13 +25,6 @@ Last verified against the codebase: **2026-08-18** — `grep -rn "TODO(content)"
   - **Currently:** prices are set in the data but **hidden** (`showPricing = false` in `packages.ts`). The durations are still the figures from the original brief and have **not** been confirmed — and they now carry the whole card, because with the price hidden the timeline is the only comparable number a visitor gets. "6–10 weeks" on the middle card is the one to check.
   - **Priority:** Blocking launch
 
-- [ ] **Professional headshot**
-  - **Destination:** `public/images/swapnil.jpg`
-  - **Format:** 1200×1500 minimum, **4:5 portrait crop**, JPG or WebP, under 400 KB after compression. Face centred in the upper two-thirds, shot against a plain or softly out-of-focus background. It sits on the near-black hero band, so a photo with dark or neutral surroundings will sit better than a bright white studio background. Also supply, if you have it, a 1:1 square crop at `public/images/swapnil-square.jpg` for the OG card and JSON-LD.
-  - **Currently:** a generated neutral placeholder at the exact final dimensions is live, so the layout will not shift when the real file lands. Just overwrite the file — no code change needed.
-  - **Note:** the 2022 photo from the old site (`images/q.jpeg`) was not carried over — it reads as a student portrait and undercuts the senior positioning.
-  - **Priority:** Blocking launch
-
 - [ ] **Stronger proof metrics**
   - **Destination:** `src/data/metrics.ts`
   - **Format:** 3 or 4 entries. Each needs a `value` (the figure exactly as displayed, ≤ 5 characters — e.g. `"1.2M"`, `"₹400 Cr"`, `"5"`), a `label` (≤ 48 chars, must name the specific thing measured — "land records secured for Govt. of Odisha", not "records secured"), and optionally `sourceHref` + `sourceLabel` linking to the project or a public source. A precise number attached to a named system beats a big round number.
@@ -55,12 +48,6 @@ Last verified against the codebase: **2026-08-18** — `grep -rn "TODO(content)"
   - **Destination:** `src/config/site.ts` — the `siteUrl` constant, one line
   - **Format:** full origin, no trailing slash, e.g. `https://swapnilkole.com`. This one constant drives canonical URLs, `sitemap.xml`, `rss.xml`, `robots.txt` and every Open Graph tag, so it must be set before the first real deploy or link previews will point at the wrong host.
   - **Currently:** set to `https://kole-swapnil.github.io` (the existing GitHub Pages URL) as a working default.
-  - **Priority:** Blocking launch
-
-- [ ] **Google Scholar links for the two papers**
-  - **Destination:** `src/data/publications.ts` — the `url` field on each entry
-  - **Format:** full https URL. Scholar, DOI, or the publisher page — whichever is most stable.
-  - **Currently:** `url` is `undefined` on both papers, so they render as plain unlinked text. The section works, it just does not link out.
   - **Priority:** Blocking launch
 
 ### Improves launch
@@ -118,16 +105,13 @@ Everything invented that is in the code **right now**. Find them all with `grep 
 |---|---|---|---|
 | 1 | Package durations | `src/data/packages.ts` | Assumed, not confirmed. Now the headline figure on each card, since prices are hidden. |
 | 2 | Hero metric figures | `src/data/metrics.ts` | **Not invented** — all four are CV-supported. Conservative stand-ins for stronger numbers. |
-| 3 | Headshot | `public/images/swapnil.jpg` | Generated neutral placeholder, 1200×1500, exact final dimensions. |
-| 4 | Square headshot | `public/images/swapnil-square.jpg` | Generated placeholder, 800×800. Used by JSON-LD `Person`. |
-| 5 | Two testimonials | `src/data/testimonials.ts` | `placeholder: true`; renders a visible "Placeholder" badge. |
-| 6 | Three project screenshots | `public/images/projects/*.jpg` | Generated placeholders at final 16:10. `distributed-doctor` and `process-lineage` intentionally have **no** image and use the typographic fallback. |
-| 7 | Availability month "September 2026" | `src/data/profile.ts` | Assumed, not confirmed. |
-| 8 | Publication URLs absent | `src/data/publications.ts` | `url: undefined` — renders unlinked rather than guessing a link. |
-| 9 | Production domain | `src/config/site.ts` | Defaulted to the existing GitHub Pages URL. |
-| 10 | Four process stage durations | `src/data/process.ts` | Assumed, not confirmed. |
-| 11 | `processNote` scope-document terms | `src/data/process.ts` | **An invented commercial promise.** Confirm or rewrite. |
-| 12 | Custom engagement copy | `src/data/packages.ts` | Describes how bespoke work gets scoped. No invented figures, but confirm it matches reality. |
+| 3 | Two testimonials | `src/data/testimonials.ts` | `placeholder: true`; renders a visible "Placeholder" badge. |
+| 4 | Three project screenshots | `public/images/projects/*.jpg` | Generated placeholders at final 16:10. `distributed-doctor` and `process-lineage` intentionally have **no** image and use the typographic fallback. |
+| 5 | Availability month "September 2026" | `src/data/profile.ts` | Assumed, not confirmed. |
+| 6 | Production domain | `src/config/site.ts` | Defaulted to the existing GitHub Pages URL. |
+| 7 | Four process stage durations | `src/data/process.ts` | Assumed, not confirmed. |
+| 8 | `processNote` scope-document terms | `src/data/process.ts` | **An invented commercial promise.** Confirm or rewrite. |
+| 9 | Custom engagement copy | `src/data/packages.ts` | Describes how bespoke work gets scoped. No invented figures, but confirm it matches reality. |
 
 Generated placeholder imagery is produced by `node scripts/generate-placeholders.mjs`
 and is committed. Overwrite the files in place — no code change is needed, and

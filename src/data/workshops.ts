@@ -4,8 +4,8 @@
  * This is a second, separate offer from the three packages above it: those
  * are bought by founders and CTOs, this is bought by a head of department or
  * an engineering manager. It sits directly under the packages because it is
- * revenue, not range — the lighter "Also available" strip further down is
- * where the non-engineering work lives.
+ * revenue, not range — the lighter "Also available" strip, which shares the
+ * custom-engagement screen above, is where the non-engineering work lives.
  *
  * The full programme, the three pricing tiers and the booking flow live on
  * blockenzyme.com/tech-workshops. This section is a summary that links there
@@ -65,27 +65,6 @@ export const workshopTopics: WorkshopTopic[] = [
     duration: '2–3 days',
     summary:
       'Python for AI/ML, supervised and unsupervised learning, neural networks and NLP basics, through to deploying a model.',
-  },
-  {
-    id: 'security',
-    title: 'Cybersecurity',
-    duration: '1–2 days',
-    summary:
-      'Security fundamentals, network and web application security against OWASP, ethical hacking basics and CTF challenges.',
-  },
-  {
-    id: 'data',
-    title: 'Data Science & Analytics',
-    duration: '2 days',
-    summary:
-      'Pandas and NumPy, visualisation, statistical and exploratory analysis — worked on real datasets, ending in business insight.',
-  },
-  {
-    id: 'mobile',
-    title: 'Mobile App Development',
-    duration: '2–3 days',
-    summary:
-      'Cross-platform React Native: UI, state management, APIs and auth, through to publishing on the App Store and Play Store.',
   },
 ]
 

@@ -1,5 +1,6 @@
 import { processSteps, processNote } from '@/data/process'
 import { useReveal } from '@/hooks/useReveal'
+import { Rail } from '@/components/Rail'
 
 /**
  * How I work.
@@ -19,9 +20,9 @@ export function Process() {
   const revealRef = useReveal<HTMLDivElement>({ stagger: 80 })
 
   return (
-    <section id="process" className="bg-surface pb-section">
+    <section id="process" className="screen screen-body">
       <div className="shell" ref={revealRef}>
-        <div className="reveal border-t-hairline border-rule pt-section">
+        <div className="reveal">
           <header className="max-w-prose">
             <p className="eyebrow">How I work</p>
             <h2 className="mt-3 text-3xl sm:text-4xl">From first email to handover</h2>
@@ -32,13 +33,17 @@ export function Process() {
           </header>
         </div>
 
-        <ol className="relative mt-12 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:mt-14 lg:grid-cols-4">
-          {/* One continuous rule behind the row, aligned to the step numbers. */}
+        {/* The rule lives on the wrapper rather than inside the list: from `lg`
+            the list is a grid and a stray child would take a column, and below
+            it the list is a scrolling rail where an absolutely positioned rule
+            would scroll away from the numbers it aligns to. */}
+        <div className="relative mt-10 lg:mt-12">
           <span
             aria-hidden="true"
             className="absolute left-0 right-0 top-[0.6rem] hidden h-px bg-rule lg:block"
           />
 
+          <Rail label="How an engagement runs" count={processSteps.length} className="lg:grid-cols-4 lg:gap-x-8">
           {processSteps.map((step, index) => (
             <li key={step.id} className="reveal relative">
               <span className="relative inline-flex items-center gap-3 bg-surface pr-3 font-mono text-xs text-meta">
@@ -51,9 +56,10 @@ export function Process() {
               <p className="mt-3 text-base text-slate">{step.description}</p>
             </li>
           ))}
-        </ol>
+          </Rail>
+        </div>
 
-        <p className="reveal mt-10 border-t-hairline border-rule pt-6 font-mono text-xs text-meta">
+        <p className="reveal mt-8 border-t-hairline border-rule pt-5 font-mono text-xs text-meta">
           {processNote}
         </p>
       </div>

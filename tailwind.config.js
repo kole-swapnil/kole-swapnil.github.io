@@ -19,6 +19,16 @@ export default {
   content: ['./index.html', './src/**/*.{ts,tsx,mdx}'],
   theme: {
     extend: {
+      /**
+       * A height query, not a width one. Every section is a full screen, so
+       * what decides whether a dense screen fits is the height of the window,
+       * and 830px is where the packages, workshops, work and experience
+       * screens stop fitting at the full type scale. Used as `short:mt-4`.
+       */
+      screens: {
+        short: { raw: '(max-height: 830px)' },
+      },
+
       colors: {
         /** Hero band background, and primary text on light surfaces. */
         ink: '#131316',

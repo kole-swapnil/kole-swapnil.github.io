@@ -89,6 +89,21 @@ export const experience: Role[] = [
  */
 export const freelance: Role[] = [
   {
+    id: 'iiit-odisha',
+    title: 'Technical Blockchain Assistant',
+    company: 'IIIT Bhubaneswar',
+    period: '20 months',
+    location: 'Bhubaneswar, India',
+    client: 'Govt. of Odisha, Dept. of Science and Technology',
+    stack: 'Blockchain · Solidity · Smart contracts · dApps',
+    highlights: [
+      'Designed and built a Land Record Management application for the Government of Odisha.',
+      'Developed all core algorithms underpinning the system, and tested and deployed the smart contracts.',
+      'Delivered a full decentralized application and published a peer-reviewed conference paper.',
+    ],
+    projectSlug: 'land-record-management',
+  },
+  {
     id: 'getfi',
     title: 'Full-Stack & AI Developer',
     company: 'GetFi',
@@ -115,21 +130,6 @@ export const freelance: Role[] = [
       'Built a complete decentralized application integrating React with on-chain logic.',
     ],
     projectSlug: 'blockx-staking',
-  },
-  {
-    id: 'iiit-odisha',
-    title: 'Technical Blockchain Assistant',
-    company: 'IIIT Bhubaneswar',
-    period: '20 months',
-    location: 'Bhubaneswar, India',
-    client: 'Govt. of Odisha, Dept. of Science and Technology',
-    stack: 'Blockchain · Solidity · Smart contracts · dApps',
-    highlights: [
-      'Designed and built a Land Record Management application for the Government of Odisha.',
-      'Developed all core algorithms underpinning the system, and tested and deployed the smart contracts.',
-      'Delivered a full decentralized application and published a peer-reviewed conference paper.',
-    ],
-    projectSlug: 'land-record-management',
   },
   {
     id: 'wirmon',

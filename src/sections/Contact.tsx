@@ -27,151 +27,162 @@ export function Contact({ selectedPackageId }: { selectedPackageId: string | nul
   const selected = packages.find((pkg) => pkg.id === selectedPackageId)
 
   return (
-    <section id="contact" className="bg-surface pb-section">
+    <section id="contact" className="screen screen-body screen-last">
       <div className="shell" ref={revealRef}>
-        <div className="reveal border-t-hairline border-rule pt-section">
-          <p className="eyebrow">Contact</p>
-          <h2 className="mt-3 max-w-prose text-3xl sm:text-4xl">
-            Tell me what you are building
-          </h2>
-          <p className="mt-4 max-w-[34rem] text-lg text-slate">
-            Either button opens with a short template already in it — fill in the blanks and
-            send. You will have a reply {profile.availability.responseTime}.
-          </p>
-        </div>
-
-        {/* The two ways to start a conversation, given equal weight and placed
-            before the reference details. Email suits a desktop visitor writing
-            a considered brief; WhatsApp suits the larger share arriving from a
-            LinkedIn link on a phone, where a mailto: often opens nothing at
-            all. Both carry a prefilled template. */}
-        <div className="reveal mt-8 flex flex-col gap-3 sm:flex-row">
-          <a href={generalMailto()} className="btn-primary group px-6 py-3.5 sm:px-7">
-            Email me
-            <ArrowRight className="transition-transform duration-200 group-hover:translate-x-0.5" />
-          </a>
-          <a
-            href={generalWhatsapp()}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-secondary group px-6 py-3.5 sm:px-7"
-          >
-            <WhatsApp className="text-[#25D366]" />
-            WhatsApp
-            <ArrowUpRight className="text-meta transition-colors group-hover:text-ink" />
-          </a>
-        </div>
-
-        {/* Reflects the package chosen above. */}
-        {selected && (
-          <div className="mt-8 flex flex-col gap-4 rounded-card border-highlight border-ink bg-card p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
-            <div>
-              <p className="eyebrow">You selected</p>
-              <p className="mt-1.5 font-sans text-lg font-medium tracking-[-0.015em] text-ink">
-                {selected.name}
+        {/* Two columns that each carry real content, rather than a tall stack
+            on the left and a single card floating in space on the right. The
+            invitation and the two ways to act sit left; the resume panel and
+            the where/elsewhere reference sit right, starting level with the
+            heading. It reads as one screen instead of a scroll. */}
+        <div className="grid gap-x-14 gap-y-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,19rem)] lg:gap-y-10">
+          <div>
+            <div className="reveal">
+              <p className="eyebrow">Contact</p>
+              <h2 className="mt-3 text-3xl sm:text-4xl">Tell me what you are building</h2>
+              <p className="mt-3.5 max-w-[34rem] text-lg text-slate">
+                Either button opens with a short template already in it — fill in the blanks
+                and send. You will have a reply {profile.availability.responseTime}.
               </p>
             </div>
-            <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
-              <a href={packageMailto(selected)} className="btn-primary group px-5 py-3">
-                Email about this
+
+            {/* The two ways to start a conversation, given equal weight and
+                placed before the reference details. Email suits a desktop
+                visitor writing a considered brief; WhatsApp suits the larger
+                share arriving from a LinkedIn link on a phone, where a mailto:
+                often opens nothing at all. Both carry a prefilled template. */}
+            <div className="reveal mt-6 flex flex-row gap-3 lg:mt-7">
+              <a href={generalMailto()} className="btn-primary group flex-1 px-5 py-3 sm:px-7 sm:py-3.5 lg:flex-none">
+                Email me
                 <ArrowRight className="transition-transform duration-200 group-hover:translate-x-0.5" />
               </a>
               <a
-                href={packageWhatsapp(selected)}
+                href={generalWhatsapp()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-secondary px-5 py-3"
+                className="btn-secondary group flex-1 px-5 py-3 sm:px-7 sm:py-3.5 lg:flex-none"
               >
                 <WhatsApp className="text-[#25D366]" />
                 WhatsApp
+                <ArrowUpRight className="text-meta transition-colors group-hover:text-ink" />
               </a>
             </div>
-          </div>
-        )}
 
-        <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,20rem)] lg:gap-16">
-          {/* Primary contact details */}
-          <dl className="reveal space-y-6">
-            <div className="border-t-hairline border-rule pt-5">
-              <dt className="eyebrow">Email</dt>
-              <dd className="mt-2.5 flex flex-wrap items-center gap-3">
-                <a
-                  href={generalMailto()}
-                  className="font-sans text-xl text-ink underline decoration-rule underline-offset-[6px] transition-colors hover:decoration-ink"
-                >
-                  {profile.email}
-                </a>
-                <CopyButton value={profile.email} label="Copy email address" />
-              </dd>
-            </div>
-
-            <div className="border-t-hairline border-rule pt-5">
-              <dt className="eyebrow">Phone</dt>
-              <dd className="mt-2.5 flex flex-wrap items-center gap-3">
-                <a
-                  href={`tel:${profile.phone.replace(/\s+/g, '')}`}
-                  className="font-mono text-md text-ink underline decoration-rule underline-offset-[6px] transition-colors hover:decoration-ink"
-                >
-                  {profile.phone}
-                </a>
-                <CopyButton value={profile.phone} label="Copy phone number" />
-                <a
-                  href={generalWhatsapp()}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-secondary gap-1.5 px-3 py-2 font-mono text-xs"
-                >
-                  <WhatsApp className="text-[#25D366]" />
-                  WhatsApp
-                </a>
-              </dd>
-            </div>
-
-            <div className="border-t-hairline border-rule pt-5">
-              <dt className="eyebrow">Based in</dt>
-              <dd className="mt-2.5">
-                <p className="font-sans text-md text-ink">{profile.location}</p>
-                <p className="mt-1.5 max-w-[28rem] text-base text-slate">
-                  {profile.timezoneNote}
-                </p>
-              </dd>
-            </div>
-
-            <div className="border-t-hairline border-rule pt-5">
-              <dt className="eyebrow">Elsewhere</dt>
-              <dd className="mt-2.5 flex flex-wrap gap-x-6 gap-y-2">
-                {profile.social.map((link) => (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    target="_blank"
-                    rel={link.isMe ? 'me noopener noreferrer' : 'noopener noreferrer'}
-                    className="group inline-flex items-center gap-1 font-sans text-md text-ink underline decoration-rule underline-offset-[6px] transition-colors hover:decoration-ink"
-                  >
-                    {link.label}
-                    <ArrowUpRight className="text-meta transition-colors group-hover:text-ink" />
+            {/* Reflects the package chosen above. */}
+            {selected && (
+              <div className="mt-7 flex flex-col gap-4 rounded-card border-highlight border-ink bg-card p-5 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <p className="eyebrow">You selected</p>
+                  <p className="mt-1.5 font-sans text-lg font-medium tracking-[-0.015em] text-ink">
+                    {selected.name}
+                  </p>
+                </div>
+                <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
+                  <a href={packageMailto(selected)} className="btn-primary group px-5 py-3">
+                    Email about this
+                    <ArrowRight className="transition-transform duration-200 group-hover:translate-x-0.5" />
                   </a>
-                ))}
-              </dd>
-            </div>
-          </dl>
+                  <a
+                    href={packageWhatsapp(selected)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-secondary px-5 py-3"
+                  >
+                    <WhatsApp className="text-[#25D366]" />
+                    WhatsApp
+                  </a>
+                </div>
+              </div>
+            )}
 
-          {/* Resume, given its own panel so it is impossible to miss. */}
-          <aside className="reveal h-fit rounded-card border-hairline border-rule bg-card p-6">
-            <p className="eyebrow">Resume</p>
-            <p className="mt-2.5 text-base text-slate">
-              The full record — roles, stack and projects — as a PDF.
-            </p>
-            <a
-              href={profile.resumePath}
-              download={profile.resumeFileName}
-              className="btn-primary mt-5 w-full py-3"
-            >
-              <Download />
-              Download resume
-            </a>
-            <p className="mt-3 text-center font-mono text-xs text-meta">PDF · updated regularly</p>
-          </aside>
+            {/* The direct lines, for anyone who would rather not use a button. */}
+            <dl className="reveal mt-6 space-y-4 lg:mt-8 lg:space-y-5">
+              <div className="border-t-hairline border-rule pt-4">
+                <dt className="eyebrow">Email</dt>
+                <dd className="mt-2 flex flex-wrap items-center gap-3">
+                  <a
+                    href={generalMailto()}
+                    className="font-sans text-lg text-ink underline decoration-rule underline-offset-[6px] transition-colors hover:decoration-ink"
+                  >
+                    {profile.email}
+                  </a>
+                  <CopyButton value={profile.email} label="Copy email address" />
+                </dd>
+              </div>
+
+              <div className="border-t-hairline border-rule pt-4">
+                <dt className="eyebrow">Phone</dt>
+                <dd className="mt-2 flex flex-wrap items-center gap-3">
+                  <a
+                    href={`tel:${profile.phone.replace(/\s+/g, '')}`}
+                    className="font-mono text-md text-ink underline decoration-rule underline-offset-[6px] transition-colors hover:decoration-ink"
+                  >
+                    {profile.phone}
+                  </a>
+                  <CopyButton value={profile.phone} label="Copy phone number" />
+                  <a
+                    href={generalWhatsapp()}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-secondary gap-1.5 px-3 py-2 font-mono text-xs"
+                  >
+                    <WhatsApp className="text-[#25D366]" />
+                    WhatsApp
+                  </a>
+                </dd>
+              </div>
+            </dl>
+          </div>
+
+          {/* Right column: the resume panel, then the reference details that
+              used to sit under the phone number. Together they run to roughly
+              the height of the left column. */}
+          <div className="flex flex-col gap-5 lg:gap-6">
+            <aside className="reveal rounded-card border-hairline border-rule bg-card p-5 sm:p-6">
+              <p className="eyebrow">Resume</p>
+              <p className="mt-2 text-sm text-slate sm:text-base">
+                The full record — roles, stack and projects — as a PDF.
+              </p>
+              <a
+                href={profile.resumePath}
+                download={profile.resumeFileName}
+                className="btn-primary mt-4 w-full py-3 sm:mt-5"
+              >
+                <Download />
+                Download resume
+              </a>
+              <p className="mt-2.5 text-center font-mono text-xs text-meta">
+                PDF · updated regularly
+              </p>
+            </aside>
+
+            <dl className="reveal grid grid-cols-2 gap-x-6 lg:block lg:space-y-5">
+              <div className="border-t-hairline border-rule pt-4">
+                <dt className="eyebrow">Based in</dt>
+                <dd className="mt-2">
+                  <p className="font-sans text-md text-ink">{profile.location}</p>
+                  <p className="mt-1.5 text-base text-slate">{profile.timezoneNote}</p>
+                </dd>
+              </div>
+
+              <div className="border-t-hairline border-rule pt-4">
+                <dt className="eyebrow">Elsewhere</dt>
+                <dd className="mt-2 flex flex-wrap gap-x-5 gap-y-2">
+                  {profile.social.map((link) => (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      target="_blank"
+                      rel={link.isMe ? 'me noopener noreferrer' : 'noopener noreferrer'}
+                      className="group inline-flex items-center gap-1 font-sans text-md text-ink underline decoration-rule underline-offset-[6px] transition-colors hover:decoration-ink"
+                    >
+                      {link.label}
+                      <ArrowUpRight className="text-meta transition-colors group-hover:text-ink" />
+                    </a>
+                  ))}
+                </dd>
+              </div>
+            </dl>
+          </div>
         </div>
       </div>
     </section>

@@ -2,9 +2,9 @@
  * How an engagement actually runs, start to finish.
  *
  * This section answers the question that stops most people emailing: "what
- * happens after I click Select?" It sits below the credentials because by
- * that point a visitor is convinced you can do the work and is deciding
- * whether to risk starting it.
+ * happens after I click Select?" It sits below the record of past work
+ * because by that point a visitor is convinced you can do the work and is
+ * deciding whether to risk starting it.
  *
  * Keep it to four steps. Five reads as bureaucracy; three looks like you have
  * not thought it through.

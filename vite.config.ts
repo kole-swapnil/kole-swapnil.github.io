@@ -25,6 +25,17 @@ export default defineConfig({
 
   plugins: [react()],
 
+  server: {
+    port: 5175,
+    /**
+     * Fail loudly if 5175 is taken rather than silently starting on 5176.
+     * A pinned port is usually pinned for a reason — a bookmark, a tunnel, a
+     * callback URL — and a server that quietly moves defeats that. Set this to
+     * false if you would rather it just find a free port.
+     */
+    strictPort: true,
+  },
+
   build: {
     target: 'es2020',
     cssTarget: 'chrome100',

@@ -103,23 +103,9 @@ async function writeJpg(outJpg, opts) {
 
 console.log('Generating placeholder images…')
 
-// Headshot — 4:5 portrait, dark so it sits correctly on the ink hero band.
-await writeJpg(join(imagesDir, 'swapnil.jpg'), {
-  width: 1200,
-  height: 1500,
-  title: 'Headshot',
-  spec: '1200 × 1500 · 4:5 portrait',
-  dark: true,
-})
-
-// Square crop, used by the share card and the JSON-LD Person image.
-await writeJpg(join(imagesDir, 'swapnil-square.jpg'), {
-  width: 800,
-  height: 800,
-  title: 'Headshot · square',
-  spec: '800 × 800 · 1:1',
-  dark: true,
-})
+// The headshot is a real photograph now — swapnil.jpg and swapnil-square.jpg
+// are deliberately NOT generated here, so re-running this script cannot
+// overwrite it.
 
 // Project screenshots — 16:10 landscape.
 const projectShots = [

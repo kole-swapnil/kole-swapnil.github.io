@@ -21,9 +21,9 @@ export function Testimonials() {
   if (testimonials.length === 0) return null
 
   return (
-    <section aria-labelledby="testimonials-heading" className="bg-surface pb-section">
+    <section aria-labelledby="testimonials-heading" className="screen screen-body">
       <div className="shell" ref={revealRef}>
-        <div className="reveal border-t-hairline border-rule pt-section">
+        <div className="reveal">
           <header className="max-w-prose">
             <p className="eyebrow">In their words</p>
             <h2 id="testimonials-heading" className="mt-3 text-3xl sm:text-4xl">
@@ -32,14 +32,14 @@ export function Testimonials() {
           </header>
         </div>
 
-        <div className="mt-10 gap-5 lg:mt-12 lg:columns-2 lg:gap-6">
+        <div className="mt-8 gap-5 lg:mt-12 lg:columns-2 lg:gap-6">
           {testimonials.map((testimonial) => {
             const project = projects.find((p) => p.slug === testimonial.projectSlug)
 
             return (
               <figure
                 key={testimonial.id}
-                className="reveal mb-5 break-inside-avoid rounded-card border-hairline border-rule bg-card p-6 sm:p-7 lg:mb-6"
+                className="reveal mb-4 break-inside-avoid rounded-card border-hairline border-rule bg-card p-5 sm:p-7 lg:mb-6"
               >
                 {testimonial.placeholder && (
                   <span className="mb-3 inline-block rounded-pill border-hairline border-rule px-2 py-0.5 font-mono text-label uppercase tracking-[0.09em] text-meta">
@@ -47,7 +47,7 @@ export function Testimonials() {
                   </span>
                 )}
 
-                <blockquote className="text-lg text-ink">“{testimonial.quote}”</blockquote>
+                <blockquote className="text-base text-ink sm:text-lg">“{testimonial.quote}”</blockquote>
 
                 <figcaption className="mt-5 flex items-center gap-3 border-t-hairline border-rule pt-5">
                   <Avatar

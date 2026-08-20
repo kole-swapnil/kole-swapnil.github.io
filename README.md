@@ -21,7 +21,7 @@ pinned in `.nvmrc`, so:
 ```bash
 nvm use          # reads .nvmrc → 22.12.0
 npm install
-npm run dev      # http://localhost:5173
+npm run dev      # http://localhost:5175
 ```
 
 > If you skip `nvm use` you will get the Homebrew Node on your `PATH`
@@ -73,7 +73,6 @@ limit the design assumes.
 | `src/data/projects.ts` | Selected work |
 | `src/data/experience.ts` | Employment history |
 | `src/data/skills.ts` | Skill groups |
-| `src/data/publications.ts` | Papers, education, positions held |
 | `src/data/testimonials.ts` | Testimonials (delete every entry to hide the section) |
 | `src/data/metrics.ts` | The proof numbers in the hero |
 | `src/data/process.ts` | The four "How I work" stages and the note under them |
@@ -143,13 +142,13 @@ from the nav, the hero and the contact section; the filename is set once in
 
 ### Swap the headshot
 
-Replace `public/images/swapnil.jpg` — **1200×1500, 4:5 portrait**. It sits on
-the near-black hero band, so a dark or neutral background suits it better than
-a bright studio white. Also replace `public/images/swapnil-square.jpg`
-(800×800) which is used by the JSON-LD `Person` image.
+Replace `public/images/swapnil.jpg` — **1000×1000, square**. The hero renders
+it as a small square tile, so anything else gets centre-cropped. Also replace
+`public/images/swapnil-square.jpg` (800×800), used by the share card and the
+JSON-LD `Person` image.
 
-The placeholders are at the exact final dimensions, so dropping the real files
-in causes no layout shift and needs no code change.
+Both are real photographs now, and `scripts/generate-placeholders.mjs` no
+longer writes to either path, so re-running it cannot overwrite them.
 
 ### Set the production domain
 
@@ -302,12 +301,41 @@ cost you more conversions than the analytics are worth.
 
 ---
 
+## One section, one screen
+
+Every section of the home page occupies exactly one viewport on desktop, so
+scrolling moves screen by screen. Three pieces make that work, all in
+`src/styles/index.css`:
+
+- `.screen` — `min-h-svh`, a column flex box, and `scroll-snap-align: start`.
+  `min-height` rather than `height`, so a section that genuinely needs more
+  room grows instead of clipping.
+- `.screen-body` — the light-surface variant: content centred in the leftover
+  height, the fixed nav's height reserved at the top, viewport-relative
+  padding so a short window loses air before it loses content.
+- `.screen-last` — the contact section, which shares its screen with the
+  footer, so it subtracts `--footer-h`. **If the footer gains or loses a line,
+  update `--footer-h`** or the last screen stops landing exactly.
+
+Snapping is `proximity`, not `mandatory`: it settles onto a screen when a
+scroll ends near one, and never fights a scroll in progress.
+
+Below 830px of viewport height a `short:` Tailwind variant
+(`tailwind.config.js`) steps the type scale down one notch on the densest
+screens. That is what makes the packages, workshops and experience screens fit
+a 13" laptop without cutting anything.
+
+If you add content to a section, re-check that it still fits. The screens with
+the least headroom are packages, workshops, experience and freelance.
+
+---
+
 ## Project layout
 
 ```
 src/
   components/     Nav, Footer, Layout, Seo, CopyButton, icons
-  sections/       One file per home page section
+  sections/       One file per home page section (some render 2–3 screens)
   pages/          Home, NotFound
   data/           All content — typed, commented, hand-edited
   config/site.ts  Production domain and site metadata
