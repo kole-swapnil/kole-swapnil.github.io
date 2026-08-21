@@ -155,7 +155,7 @@ export function Contact({ selectedPackageId }: { selectedPackageId: string | nul
               </p>
             </aside>
 
-            <dl className="reveal grid grid-cols-2 gap-x-6 lg:block lg:space-y-5">
+            <dl className="reveal space-y-4 lg:space-y-5">
               <div className="border-t-hairline border-rule pt-4">
                 <dt className="eyebrow">Based in</dt>
                 <dd className="mt-2">
@@ -164,7 +164,7 @@ export function Contact({ selectedPackageId }: { selectedPackageId: string | nul
                 </dd>
               </div>
 
-              <div className="border-t-hairline border-rule pt-4">
+              <div className="hidden border-t-hairline border-rule pt-4 lg:block">
                 <dt className="eyebrow">Elsewhere</dt>
                 <dd className="mt-2 flex flex-wrap gap-x-5 gap-y-2">
                   {profile.social.map((link) => (

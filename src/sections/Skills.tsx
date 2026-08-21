@@ -26,10 +26,12 @@ export function Skills() {
         </div>
 
         <div className="mt-10 lg:mt-12">
+          {/* Three to a swipe: ten groups one at a time is ten swipes. */}
           <Rail
             label="Skill groups"
             count={skillGroups.length}
-            className="lg:grid-cols-3 lg:gap-x-12 lg:gap-y-8"
+            perView={3}
+            className="rail-stacked lg:grid-cols-3 lg:gap-x-12 lg:gap-y-8"
           >
             {skillGroups.map((group) => (
               <li key={group.id} className="reveal border-t-hairline border-rule pt-5">

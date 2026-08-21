@@ -245,10 +245,41 @@
     @apply w-[86%] shrink-0 snap-center;
   }
 
+  /*
+   * Three cards to a swipe instead of one.
+   *
+   * Ten skill groups one-per-swipe is ten swipes, which is more work than
+   * reading them. Stacked three deep it is four stops, and each stop shows a
+   * coherent bundle of the stack rather than a single line item.
+   *
+   * `grid-auto-flow: column` over three fixed rows is what does it: items fill
+   * downwards, then start a new column, so the horizontal scroll moves a whole
+   * bundle at a time. Snapping still lands on a column because the three items
+   * in one share an x position.
+   */
+  .rail-stacked {
+    @apply grid gap-x-4 gap-y-6;
+    grid-auto-flow: column;
+    grid-template-rows: repeat(3, min-content);
+    grid-auto-columns: 86%;
+  }
+
+  .rail-stacked > * {
+    width: auto;
+  }
+
   /* From `lg` the caller's own grid takes over and the rail stops existing. */
   @media (min-width: 1024px) {
     .rail {
       @apply mx-0 grid gap-6 overflow-visible px-0 pb-0;
+    }
+
+    /* Defined after `.rail` so it wins, and reset here so the caller's
+       `lg:grid-cols-*` is not fighting a column-flow grid. */
+    .rail-stacked {
+      grid-auto-flow: row;
+      grid-template-rows: none;
+      grid-auto-columns: auto;
     }
 
     .rail > * {

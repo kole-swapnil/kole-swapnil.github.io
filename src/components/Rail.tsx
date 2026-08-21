@@ -30,18 +30,26 @@ export function Rail({
   children,
   label,
   count,
+  perView = 1,
   className = '',
 }: {
   children: ReactNode
   /** Describes the rail to a screen reader, e.g. "Packages". */
   label: string
-  /** Number of cards, for the dots. */
+  /** Number of cards. */
   count: number
+  /**
+   * Cards visible per swipe. Above 1 the dots count stops rather than cards —
+   * see `.rail-stacked` in index.css, which is what puts more than one card
+   * in a column.
+   */
+  perView?: number
   /** Grid classes applied from `lg` up, e.g. "lg:grid-cols-3". */
   className?: string
 }) {
   const railRef = useRef<HTMLUListElement>(null)
   const [active, setActive] = useState(0)
+  const stops = Math.ceil(count / perView)
 
   useEffect(() => {
     const rail = railRef.current
@@ -51,7 +59,7 @@ export function Rail({
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          if (entry.isIntersecting) setActive(cards.indexOf(entry.target))
+          if (entry.isIntersecting) setActive(Math.floor(cards.indexOf(entry.target) / perView))
         }
       },
       /* `root: rail` measures against the rail's own scrollport, and 0.6 means
@@ -62,7 +70,7 @@ export function Rail({
 
     for (const card of cards) observer.observe(card)
     return () => observer.disconnect()
-  }, [count])
+  }, [count, perView])
 
   return (
     <>
@@ -78,9 +86,9 @@ export function Rail({
 
       {/* Position, not control. Hidden from assistive tech and from `lg` up,
           where every card is visible at once and there is nothing to report. */}
-      {count > 1 && (
+      {stops > 1 && (
         <div aria-hidden="true" className="mt-4 flex items-center gap-2 lg:hidden">
-          {Array.from({ length: count }, (_, index) => (
+          {Array.from({ length: stops }, (_, index) => (
             <span
               key={index}
               className={[
@@ -90,7 +98,7 @@ export function Rail({
             />
           ))}
           <span className="ml-1 font-mono text-xs text-meta">
-            {active + 1}/{count}
+            {active + 1}/{stops}
           </span>
         </div>
       )}
