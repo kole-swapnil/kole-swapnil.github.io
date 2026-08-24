@@ -26,19 +26,20 @@ export function Skills() {
         </div>
 
         <div className="mt-10 lg:mt-12">
-          {/* Three to a swipe: ten groups one at a time is ten swipes. */}
+          {/* Five to a swipe: the ten groups land as two even columns of
+              five, so the whole stack is one swipe rather than ten. */}
           <Rail
             label="Skill groups"
             count={skillGroups.length}
-            perView={3}
-            className="rail-stacked lg:grid-cols-3 lg:gap-x-12 lg:gap-y-8"
+            perView={5}
+            className="rail-stacked [--rail-rows:5] lg:grid-cols-3 lg:gap-x-12 lg:gap-y-8"
           >
             {skillGroups.map((group) => (
-              <li key={group.id} className="reveal border-t-hairline border-rule pt-5">
+              <li key={group.id} className="reveal border-t-hairline border-rule pt-4 lg:pt-5">
                 <p className="font-sans text-base font-semibold tracking-[-0.01em] text-ink">
                   {group.name}
                 </p>
-                <p className="mt-2.5 text-base leading-relaxed text-slate">
+                <p className="mt-2 text-base leading-relaxed text-slate lg:mt-2.5">
                   {group.items.join(', ')}
                 </p>
               </li>

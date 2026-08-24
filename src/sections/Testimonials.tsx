@@ -1,6 +1,7 @@
 import { testimonials } from '@/data/testimonials'
 import { projects } from '@/data/projects'
 import { useReveal } from '@/hooks/useReveal'
+import { Rail } from '@/components/Rail'
 import { ArrowUpRight } from '@/components/Icons'
 
 /**
@@ -32,14 +33,15 @@ export function Testimonials() {
           </header>
         </div>
 
-        <div className="mt-8 gap-5 lg:mt-12 lg:columns-2 lg:gap-6">
+        <div className="mt-8 short:mt-6 lg:mt-12">
+          <Rail label="What clients say" count={testimonials.length} className="lg:grid-cols-2">
           {testimonials.map((testimonial) => {
             const project = projects.find((p) => p.slug === testimonial.projectSlug)
 
             return (
               <figure
                 key={testimonial.id}
-                className="reveal mb-4 break-inside-avoid rounded-card border-hairline border-rule bg-card p-5 sm:p-7 lg:mb-6"
+                className="reveal flex flex-col rounded-card border-hairline border-rule bg-card p-5 short:p-4 sm:p-6"
               >
                 {testimonial.placeholder && (
                   <span className="mb-3 inline-block rounded-pill border-hairline border-rule px-2 py-0.5 font-mono text-label uppercase tracking-[0.09em] text-meta">
@@ -47,9 +49,9 @@ export function Testimonials() {
                   </span>
                 )}
 
-                <blockquote className="text-base text-ink sm:text-lg">“{testimonial.quote}”</blockquote>
+                <blockquote className="pb-5 text-base text-ink short:pb-4 short:text-base sm:text-lg">“{testimonial.quote}”</blockquote>
 
-                <figcaption className="mt-5 flex items-center gap-3 border-t-hairline border-rule pt-5">
+                <figcaption className="mt-auto flex items-center gap-3 border-t-hairline border-rule pt-4">
                   <Avatar
                     src={testimonial.avatar}
                     name={testimonial.author}
@@ -70,9 +72,13 @@ export function Testimonials() {
                         testimonial.author
                       )}
                     </p>
-                    <p className="mt-0.5 font-mono text-xs text-meta">
-                      {testimonial.role}, {testimonial.company}
-                    </p>
+                    {/* Title and organisation are both optional, so this
+                        prints whichever exist rather than a stray comma. */}
+                    {(testimonial.role || testimonial.company) && (
+                      <p className="mt-0.5 font-mono text-xs text-meta">
+                        {[testimonial.role, testimonial.company].filter(Boolean).join(', ')}
+                      </p>
+                    )}
                     {project && (
                       <p className="mt-1 font-mono text-xs text-meta">
                         on{' '}
@@ -89,6 +95,7 @@ export function Testimonials() {
               </figure>
             )
           })}
+          </Rail>
         </div>
       </div>
     </section>

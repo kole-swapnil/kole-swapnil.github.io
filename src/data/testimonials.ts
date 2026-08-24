@@ -21,10 +21,17 @@ export interface Testimonial {
   quote: string
   /** Who said it. */
   author: string
-  /** Their job title. ~40 chars. */
-  role: string
-  /** Their company. ~30 chars. */
-  company: string
+  /**
+   * Their job title. ~40 chars.
+   *
+   * Optional on purpose: a real testimonial often arrives without one, and
+   * the honest fix is to print the name and the organisation rather than
+   * invent a title for a named person. The caption falls back to just the
+   * company, and then to just the name.
+   */
+  role?: string
+  /** Their organisation. ~30 chars. */
+  company?: string
   /**
    * Optional square avatar under `public/images/testimonials/`.
    * 400×400 minimum, JPG or WebP. When absent an initials monogram renders.
@@ -45,24 +52,48 @@ export interface Testimonial {
   placeholder?: boolean
 }
 
+/**
+ * Four real testimonials, written up from what each person said rather than
+ * copied verbatim from something they wrote.
+ *
+ * TODO(content): job titles are missing for all four, and Atiya Ahmed's
+ * organisation is unconfirmed — the caption prints the organisation alone
+ * where there is no title. Add `linkedinUrl` wherever you have it; it renders
+ * a verify link, which is worth more on a testimonial than anything else here.
+ *
+ * TODO(content): each person should see and approve the exact wording before
+ * this ships, since it publishes under their name.
+ */
 export const testimonials: Testimonial[] = [
-  // TODO(content): replace both entries with real testimonials — see CONTENT-NEEDED.md
   {
-    id: 'placeholder-1',
+    id: 'selcuk-getfi',
     quote:
-      'Sample text, not a real quote. This entry exists so the layout can be reviewed with content of a realistic length in it. The second placeholder below is deliberately much shorter, because real testimonials arrive at wildly different lengths and the design has to hold both without looking broken.',
-    author: 'Placeholder Name',
-    role: 'Chief Technology Officer',
-    company: 'Placeholder Co.',
-    projectSlug: 'domx',
-    placeholder: true,
+      'Swapnil built GetFi end to end — front end, back end, all of it. He took the project from nothing and shipped every feature we asked for inside the timeline he gave us. The ownership is what I would point to: I never had to chase him for a status update or tell him what came next.',
+    author: 'Selcuk Casur',
+    company: 'GetFi',
+    projectSlug: 'getfi',
   },
   {
-    id: 'placeholder-2',
-    quote: 'Sample text, not a real quote. Short on purpose.',
-    author: 'Placeholder Name',
-    role: 'Founder',
-    company: 'Placeholder Ltd.',
-    placeholder: true,
+    id: 'nick-blockx',
+    quote:
+      'Swapnil owned everything we built around BlockX. He did not wait to be told what to improve — he would come back with a better approach than the one we had asked for, and explain it to stakeholders who were not engineers. He was there building the company from the ground up.',
+    author: 'Nick Majumdar',
+    company: 'BlockX',
+    projectSlug: 'blockx-staking',
+  },
+  {
+    id: 'atiya-distributed-doctor',
+    quote:
+      'The MVP Swapnil built is what turned my proposal into a published paper. He took an idea that existed only on paper and made it something I could stand in front of people and demo — which is the difference between describing research and showing it.',
+    author: 'Atiya Ahmed',
+    projectSlug: 'distributed-doctor',
+  },
+  {
+    id: 'praveen-acropolis',
+    quote:
+      'Five days, from the fundamentals through to the advanced material, and the students stayed with him the whole way. What told me most was that the faculty sat in and stayed too — several of us left understanding blockchain properly for the first time.',
+    author: 'Praveen Bhanodia',
+    role: 'Faculty',
+    company: 'Acropolis Institute',
   },
 ]

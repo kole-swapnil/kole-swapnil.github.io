@@ -105,7 +105,7 @@ Everything invented that is in the code **right now**. Find them all with `grep 
 |---|---|---|---|
 | 1 | Package durations | `src/data/packages.ts` | Assumed, not confirmed. Now the headline figure on each card, since prices are hidden. |
 | 2 | Hero metric figures | `src/data/metrics.ts` | **Not invented** — all four are CV-supported. Conservative stand-ins for stronger numbers. |
-| 3 | Two testimonials | `src/data/testimonials.ts` | `placeholder: true`; renders a visible "Placeholder" badge. |
+| 3 | Testimonial job titles | `src/data/testimonials.ts` | Four real quotes, written up from what each person said. Titles missing for all four; Atiya Ahmed's organisation unconfirmed. Each person should approve the wording before launch. |
 | 4 | Three project screenshots | `public/images/projects/*.jpg` | Generated placeholders at final 16:10. `distributed-doctor` and `process-lineage` intentionally have **no** image and use the typographic fallback. |
 | 5 | Availability month "September 2026" | `src/data/profile.ts` | Assumed, not confirmed. |
 | 6 | Production domain | `src/config/site.ts` | Defaulted to the existing GitHub Pages URL. |

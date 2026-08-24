@@ -246,21 +246,24 @@
   }
 
   /*
-   * Three cards to a swipe instead of one.
+   * Several cards to a swipe instead of one.
    *
    * Ten skill groups one-per-swipe is ten swipes, which is more work than
-   * reading them. Stacked three deep it is four stops, and each stop shows a
+   * reading them. Stacked five deep it is two stops, and each stop shows a
    * coherent bundle of the stack rather than a single line item.
    *
-   * `grid-auto-flow: column` over three fixed rows is what does it: items fill
-   * downwards, then start a new column, so the horizontal scroll moves a whole
-   * bundle at a time. Snapping still lands on a column because the three items
-   * in one share an x position.
+   * `grid-auto-flow: column` over a fixed number of rows is what does it:
+   * items fill downwards, then start a new column, so the horizontal scroll
+   * moves a whole bundle at a time. Snapping still lands on a column because
+   * the items in one share an x position.
+   *
+   * Set the depth with `[--rail-rows:5]` alongside the class, and pass the
+   * same number as `perView` so the dots count stops rather than cards.
    */
   .rail-stacked {
-    @apply grid gap-x-4 gap-y-6;
+    @apply grid gap-x-4 gap-y-4;
     grid-auto-flow: column;
-    grid-template-rows: repeat(3, min-content);
+    grid-template-rows: repeat(var(--rail-rows, 3), min-content);
     grid-auto-columns: 86%;
   }
 
