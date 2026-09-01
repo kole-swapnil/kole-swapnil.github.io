@@ -1,6 +1,8 @@
 import { customEngagement } from '@/data/packages'
 import { services } from '@/data/services'
 import { customMailto } from '@/lib/mailto'
+import { showContact } from '@/data/profile'
+import { SectionLink } from '@/components/SectionLink'
 import { useReveal } from '@/hooks/useReveal'
 import { ArrowRight, ArrowUpRight } from '@/components/Icons'
 import { Rail } from '@/components/Rail'
@@ -50,13 +52,25 @@ export function CustomWork() {
               <p className="font-mono text-label uppercase tracking-[0.09em] text-meta">
                 {customEngagement.priceLabel}
               </p>
-              <a
-                href={customMailto()}
-                className="btn-secondary group mt-3 w-full py-3 lg:w-auto lg:px-5"
-              >
-                {customEngagement.ctaLabel}
-                <ArrowRight className="transition-transform duration-200 group-hover:translate-x-0.5" />
-              </a>
+              {/* Opens a mail client while contact details are published, and
+                  otherwise sends the visitor down to the contact section. */}
+              {showContact ? (
+                <a
+                  href={customMailto()}
+                  className="btn-secondary group mt-3 w-full py-3 lg:w-auto lg:px-5"
+                >
+                  {customEngagement.ctaLabel}
+                  <ArrowRight className="transition-transform duration-200 group-hover:translate-x-0.5" />
+                </a>
+              ) : (
+                <SectionLink
+                  id="contact"
+                  className="btn-secondary group mt-3 w-full py-3 lg:w-auto lg:px-5"
+                >
+                  {customEngagement.ctaLabel}
+                  <ArrowRight className="transition-transform duration-200 group-hover:translate-x-0.5" />
+                </SectionLink>
+              )}
             </div>
           </div>
         </div>

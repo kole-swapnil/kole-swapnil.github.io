@@ -1,5 +1,5 @@
-import { profile } from '@/data/profile'
-import { packages } from '@/data/packages'
+import { profile, showContact } from '@/data/profile'
+import { packages, type Package } from '@/data/packages'
 import {
   generalMailto,
   generalWhatsapp,
@@ -21,10 +21,23 @@ import { ArrowRight, ArrowUpRight, Download, WhatsApp } from '@/components/Icons
  * When a package has been selected upstream, that choice is shown here so the
  * select button is not a dead end — the visitor lands on a section that
  * already reflects what they picked.
+ *
+ * Two versions, chosen by `showContact` in src/data/profile.ts. The open one
+ * is the real section; the closed one keeps the screen and the selection but
+ * publishes no address, phone number, profile or resume. Splitting them into
+ * two components rather than threading a dozen conditionals through one keeps
+ * the open version readable, which is the version that ships most of the time.
  */
 export function Contact({ selectedPackageId }: { selectedPackageId: string | null }) {
-  const revealRef = useReveal<HTMLDivElement>({ stagger: 70 })
   const selected = packages.find((pkg) => pkg.id === selectedPackageId)
+
+  return showContact ? <ContactOpen selected={selected} /> : <ContactClosed selected={selected} />
+}
+
+/* -------------------------------------------------------------------------- */
+
+function ContactOpen({ selected }: { selected: Package | undefined }) {
+  const revealRef = useReveal<HTMLDivElement>({ stagger: 70 })
 
   return (
     <section id="contact" className="screen screen-body screen-last">
@@ -189,6 +202,79 @@ export function Contact({ selectedPackageId }: { selectedPackageId: string | nul
   )
 }
 
+/* -------------------------------------------------------------------------- */
+
+/**
+ * The same screen with every channel withheld.
+ *
+ * The section is kept rather than removed: the nav tracks `#contact`, the
+ * package buttons scroll here, and a stranger who reaches the bottom of a
+ * portfolio still needs to be told what happens next. So it says plainly that
+ * the details are withheld and where the reply will come from, instead of
+ * showing a heading over an empty column.
+ *
+ * The selection card stays too, minus its buttons — the choice a visitor made
+ * two screens up is worth carrying, and it gives them something concrete to
+ * quote in the first message.
+ */
+function ContactClosed({ selected }: { selected: Package | undefined }) {
+  const revealRef = useReveal<HTMLDivElement>({ stagger: 70 })
+
+  return (
+    <section id="contact" className="screen screen-body screen-last">
+      <div className="shell" ref={revealRef}>
+        <div className="max-w-[38rem]">
+          <div className="reveal">
+            <p className="eyebrow">Contact</p>
+            <h2 className="mt-3 text-3xl sm:text-4xl">Tell me what you are building</h2>
+            <p className="mt-3.5 text-lg text-slate">
+              Direct contact details are not published on this version of the site. Message me
+              wherever you found it and you will have a reply{' '}
+              {profile.availability.responseTime}.
+            </p>
+          </div>
+
+          {selected && (
+            <div className="reveal mt-7 rounded-card border-highlight border-ink bg-card p-5">
+              <p className="eyebrow">You selected</p>
+              <p className="mt-1.5 font-sans text-lg font-medium tracking-[-0.015em] text-ink">
+                {selected.name}
+              </p>
+              <p className="mt-2 text-sm text-slate">
+                Quote this in your first message and we can start from there.
+              </p>
+            </div>
+          )}
+
+          <dl className="reveal mt-7 space-y-4 lg:mt-8 lg:space-y-5">
+            <div className="border-t-hairline border-rule pt-4">
+              <dt className="eyebrow">Based in</dt>
+              <dd className="mt-2">
+                <p className="font-sans text-md text-ink">{profile.location}</p>
+                <p className="mt-1.5 text-base text-slate">{profile.timezoneNote}</p>
+              </dd>
+            </div>
+
+            <div className="border-t-hairline border-rule pt-4">
+              <dt className="eyebrow">Availability</dt>
+              <dd className="mt-2">
+                <p className="font-sans text-md text-ink">
+                  {profile.availability.availableFrom
+                    ? `Available from ${profile.availability.availableFrom}`
+                    : 'Not taking new work'}
+                </p>
+                <p className="mt-1.5 text-base text-slate">
+                  Booking conversations now for work starting then.
+                </p>
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 /* ---------------------------------------------------------------------------
  * If you ever want a real form
  * ---------------------------------------------------------------------------
@@ -204,6 +290,9 @@ export function Contact({ selectedPackageId }: { selectedPackageId: string | nul
  *   4. Test the failure path: no network, and a rejected submission. A form
  *      that silently swallows a message is worse than no form at all, which
  *      is the reason the site ships without one.
+ *
+ * A form would also be the way to keep a way in while `showContact` is off,
+ * since the endpoint holds the address rather than the page.
  *
  * function ContactForm() {
  *   const [state, setState] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')

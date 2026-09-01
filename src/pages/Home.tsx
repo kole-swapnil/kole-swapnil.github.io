@@ -10,7 +10,7 @@ import { Skills } from '@/sections/Skills'
 import { Process } from '@/sections/Process'
 import { Testimonials } from '@/sections/Testimonials'
 import { Contact } from '@/sections/Contact'
-import { profile } from '@/data/profile'
+import { profile, showContact } from '@/data/profile'
 import { skillGroups } from '@/data/skills'
 import { absoluteUrl, siteDescription } from '@/config/site'
 
@@ -60,15 +60,26 @@ export function Home() {
   )
 }
 
-/** JSON-LD Person schema — job title, location and verified social profiles. */
+/**
+ * JSON-LD Person schema — job title, location and verified social profiles.
+ *
+ * The contact properties are spread in rather than written inline: structured
+ * data is exactly where a withheld address would otherwise still be published,
+ * in a form a machine reads and a person never sees.
+ */
 function personSchema(): Record<string, unknown> {
   return {
     '@context': 'https://schema.org',
     '@type': 'Person',
     name: profile.name,
     jobTitle: profile.role,
-    email: `mailto:${profile.email}`,
-    telephone: profile.phone,
+    ...(showContact
+      ? {
+          email: `mailto:${profile.email}`,
+          telephone: profile.phone,
+          sameAs: profile.social.map((link) => link.href),
+        }
+      : {}),
     url: absoluteUrl('/'),
     image: absoluteUrl('/images/swapnil-square.jpg'),
     address: {
@@ -76,7 +87,6 @@ function personSchema(): Record<string, unknown> {
       addressLocality: 'Hyderabad',
       addressCountry: 'IN',
     },
-    sameAs: profile.social.map((link) => link.href),
     knowsAbout: skillGroups.flatMap((group) => group.items).slice(0, 24),
   }
 }

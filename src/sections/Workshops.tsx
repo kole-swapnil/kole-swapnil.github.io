@@ -6,10 +6,11 @@ import {
 } from '@/data/workshops'
 import { courses, courseStats } from '@/data/courses'
 import { showPricing } from '@/data/packages'
-import { profile } from '@/data/profile'
+import { profile, showContact } from '@/data/profile'
 import { whatsappHref } from '@/lib/mailto'
 import { useReveal } from '@/hooks/useReveal'
 import { Rail } from '@/components/Rail'
+import { SectionLink } from '@/components/SectionLink'
 import { ArrowRight, ArrowUpRight, Check, WhatsApp } from '@/components/Icons'
 
 /**
@@ -131,20 +132,31 @@ export function Workshops() {
                 {showPricing ? workshopOffer.priceNote : 'Pricing on enquiry'}
               </p>
 
+              {/* Two prefilled channels while contact details are published;
+                  one link to the contact section when they are withheld. */}
               <div className="mt-4 flex w-full flex-col gap-2 sm:flex-row lg:flex-col">
-                <a href={enquiry} className="btn-primary group py-2.5 sm:py-3">
-                  Enquire about a workshop
-                  <ArrowRight className="transition-transform duration-200 group-hover:translate-x-0.5" />
-                </a>
-                <a
-                  href={whatsapp}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-secondary py-2.5 sm:py-3"
-                >
-                  <WhatsApp className="text-[#25D366]" />
-                  WhatsApp
-                </a>
+                {showContact ? (
+                  <>
+                    <a href={enquiry} className="btn-primary group py-2.5 sm:py-3">
+                      Enquire about a workshop
+                      <ArrowRight className="transition-transform duration-200 group-hover:translate-x-0.5" />
+                    </a>
+                    <a
+                      href={whatsapp}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-secondary py-2.5 sm:py-3"
+                    >
+                      <WhatsApp className="text-[#25D366]" />
+                      WhatsApp
+                    </a>
+                  </>
+                ) : (
+                  <SectionLink id="contact" className="btn-primary group py-2.5 sm:py-3">
+                    Enquire about a workshop
+                    <ArrowRight className="transition-transform duration-200 group-hover:translate-x-0.5" />
+                  </SectionLink>
+                )}
               </div>
             </div>
           </div>

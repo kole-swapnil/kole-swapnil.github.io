@@ -1,5 +1,6 @@
 import { packages, pricingNote, showPricing, type Package } from '@/data/packages'
 import { formatPrice, packageMailto } from '@/lib/mailto'
+import { showContact } from '@/data/profile'
 import { useReveal } from '@/hooks/useReveal'
 import { ArrowRight, Check } from '@/components/Icons'
 import { Rail } from '@/components/Rail'
@@ -54,6 +55,16 @@ export function Packages({ onSelect }: { onSelect: (id: string) => void }) {
 
 function PackageCard({ pkg, onSelect }: { pkg: Package; onSelect: (id: string) => void }) {
   const featured = pkg.featured === true
+
+  // Shared by both forms of the select control below so the anchor and the
+  // button cannot drift apart visually.
+  const buttonClass = ['group w-full', featured ? 'btn-primary' : 'btn-secondary', 'py-3'].join(' ')
+  const buttonLabel = (
+    <>
+      Select {pkg.name.toLowerCase()}
+      <ArrowRight className="transition-transform duration-200 group-hover:translate-x-0.5" />
+    </>
+  )
 
   return (
     <article
@@ -139,20 +150,27 @@ function PackageCard({ pkg, onSelect }: { pkg: Package; onSelect: (id: string) =
         </ul>
       </div>
 
-      {/* `mt-auto` pins the button to the bottom so all three line up. */}
+      {/* `mt-auto` pins the button to the bottom so all three line up.
+
+          With contact details published the button opens a mail client with
+          the package already named in the subject. With them withheld it does
+          only the other half of what it always did — record the choice and
+          scroll to the contact section, which then shows it back. Same label,
+          same position, no dead link. */}
       <div className="mt-auto pt-4 short:pt-3">
-        <a
-          href={packageMailto(pkg)}
-          onClick={() => onSelect(pkg.id)}
-          className={[
-            'group w-full',
-            featured ? 'btn-primary' : 'btn-secondary',
-            'py-3',
-          ].join(' ')}
-        >
-          Select {pkg.name.toLowerCase()}
-          <ArrowRight className="transition-transform duration-200 group-hover:translate-x-0.5" />
-        </a>
+        {showContact ? (
+          <a
+            href={packageMailto(pkg)}
+            onClick={() => onSelect(pkg.id)}
+            className={buttonClass}
+          >
+            {buttonLabel}
+          </a>
+        ) : (
+          <button type="button" onClick={() => onSelect(pkg.id)} className={buttonClass}>
+            {buttonLabel}
+          </button>
+        )}
       </div>
     </article>
   )

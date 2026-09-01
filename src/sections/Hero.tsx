@@ -1,4 +1,4 @@
-import { profile } from '@/data/profile'
+import { profile, showResume } from '@/data/profile'
 import { metrics } from '@/data/metrics'
 import { SectionLink } from '@/components/SectionLink'
 import { ArrowRight, ArrowUpRight, Download } from '@/components/Icons'
@@ -59,14 +59,18 @@ export function Hero() {
               See packages and pricing
               <ArrowRight className="transition-transform duration-200 group-hover:translate-x-0.5" />
             </SectionLink>
-            <a
-              href={profile.resumePath}
-              download={profile.resumeFileName}
-              className="btn-on-dark-secondary px-5 py-3"
-            >
-              <Download />
-              Download resume
-            </a>
+            {/* The PDF carries the email address and the profile links, so it
+                goes when they do — see `showResume` in src/data/profile.ts. */}
+            {showResume && (
+              <a
+                href={profile.resumePath}
+                download={profile.resumeFileName}
+                className="btn-on-dark-secondary px-5 py-3"
+              >
+                <Download />
+                Download resume
+              </a>
+            )}
           </div>
         </div>
 

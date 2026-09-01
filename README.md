@@ -139,6 +139,8 @@ it comes from.
 Replace `public/Swapnil_Kole_Resume.pdf`, keeping the filename. It is linked
 from the nav, the hero and the contact section; the filename is set once in
 `profile.ts` (`resumePath`, `resumeFileName`) if you do want to change it.
+Those links, and the file itself, are withheld while `showContact` is off —
+see below.
 
 ### Swap the headshot
 
@@ -161,6 +163,35 @@ export const siteUrl = 'https://swapnilkole.com'   // no trailing slash
 That single constant drives canonical URLs, `sitemap.xml`, `robots.txt` and
 every Open Graph tag. **Set it before the first real deploy**
 or every link preview will point at the wrong host.
+
+### Hide (or restore) the contact details
+
+One line in `src/data/profile.ts`:
+
+```ts
+export const showContact = false   // true to publish them again
+```
+
+**Currently `false`**, for a submission to a site that does not allow direct
+contact details on the page. With it off, the build carries no email address,
+phone number, WhatsApp link or social profile — not in the markup, not in the
+JavaScript bundle, not in the JSON-LD `Person` schema, and not in
+`humans.txt`. The resume PDF goes with them: it has the same email and the
+LinkedIn and GitHub links printed inside it, so `scripts/postbuild.mjs` drops
+it from `dist/` rather than leaving it answering on its own URL. The file in
+`public/` is untouched.
+
+The page keeps its shape either way. Every enquiry button — the three package
+cards, the custom engagement, the workshops — stays exactly where it was and
+scrolls to the contact section instead of opening a mail client, and that
+section says plainly that the details are withheld. Nothing dead-ends.
+
+Two things the switch cannot reach, both worth knowing before submitting:
+
+- The site is served from `kole-swapnil.github.io`, so the domain itself
+  carries the GitHub username. Only a custom domain changes that.
+- The details are still in this repository's git history, and the repository
+  is public.
 
 ### Change availability
 

@@ -11,7 +11,7 @@
  * the same claim, and only the second one matters.
  */
 
-import { readFileSync, writeFileSync, existsSync } from 'node:fs'
+import { readFileSync, writeFileSync, existsSync, rmSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'node:path'
 import { loadTs } from './lib/load-ts.mjs'
@@ -20,7 +20,7 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const dist = join(root, 'dist')
 
 const { siteUrl } = await loadTs(join(root, 'src', 'config', 'site.ts'))
-const { profile } = await loadTs(join(root, 'src', 'data', 'profile.ts'))
+const { profile, showContact } = await loadTs(join(root, 'src', 'data', 'profile.ts'))
 
 const origin = String(siteUrl).replace(/\/$/, '')
 const abs = (path) => `${origin}${path.startsWith('/') ? path : `/${path}`}`
@@ -66,15 +66,35 @@ Sitemap: ${abs('/sitemap.xml')}
 )
 
 /* -------------------------------------------------------------------------- */
+/* Resume PDF                                                                 */
+/* -------------------------------------------------------------------------- */
+
+/**
+ * Everything under public/ is copied into dist wholesale, so removing the
+ * download button is not enough — the PDF would still answer on its own URL,
+ * with the email address and the profile links printed inside it. While
+ * `showContact` is off the file is dropped from the build instead. The source
+ * copy in public/ is untouched; flipping the switch back brings it along.
+ */
+const resume = join(dist, profile.resumeFileName)
+
+if (!showContact && existsSync(resume)) {
+  rmSync(resume)
+  console.log(`[postbuild] removed ${profile.resumeFileName} — showContact is off`)
+}
+
+/* -------------------------------------------------------------------------- */
 /* humans.txt                                                                 */
 /* -------------------------------------------------------------------------- */
 
+// The email line is dropped along with every other channel when `showContact`
+// is off — humans.txt is a plain text file at a well-known path, which makes
+// it the easiest place to leave an address behind by accident.
 writeFileSync(
   join(dist, 'humans.txt'),
   `/* TEAM */
 ${profile.role}: ${profile.name}
-Site: ${profile.email}
-Location: ${profile.location}
+${showContact ? `Site: ${profile.email}\n` : ''}Location: ${profile.location}
 
 /* SITE */
 Standards: HTML5, CSS3, ECMAScript 2022

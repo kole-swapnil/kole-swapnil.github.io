@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { profile } from '@/data/profile'
+import { profile, showResume } from '@/data/profile'
 import { useActiveSection } from '@/hooks/useActiveSection'
 import { SectionLink } from './SectionLink'
 import { Download } from './Icons'
@@ -127,17 +127,19 @@ export function Nav() {
 
         {/* Persistent actions */}
         <div className="hidden items-center gap-2 md:flex">
-          <a
-            href={profile.resumePath}
-            download={profile.resumeFileName}
-            className={[
-              'btn gap-1.5 px-3 text-sm transition-colors',
-              dark ? 'text-dark-muted hover:text-bone' : 'text-meta hover:text-ink',
-            ].join(' ')}
-          >
-            <Download />
-            Resume
-          </a>
+          {showResume && (
+            <a
+              href={profile.resumePath}
+              download={profile.resumeFileName}
+              className={[
+                'btn gap-1.5 px-3 text-sm transition-colors',
+                dark ? 'text-dark-muted hover:text-bone' : 'text-meta hover:text-ink',
+              ].join(' ')}
+            >
+              <Download />
+              Resume
+            </a>
+          )}
           <SectionLink
             id="packages"
             className={dark ? 'btn-on-dark-primary' : 'btn-primary'}
@@ -203,14 +205,16 @@ export function Nav() {
             >
               Start a project
             </SectionLink>
-            <a
-              href={profile.resumePath}
-              download={profile.resumeFileName}
-              className="btn-secondary w-full gap-1.5"
-            >
-              <Download />
-              Download resume
-            </a>
+            {showResume && (
+              <a
+                href={profile.resumePath}
+                download={profile.resumeFileName}
+                className="btn-secondary w-full gap-1.5"
+              >
+                <Download />
+                Download resume
+              </a>
+            )}
           </li>
         </ul>
       </div>

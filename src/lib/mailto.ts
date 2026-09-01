@@ -11,6 +11,11 @@ import type { Package } from '@/data/packages'
  * smaller ask, and it arrives already qualified.
  *
  * Keep the field list short. Every line added is a reason to close the window.
+ *
+ * None of these are called while `showContact` in src/data/profile.ts is off —
+ * the call sites render a link to the contact section instead. The builders
+ * are left intact rather than guarded here so that flipping that switch needs
+ * no change in this file.
  */
 
 const SIGN_OFF = `— Sent from ${profile.name}'s site`

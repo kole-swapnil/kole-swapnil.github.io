@@ -87,6 +87,48 @@ export interface Profile {
   trustedBy: string[]
 }
 
+/**
+ * Whether to publish any way of reaching me.
+ *
+ * Set to false while the site is submitted somewhere that does not allow
+ * direct contact details on the page. With it off the site drops:
+ *
+ *   - the email address, the phone number and every WhatsApp link
+ *   - every social profile (LinkedIn, GitHub, Instagram)
+ *   - the resume PDF, which carries the same email and profile links inside it
+ *   - `email`, `telephone` and `sameAs` from the JSON-LD Person schema
+ *   - the email line in humans.txt, written by scripts/postbuild.mjs
+ *
+ * Every enquiry button stays, but points at the contact section instead of
+ * opening a mail client, so the page keeps its shape and no link dead-ends.
+ * The details themselves are kept in `contactDetails` below rather than
+ * deleted: set this back to true and everything returns, with nothing else
+ * to change.
+ */
+export const showContact = false
+
+/**
+ * The resume PDF has the email address and the LinkedIn and GitHub links
+ * printed inside it, so offering the download would walk straight around the
+ * switch above. It rides on the same flag rather than getting one of its own.
+ */
+export const showResume = showContact
+
+/**
+ * The real contact details, held apart from `profile` so that hiding them is
+ * one boolean rather than a set of deletions to be undone by hand later.
+ */
+const contactDetails = {
+  email: 'swapnilkole7500@gmail.com',
+  phone: '+91 8328217163',
+  whatsapp: '918328217163',
+  social: [
+    { label: 'LinkedIn', href: 'https://linkedin.com/in/swapnil-kole', isMe: true },
+    { label: 'GitHub', href: 'https://github.com/kole-swapnil', isMe: true },
+    { label: 'Instagram', href: 'https://www.instagram.com/car_thruster/', isMe: true },
+  ],
+} satisfies Pick<Profile, 'email' | 'phone' | 'whatsapp' | 'social'>
+
 export const profile: Profile = {
   name: 'Swapnil Kole',
   role: 'Senior Software Engineer',
@@ -101,9 +143,11 @@ export const profile: Profile = {
   timezoneNote:
     'I work with clients across time zones — my last role was a US company, fully remote.',
 
-  email: 'swapnilkole7500@gmail.com',
-  phone: '+91 8328217163',
-  whatsapp: '918328217163',
+  // Blank while the switch is off, so a render site that was missed cannot
+  // print an address anyway.
+  email: showContact ? contactDetails.email : '',
+  phone: showContact ? contactDetails.phone : '',
+  whatsapp: showContact ? contactDetails.whatsapp : undefined,
 
   headshot: '/images/swapnil.jpg',
   headshotAlt: 'Swapnil Kole, smiling, photographed outdoors in front of trees',
@@ -118,11 +162,7 @@ export const profile: Profile = {
     responseTime: 'within 24 hours',
   },
 
-  social: [
-    { label: 'LinkedIn', href: 'https://linkedin.com/in/swapnil-kole', isMe: true },
-    { label: 'GitHub', href: 'https://github.com/kole-swapnil', isMe: true },
-    { label: 'Instagram', href: 'https://www.instagram.com/car_thruster/', isMe: true },
-  ],
+  social: showContact ? contactDetails.social : [],
 
   trustedBy: [
     'Govt. of Odisha',
