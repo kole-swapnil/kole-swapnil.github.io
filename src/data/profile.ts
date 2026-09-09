@@ -91,7 +91,8 @@ export interface Profile {
  * Whether to publish any way of reaching me.
  *
  * Set to false while the site is submitted somewhere that does not allow
- * direct contact details on the page. With it off the site drops:
+ * direct contact details on the page — it was, from 2026-09-01 to 2026-09-09.
+ * With it off the site drops:
  *
  *   - the email address, the phone number and every WhatsApp link
  *   - every social profile (LinkedIn, GitHub, Instagram)
@@ -105,7 +106,7 @@ export interface Profile {
  * deleted: set this back to true and everything returns, with nothing else
  * to change.
  */
-export const showContact = false
+export const showContact = true
 
 /**
  * The resume PDF has the email address and the LinkedIn and GitHub links
